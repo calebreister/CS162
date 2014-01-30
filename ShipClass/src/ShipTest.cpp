@@ -23,7 +23,6 @@ main()
   cout << "Set Location (x y): ";
   cin >> x >> y;
   test.setLocation(x, y);
-
   cout << "Set Velocity (x y): ";
   cin >> x >> y;
   test.setVelocity(x, y);

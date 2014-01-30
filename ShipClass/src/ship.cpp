@@ -1,3 +1,5 @@
+//FILE HEADER
+
 #include "ship.h"
 
 float
@@ -22,6 +24,7 @@ Ship::Ship()
 void
 Ship::setLocation(float x, float y)
 {
+  //validate
   location.x = x;
   location.y = y;
 }
@@ -36,6 +39,7 @@ Ship::setVelocity(float velX, float velY)
 void
 Ship::setAngle(float angle)
 {
+  //validate
   angleDeg = angle;
 }
 
