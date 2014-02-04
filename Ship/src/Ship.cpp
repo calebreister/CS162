@@ -9,12 +9,10 @@ using namespace std;
 
 Ship::Ship()
 {
-    location = {0, 0};
-    velocity = {0, 0};
-    shipAngle.set(0);
+    location = WIN_MID;
+    velocity = ORIGIN;
+    shipAngle.set(45);
     radius = 5;
-    maxLocation =
-    {   1000, 1000};
 }
 
 /*
@@ -26,7 +24,6 @@ Ship::Ship()
  */
 void Ship::setLocation(float x, float y)
 {
-    //validate
     location.x = x;
     location.y = y;
 }
@@ -52,18 +49,47 @@ void Ship::setVelocity(float velX, float velY)
  */
 void Ship::setAngle(float angle)
 {
-    //validate
     shipAngle.set(angle);
 }
 
-//========================================================
+/*
+ * FUNCTIOPN: draw
+ * DESCRIPTION: draws the ship in the given window
+ *  and gets position information from the class.
+ *  Defines the shape of the ship
+ *  Does NOT get input for positioning
+ * PARAMETERS:
+ *  win - the window in which to draw the ship
+ */
+void Ship::draw(sf::RenderWindow& win)
+{
+    // draw ship
+    sf::ConvexShape ship;
+    ship.setPointCount(3);
+    ship.setPoint(0, sf::Vector2f(10, 0));
+    ship.setPoint(1, sf::Vector2f(0, 25));
+    ship.setPoint(2, sf::Vector2f(20, 25));
+
+    sf::Vector2f midpoint(10, 15);
+    ship.setOrigin(midpoint);
+
+    ship.setFillColor(sf::Color(0, 0, 0));
+    ship.setOutlineThickness(1);
+    ship.setOutlineColor(sf::Color(255, 255, 255));
+
+    ship.setPosition(location.x, location.y);
+    ship.setRotation(shipAngle.get());
+    win.draw(ship);
+}
+
+//////////////////////////////////////////////////////////////
 
 /*
  * FUNCTION: rotateLeft
  * DESCRIPTION: rotates the ship -1 degrees, the
  *  angle of the ship becomes -1, change the current angle 359
  */
-void Ship::turnLeft()
+void Ship::rotateLeft()
 {
     shipAngle.change(1);
 }
@@ -73,7 +99,7 @@ void Ship::turnLeft()
  * DESCRIPTION: rotates the ship +1 degrees, sets angle
  *  1 if it exceeds 360
  */
-void Ship::turnRight()
+void Ship::rotateRight()
 {
     shipAngle.change( -1);
 }
@@ -85,9 +111,11 @@ void Ship::turnRight()
  * angle the ship is facing (it may be facing a different direction than it’s
  * travelling).
  */
-void Ship::applyThrust(int thrust)
+void Ship::applyThrust(float thrust)
 {
-    velocity = shipAngle.getSlope(thrust);
+    Vect2d add = shipAngle.getSlope(thrust);
+    velocity.x = add.x;
+    velocity.y = add.y;
     updateLocation();
 }
 
@@ -95,13 +123,19 @@ void Ship::applyThrust(int thrust)
  * FUNCTION: updateLocation
  * DESCRIPTION: Updates the location based on the current velocity.
  *  (adds the velocity vector to the location vector)
+ *  Ensures that the ship is always inside the window
  */
 void Ship::updateLocation()
 {
     location.x += velocity.x;
+    if (location.x > WIN_SIZE.x)
+        location.x = 0;
     location.y += velocity.y;
+    if (location.y > WIN_SIZE.y)
+        location.y = 0;
 }
 
+///////////////////////////////////////////////////////////////////////////////
 /*
  * FUNCTION: getRadius
  * DESCRIPTION: returns the radius of the ship
