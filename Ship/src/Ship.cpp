@@ -78,7 +78,7 @@ void Ship::draw(sf::RenderWindow& win)
     ship.setOutlineColor(sf::Color(255, 255, 255));
 
     ship.setPosition(location.x, location.y);
-    ship.setRotation(shipAngle.get());
+    ship.setRotation(shipAngle.get() + 90);
     win.draw(ship);
 }
 
@@ -91,7 +91,7 @@ void Ship::draw(sf::RenderWindow& win)
  */
 void Ship::rotateLeft()
 {
-    shipAngle.change(1);
+    shipAngle.change(2);
 }
 
 /*
@@ -101,7 +101,7 @@ void Ship::rotateLeft()
  */
 void Ship::rotateRight()
 {
-    shipAngle.change( -1);
+    shipAngle.change( -2);
 }
 
 /*
@@ -121,18 +121,25 @@ void Ship::applyThrust(float thrust)
 
 /*
  * FUNCTION: updateLocation
- * DESCRIPTION: Updates the location based on the current velocity.
- *  (adds the velocity vector to the location vector)
- *  Ensures that the ship is always inside the window
+ * DESCRIPTION:
+ *  - Updates the location based on the current velocity.
+ *      (adds the velocity vector to the location vector)
+ *  - Ensures that the ship is always inside the window
  */
 void Ship::updateLocation()
 {
-    location.x += velocity.x;
     if (location.x > WIN_SIZE.x)
         location.x = 0;
-    location.y += velocity.y;
+    if (location.x < ORIGIN.x)
+        location.x = WIN_SIZE.x;
+
     if (location.y > WIN_SIZE.y)
         location.y = 0;
+    if (location.y < ORIGIN.y)
+        location.y = WIN_SIZE.y;
+
+    location.x += velocity.x;
+    location.y += velocity.y;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

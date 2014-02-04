@@ -15,7 +15,7 @@
 #include "VectAngle.hpp"
 
 const int refHz = 120; //Hz at which to refresh the screen
-const Vect2d WIN_SIZE = { 1000, 1000 };
+const Vect2d WIN_SIZE = { 800, 800 };
 const Vect2d WIN_MID = { WIN_SIZE.x / 2, WIN_SIZE.y / 2 };
 const Vect2d ORIGIN = { 0, 0 };
 
@@ -29,16 +29,17 @@ class Ship
 
     public:
         Ship();
+        //Utility actions
         void setLocation(float x, float y);
         void setVelocity(float velX, float velY);
         void setAngle(float angle);
         void draw(sf::RenderWindow& win);
-        ///////////////////////////////////////////
+        void updateLocation();
+        //User interaction
         void rotateLeft();
         void rotateRight();
         void applyThrust(float thrust);
-        void updateLocation();
-        /////////////////////////////////////////////
+        //accessors
         float getRadius();
         Vect2d getLocation();
         Vect2d getVelocity();

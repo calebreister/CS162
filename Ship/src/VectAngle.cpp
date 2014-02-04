@@ -55,7 +55,7 @@ float AngleDeg::toDegrees(float rad)
  */
 void AngleDeg::set(float angle)
 {
-    degrees = angle;
+    degrees = angle - 90;//accounts for ship creation, which is 90 degrees off
 }
 
 /*
