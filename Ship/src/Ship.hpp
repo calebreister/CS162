@@ -43,6 +43,7 @@ class Ship
         float getRadius();
         Vect2d getLocation();
         Vect2d getVelocity();
+        float getAngVel();
         float getAngle();
 };
 

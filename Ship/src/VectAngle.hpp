@@ -35,7 +35,7 @@ class AngleDeg
         /////////////////////////////////////
         float get();
         float getRadians();
-        Vect2d getSlope(float multipler = 1);
+        Vect2d getSlope();
 };
 
 #endif

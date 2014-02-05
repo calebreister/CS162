@@ -14,20 +14,19 @@
 #include <SFML/Graphics.hpp>
 #include "Ship.hpp"
 
-void keyInput(Ship ship);
+Ship player;
+void keyInput(float& i, Ship& shp = player);
 
 int main()
 {
+    float iter; //used for keyboard input acceleration loops
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
                             "Gamma Quadrant",
                             sf::Style::Titlebar | sf::Style::Close);
     window.setFramerateLimit(refHz);
     //////////////////////////////////////////////////////////////////////
-    Ship ship;
-
     while (window.isOpen())
     {
-        //handle user input (events and keyboard keys being pressed)
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -35,15 +34,13 @@ int main()
                 window.close();
         }
 
-        //Get Keyboard Input
-        keyInput(ship);
+        keyInput(iter);
 
         //draw new frame
         window.clear();
-
-        ship.draw(window);
-        ship.updateLocation();
-        ship.draw(window);
+        player.draw(window);
+        player.updateLocation();
+        player.draw(window);
 
         //redisplay window
         window.display();
@@ -53,21 +50,25 @@ int main()
 
 /*
  * FUNCTION: keyInput
- * DESCRIPTION: gets keyboard input for controlling the space ship
+ * DESCRIPTION: gets keyboard input for controlling the space player
  * PARAMETERS:
- *  ship - the ship object to use
+ *  shp - the ship object to use as the player
+ *  i - iterator for loops
  */
-void keyInput(Ship ship)
+void keyInput(float& i, Ship& shp)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        ship.rotateLeft();
+        shp.rotateLeft();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        ship.rotateRight();
+        shp.rotateRight();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        ship.applyThrust(3);
+    {
+//        for (i = 0; i < 3; i += .00001)
+            shp.applyThrust(.1);
+    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        ship.applyThrust(-1);
+        shp.applyThrust( -1);
 }

@@ -49,7 +49,8 @@ void Ship::setVelocity(float velX, float velY)
  */
 void Ship::setAngle(float angle)
 {
-    shipAngle.set(angle);
+    shipAngle.set(angle - 90);
+    // -90 accounts for the ship creation (which was done with SFML polygons
 }
 
 /*
@@ -91,7 +92,7 @@ void Ship::draw(sf::RenderWindow& win)
  */
 void Ship::rotateLeft()
 {
-    shipAngle.change(2);
+    shipAngle.change( -2);
 }
 
 /*
@@ -101,7 +102,7 @@ void Ship::rotateLeft()
  */
 void Ship::rotateRight()
 {
-    shipAngle.change( -2);
+    shipAngle.change(2);
 }
 
 /*
@@ -113,9 +114,9 @@ void Ship::rotateRight()
  */
 void Ship::applyThrust(float thrust)
 {
-    Vect2d add = shipAngle.getSlope(thrust);
-    velocity.x = add.x;
-    velocity.y = add.y;
+    Vect2d slope = shipAngle.getSlope();
+    velocity.x += slope.x * thrust;
+    velocity.y += slope.y * thrust;
     updateLocation();
 }
 
@@ -168,6 +169,15 @@ Vect2d Ship::getLocation()
 Vect2d Ship::getVelocity()
 {
     return velocity;
+}
+
+/*
+ * FUNCTION: getAngVel
+ * DESCIRPTION: returns the angular velocity of the ship
+ */
+float Ship::getAngVel()
+{
+    return std::sqrt(pow(velocity.x, 2) + pow(velocity.y, 2));
 }
 
 /*

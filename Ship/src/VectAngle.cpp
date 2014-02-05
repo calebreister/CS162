@@ -55,7 +55,7 @@ float AngleDeg::toDegrees(float rad)
  */
 void AngleDeg::set(float angle)
 {
-    degrees = angle - 90;//accounts for ship creation, which is 90 degrees off
+    degrees = angle;//accounts for ship creation, which is 90 degrees off
 }
 
 /*
@@ -125,15 +125,12 @@ float AngleDeg::getRadians()
  * FUNCTION: getSlope
  * DESCRIPTION: converts degrees to a slope for use on
  *  a Cartesian plane, ranged
- * PARAMETERS:
- *  multiplier - multiplies each result by a set value, useful for
- *  physics calculations
  * RETURN: slope of angle expressed as a vector
  */
-Vect2d AngleDeg::getSlope(float multiplier)
+Vect2d AngleDeg::getSlope()
 {
     Vect2d slope;
-    slope.x = cos(toRadians(degrees)) * multiplier;
-    slope.y = sin(toRadians(degrees)) * multiplier;
+    slope.x = cos(toRadians(degrees));
+    slope.y = sin(toRadians(degrees));
     return slope;
 }
