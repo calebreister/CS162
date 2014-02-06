@@ -44,6 +44,13 @@ int main()
         player.updateLocation();
         player.draw(window);
 
+        Vect2d vel = player.getVelocity();
+        std::cout << vel.x << "   " << vel.y << std::endl;
+        assert(vel.x <= 3);
+        assert(vel.x >= -3);
+        assert(vel.y <= 3);
+        assert(vel.y >= -3);
+
         //redisplay window
         window.display();
     }
@@ -65,16 +72,8 @@ void keyInput(float& i, Ship& shp)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         shp.angle.change(1);
 
-    Vect2d vel = shp.getVelocity();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        if (vel.x < MAX_SPEED)
-            shp.applyThrust(y);
-        if (vel.y < MAX_SPEED)
-            shp.applyThrust(x);
-        else
-            shp.applyThrust(both);
-    }
+        shp.applyThrust(both);
 
     //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     //    shp.applyThrust();

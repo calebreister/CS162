@@ -12,7 +12,7 @@ Ship::Ship()
 {
     setLocation(WIN_MID.x, WIN_MID.y);
     setVelocity(0, 0);
-    angle.set(45);
+    angle.set(0);
 }
 
 /*
@@ -49,23 +49,23 @@ void Ship::draw(sf::RenderWindow& win)
 //////////////////////////////////////////////////////////////
 
 /*
- * FUNCTION: rotateLeft
- * DESCRIPTION: rotates the ship -1 degrees, the
- *  angle of the ship becomes -1, change the current angle 359
- *
-void Ship::rotateLeft()
+ * FUNCTION: speedLimit
+ * DESCRIPTION: limits the speed of the ship based on MAX_SPEED
+ *  and MIN_SPEED set in config.h
+ */
+void Ship::speedLimit()
 {
-    angle.change( -2);
-}
+    Vect2d vel = getVelocity();
+//    Vect2d slope = Angle::deg2slope(angle.get());
 
-/*
- * FUNCTION: rotateRight
- * DESCRIPTION: rotates the ship +1 degrees, sets angle
- *  1 if it exceeds 360
- *
-void Ship::rotateRight()
-{
-    angle.change(2);
+    if (vel.x > MAX_SPEED)
+        setVelocity(MAX_SPEED, vel.y);
+    if (vel.x < -MAX_SPEED)
+        setVelocity(-MAX_SPEED, vel.y);
+    if (vel.y > MAX_SPEED)
+        setVelocity(vel.x, MAX_SPEED);
+    if (vel.y < -MAX_SPEED)
+        setVelocity(vel.x, -MAX_SPEED);
 }
 
 /*
@@ -82,6 +82,8 @@ void Ship::applyThrust(axis dir, float thrust)
         slope.y = 0;
     if (dir == y)
         slope.x = 0;
-    chgVelocity(slope);
+    chgVelocity(slope, thrust);
+    speedLimit();
     updateLocation();
+    speedLimit();
 }

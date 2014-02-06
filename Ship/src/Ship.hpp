@@ -21,8 +21,7 @@ class Ship : public SpaceObject
         Ship();
         void draw(sf::RenderWindow& win);
         //User interaction
-        /*void rotateLeft();
-         void rotateRight();*/
+        void speedLimit();
         void applyThrust(axis dir, float thrust = 1);
 };
 
