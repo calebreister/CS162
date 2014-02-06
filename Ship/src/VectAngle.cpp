@@ -6,44 +6,19 @@
 
 #include "VectAngle.hpp"
 
-AngleDeg::AngleDeg()
+Angle::deg::deg()
 {
-    degrees = 0;
+    ang = 0;
 }
 
 /*
  * FUNCTION: range
  * DESCRIPTION:
- *  ensures that degrees is within 0 and 359 degrees
+ *  ensures that ang is within 0 and 359 ang
  */
-void AngleDeg::range()
+void Angle::deg::range()
 {
-    degrees = fmod(degrees, 360);
-}
-
-/*
- * FUNCTION: toRadians
- * DESCRIPTION: converts degrees to radians
- * PARAMTERS:
- *  deg = the degrees to convert
- * RETURN:
- *  radians as a float
- */
-float AngleDeg::toRadians(float deg)
-{
-    return (PI * deg) / 180;
-}
-
-/*
- * FUNCTION: toDegrees
- * DESCRIPTION: converts radians to degrees
- * PARAMETERS:
- *  rad = the radians to convert, as a float
- * RETURN: the degrees (float)
- */
-float AngleDeg::toDegrees(float rad)
-{
-    return (180 * rad) / PI;
+    ang = fmod(ang, 360);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -53,84 +28,87 @@ float AngleDeg::toDegrees(float rad)
  * PARAMETERS:
  *  angle - the angle to set, overwrites any previous angle
  */
-void AngleDeg::set(float angle)
+void Angle::deg::set(float angle)
 {
-    degrees = angle;//accounts for ship creation, which is 90 degrees off
+    ang = angle;//accounts for ship creation, which is 90 ang off
 }
 
 /*
  * FUNCTION: change
  * DESCRIPTION: changes the angle, adds or subtracts to previous angle
  * PARAMETERS:
- *  difference - the number of degrees to add or subtract
+ *  difference - the number of ang to add or subtract
  */
-void AngleDeg::change(float difference)
+void Angle::deg::change(float difference)
 {
-    degrees += difference;
+    ang += difference;
 }
 
 /*
- * FUNCTION: radiansIn
- * DESCRIPTION: converts radians to degrees and stores the angle
+ * FUNCTION: get
+ * DESCRIPTION: ensures that the angle is between 0 and 359 and returns it.
+ *  Can be used to ensure that the number of ang is valid and
+ */
+float Angle::deg::get()
+{
+    range();
+    return ang;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/*
+ * FUNCTION: rad2deg
+ * DESCRIPTION: converts radians to degrees
  * PARAMETERS:
- *  radians - the input angle in radians
+ *  rad = the radians to convert, as a float
+ * RETURN: the angle (float) in degrees
  */
-void AngleDeg::setRadians(float radians)
+float Angle::rad2deg(float rad)
 {
-    degrees = toDegrees(radians);
+    return (180 * rad) / PI;
 }
 
 /*
- * FUNCTION: slopeIn
+ * FUNCTION: deg2rad
+ * DESCRIPTION: converts ang to radians
+ * PARAMTERS:
+ *  deg = the ang to convert
+ * RETURN:
+ *  radians as a float
+ */
+float Angle::deg2rad(float deg)
+{
+    return (PI * deg) / 180;
+}
+
+/*
+ * FUNCTION: slope2deg
  * DESCRIPTION: gets a slope (either as a vector or a float),
- *  converts it to degrees, and stores it
+ *  converts it to ang, and stores it
  * PARAMETERS:
  *  slope (vector) - the rise (y) and run (x) values of the slope
  *  slope (float) - the rise and run, pre-divided
  */
-void AngleDeg::setSlope(Vect2d slope)
+float Angle::slope2deg(Vect2d slope)
 {
-    degrees = toDegrees(atan(slope.y / slope.x));
+    return rad2deg(atan(slope.y / slope.x));
 }
 
-void AngleDeg::setSlope(float slope)
+float Angle::slope2deg(float slope)
 {
-    degrees = toDegrees(atan(slope));
-}
-
-///////////////////////////////////////////////////////////////////////////
-/*
- * FUNCTION: get
- * DESCRIPTION: ensures that the angle is between 0 and 359 and returns it.
- *  Can be used to ensure that the number of degrees is valid and
- */
-float AngleDeg::get()
-{
-    range();
-    return degrees;
+    return rad2deg(atan(slope));
 }
 
 /*
- * FUNCTION: getRadians
- * DESCRIPTION: converts degrees to radians, ranged
- * RETURN: radians
- */
-float AngleDeg::getRadians()
-{
-    range();
-    return toRadians(degrees);
-}
-
-/*
- * FUNCTION: getSlope
- * DESCRIPTION: converts degrees to a slope for use on
+ * FUNCTION: deg2slope
+ * DESCRIPTION: converts ang to a slope for use on
  *  a Cartesian plane, ranged
  * RETURN: slope of angle expressed as a vector
  */
-Vect2d AngleDeg::getSlope()
+Vect2d Angle::deg2slope(float deg)
 {
     Vect2d slope;
-    slope.x = cos(toRadians(degrees));
-    slope.y = sin(toRadians(degrees));
+    slope.x = cos(deg2rad(deg));
+    slope.y = sin(deg2rad(deg));
     return slope;
 }

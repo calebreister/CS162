@@ -11,31 +11,41 @@
 
 const float PI = M_PI;
 
+//Enumeration for selecting x coordinates, y coordinates, or both
+enum axis
+{
+    x, y, both
+};
+
 struct Vect2d
 {
         float x;
         float y;
 };
 
-class AngleDeg
+namespace Angle
 {
-    private:
-        float degrees;
-        void range();
-        float toRadians(float deg);
-        float toDegrees(float rad);
+    //degrees class
+    class deg
+    {
+        private:
+            float ang;
+            void range();
 
-    public:
-        AngleDeg();
-        void set(float angle);
-        void change(float difference);
-        void setRadians(float radians);
-        void setSlope(Vect2d slope);
-        void setSlope(float slope);
-        /////////////////////////////////////
-        float get();
-        float getRadians();
-        Vect2d getSlope();
-};
+        public:
+            deg();
+            void set(float angle);
+            void change(float difference);
+            /////////////////////////////////////
+            float get();
+    };
+
+    //utility functions
+    float rad2deg(float rad);
+    float deg2rad(float deg);
+    float slope2deg(Vect2d slope);
+    float slope2deg(float slope);
+    Vect2d deg2slope(float deg);
+}
 
 #endif

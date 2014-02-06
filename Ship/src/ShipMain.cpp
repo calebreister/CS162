@@ -12,6 +12,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "config.h"
+#include "VectAngle.hpp"
 #include "Ship.hpp"
 
 Ship player;
@@ -58,17 +60,22 @@ int main()
 void keyInput(float& i, Ship& shp)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        shp.rotateLeft();
+        shp.angle.change( -1);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        shp.rotateRight();
+        shp.angle.change(1);
 
+    Vect2d vel = shp.getVelocity();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-//        for (i = 0; i < 3; i += .00001)
-            shp.applyThrust(.1);
+        if (vel.x < MAX_SPEED)
+            shp.applyThrust(y);
+        if (vel.y < MAX_SPEED)
+            shp.applyThrust(x);
+        else
+            shp.applyThrust(both);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        shp.applyThrust( -1);
+    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    //    shp.applyThrust();
 }
