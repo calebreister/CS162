@@ -97,9 +97,21 @@ void SpaceObject::setVelocity(float velX, float velY)
 void SpaceObject::chgVelocity(float mag, float max, Angle::deg ang)
 {
     float rad = Angle::deg2rad(ang.get());
-    //Add speed limit
+    float slope = Angle::deg2slope(ang.get());
+    float magX = mag;
+    float magY = mag;
+
     velocity.x += mag * cos(rad);
     velocity.y += mag * sin(rad);
+
+    if (velocity.x > max)
+        velocity.x = max;
+    if (velocity.x < -max)
+        velocity.x = -max;
+    if (velocity.y > max)
+        velocity.y = max;
+    if (velocity.y < -max)
+        velocity.y = -max;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -46,10 +46,10 @@ int main()
 
         Vect2d vel = player.getVelocity();
         std::cout << vel.x << "   " << vel.y << std::endl;
-        assert(vel.x < MAX_SPEED);
-        assert(vel.x > -MAX_SPEED);
-        assert(vel.y < MAX_SPEED);
-        assert(vel.y > -MAX_SPEED);
+        assert(vel.x <= MAX_SPEED);
+        assert(vel.x >= -MAX_SPEED);
+        assert(vel.y <= MAX_SPEED);
+        assert(vel.y >= -MAX_SPEED);
 
         //redisplay window
         window.display();
