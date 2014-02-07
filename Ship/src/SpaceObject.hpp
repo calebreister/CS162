@@ -30,7 +30,7 @@ class SpaceObject
         void updateLocation();
 
         void setVelocity(float velX, float velY);
-        void chgVelocity(Vect2d delta, float mult = 1);
+        void chgVelocity(float mag, float max, Angle::deg ang);
 
         //////////////////////////////
         float getRadius();

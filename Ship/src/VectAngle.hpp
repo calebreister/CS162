@@ -11,12 +11,6 @@
 
 const float PI = M_PI;
 
-//Enumeration for selecting x coordinates, y coordinates, or both
-enum axis
-{
-    x, y, both
-};
-
 struct Vect2d
 {
         float x;

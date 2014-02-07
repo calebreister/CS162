@@ -49,41 +49,13 @@ void Ship::draw(sf::RenderWindow& win)
 //////////////////////////////////////////////////////////////
 
 /*
- * FUNCTION: speedLimit
- * DESCRIPTION: limits the speed of the ship based on MAX_SPEED
- *  and MIN_SPEED set in config.h
- */
-void Ship::speedLimit()
-{
-    Vect2d vel = getVelocity();
-//    Vect2d slope = Angle::deg2slope(angle.get());
-
-    if (vel.x > MAX_SPEED)
-        setVelocity(MAX_SPEED, vel.y);
-    if (vel.x < -MAX_SPEED)
-        setVelocity(-MAX_SPEED, vel.y);
-    if (vel.y > MAX_SPEED)
-        setVelocity(vel.x, MAX_SPEED);
-    if (vel.y < -MAX_SPEED)
-        setVelocity(vel.x, -MAX_SPEED);
-}
-
-/*
  * FUNCTION: applyThrust
  * DESCRIPTION:
  * Simulates firing the engine. Changes the current velocity based on the
  * angle the ship is facing (it may be facing a different direction than it’s
  * travelling).
  */
-void Ship::applyThrust(axis dir, float thrust)
+void Ship::applyThrust(float thrust)
 {
-    Vect2d slope = Angle::deg2slope(angle.get());
-    if (dir == x)
-        slope.y = 0;
-    if (dir == y)
-        slope.x = 0;
-    chgVelocity(slope, thrust);
-    speedLimit();
-    updateLocation();
-    speedLimit();
+    chgVelocity(thrust, MAX_SPEED, angle);
 }

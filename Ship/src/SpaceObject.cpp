@@ -90,13 +90,16 @@ void SpaceObject::setVelocity(float velX, float velY)
  * FUNCTION: chgVelocity
  * DESCRIPTION changes the velocity vector and multiplies it
  * PARAMETERS:
- *  delta - the velocity vector to add
- *  mult - the multiplier
+ *  ang - the angle at which to move the ship
+ *  max - the maximum velocity to allow in any direction
+ *  mag - the magnitude
  */
-void SpaceObject::chgVelocity(Vect2d delta, float mult)
+void SpaceObject::chgVelocity(float mag, float max, Angle::deg ang)
 {
-    velocity.x += (delta.x * mult);
-    velocity.y += (delta.y * mult);
+    float rad = Angle::deg2rad(ang.get());
+    //Add speed limit
+    velocity.x += mag * cos(rad);
+    velocity.y += mag * sin(rad);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
