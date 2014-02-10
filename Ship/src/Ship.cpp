@@ -11,7 +11,7 @@ using namespace std;
 Ship::Ship()
 {
     setLocation(WIN_MID.x, WIN_MID.y);
-    setVelocity(0, 0);
+    setVelocity(0, 0, 0);
     angle.set(0);
 }
 
@@ -53,9 +53,10 @@ void Ship::draw(sf::RenderWindow& win)
  * DESCRIPTION:
  * Simulates firing the engine. Changes the current velocity based on the
  * angle the ship is facing (it may be facing a different direction than it’s
- * travelling).
+ * traveling).
  */
 void Ship::applyThrust(float thrust)
 {
-    chgVelocity(thrust, MAX_SPEED, angle);
+    float rad = Angle::deg2rad(angle.get());
+    chgVelocity(thrust * cos(rad), thrust * sin(rad), MAX_SPEED);
 }

@@ -52,10 +52,10 @@ void SpaceObject::setLocation(float x, float y)
  * PARAMETERS:
  *  delta - the change vector
  */
-void SpaceObject::chgLocation(Vect2d delta)
+void SpaceObject::chgLocation(float deltaX, float deltaY)
 {
-    location.x += delta.x;
-    location.y += delta.y;
+    location.x += deltaX;
+    location.y += deltaY;
     boundFix();
 }
 
@@ -78,55 +78,36 @@ void SpaceObject::updateLocation()
  * DESCRIPTION: set the the velocity of the SpaceObject
  * PARAMETERS:
  *  velX: the x-velocity factor
- *  velY: the y-velocity factor
+ *  velY: the y-velocity factor'
+ *  max: the maximum angular velocity to allow
  */
-void SpaceObject::setVelocity(float velX, float velY)
+void SpaceObject::setVelocity(float velX, float velY, float max)
 {
     velocity.x = velX;
     velocity.y = velY;
+
+    //SPEED LIMITING
+    float angMaxRatio = getAngVel() / max; // angular velocity / max velocity
+    if (angMaxRatio > 1)
+    {
+        velocity.x /= angMaxRatio;
+        velocity.y /= angMaxRatio;
+    }
 }
 
 /*
  * FUNCTION: chgVelocity
  * DESCRIPTION changes the velocity vector and multiplies it
- * PARAMETERS:
+ * PARAMETERS 1:
+ *  deltaX - the change in X
+ *  deltaY - the change in Y
  *  ang - the angle at which to move the ship
- *  max - the maximum velocity to allow in any direction
  *  mag - the magnitude
+ *  max - the max allowable velocity
  */
-void SpaceObject::chgVelocity(float mag, float max, Angle::deg ang)
+void SpaceObject::chgVelocity(float deltaX, float deltaY, float max)
 {
-    float rad = Angle::deg2rad(ang.get());
-    Vect2d slope = Angle::deg2slope(ang.get());
-    float fslope = fabs(slope.y / slope.x);
-
-    velocity.x += mag * cos(rad);
-    velocity.y += mag * sin(rad);
-
-    if (velocity.x > max && velocity.x > velocity.y)
-    {
-        float diff = velocity.x - max;
-        velocity.x -= diff;
-        velocity.y -= diff * fslope;
-    }
-    else if (velocity.x < -max && velocity.x < velocity.y)
-    {
-        float diff = -max - velocity.x;
-        velocity.x += diff;
-        velocity.y += diff * fslope;
-    }
-    else if (velocity.y > max && velocity.y > velocity.x)
-    {
-        float diff = velocity.y - max;
-        velocity.y -= diff;
-        velocity.x -= diff * fslope;
-    }
-    else if (velocity.y < -max && velocity.y < velocity.x)
-    {
-        float diff = -max - velocity.x;
-        velocity.y += diff;
-        velocity.x += diff * fslope;
-    }
+    setVelocity(velocity.x + deltaX, velocity.y + deltaY, max);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

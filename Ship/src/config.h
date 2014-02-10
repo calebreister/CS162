@@ -12,7 +12,7 @@ const Vect2d WIN_SIZE = { 800, 800 };
 const Vect2d WIN_MID = { WIN_SIZE.x / 2, WIN_SIZE.y / 2 };
 const Vect2d ORIGIN = { 0, 0 };
 
-const float MAX_SPEED = 5;
+const float MAX_SPEED = 6;
 
 //degrees to turn per loop cycle
 const float TURN_RATE = 2;

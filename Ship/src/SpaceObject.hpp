@@ -26,11 +26,11 @@ class SpaceObject
         void boundFix();
 
         void setLocation(float x, float y);
-        void chgLocation(Vect2d delta);
+        void chgLocation(float deltaX, float deltaY);
         void updateLocation();
 
-        void setVelocity(float velX, float velY);
-        void chgVelocity(float mag, float max, Angle::deg ang);
+        void setVelocity(float velX, float velY, float maxAngVel);
+        void chgVelocity(float deltaX, float deltaY, float max);
 
         //////////////////////////////
         float getRadius();
