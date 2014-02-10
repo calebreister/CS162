@@ -13,7 +13,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "config.h"
-#include "VectAngle.hpp"
+#include "util.hpp"
 #include "Ship.hpp"
 
 Ship player;
@@ -25,8 +25,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
                             "Gamma Quadrant",
                             sf::Style::Titlebar | sf::Style::Close);
-    window.setFramerateLimit(refHz);
-    //////////////////////////////////////////////////////////////////////
+    window.setFramerateLimit(REF_HZ);
+    ////////////////////////////////////////////////////////////////////
     while (window.isOpen())
     {
         sf::Event event;
@@ -44,7 +44,7 @@ int main()
         player.updateLocation();
         player.draw(window);
 
-        Vect2d vel = player.getVelocity();
+        util::Vect2d vel = player.getVelocity();
         std::cout << vel.x << "   " << vel.y << std::endl;
         assert(vel.x <= MAX_SPEED);
         assert(vel.x >= -MAX_SPEED);
@@ -67,14 +67,14 @@ int main()
 void keyInput(float& i, Ship& shp)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        shp.angle.change( -TURN_RATE);
+        shp.chgAngle( -TURN_RATE);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        shp.angle.change(TURN_RATE);
+        shp.chgAngle(TURN_RATE);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        shp.applyThrust(THRUST);
+        shp.applyThrust(.05);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        shp.applyThrust( -THRUST);
+        shp.applyThrust( -.05);
 }

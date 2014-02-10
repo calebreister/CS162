@@ -11,18 +11,18 @@
 #include <iostream>
 #include <cmath>
 #include "config.h"
-#include "VectAngle.hpp"
+#include "util.hpp"
 
 class SpaceObject
 {
     private:
-        Vect2d velocity;
-        Vect2d location;
+        util::Vect2d velocity;
+        util::Vect2d location;
+        float angleDeg;
         float radius;
 
     public:
         SpaceObject();
-        Angle::deg angle;
         void boundFix();
 
         void setLocation(float x, float y);
@@ -32,11 +32,15 @@ class SpaceObject
         void setVelocity(float velX, float velY, float maxAngVel);
         void chgVelocity(float deltaX, float deltaY, float max);
 
+        void setAngle(float deg);
+        void chgAngle(float deltaDeg);
+
         //////////////////////////////
         float getRadius();
-        Vect2d getLocation();
-        Vect2d getVelocity();
+        util::Vect2d getLocation();
+        util::Vect2d getVelocity();
         float getAngVel();
+        float getAngle();
 };
 
 #endif

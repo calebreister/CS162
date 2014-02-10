@@ -11,7 +11,7 @@ SpaceObject::SpaceObject()
 {
     location = WIN_MID;
     velocity = ORIGIN;
-    angle.set(45);
+    angleDeg = 0;
     radius = 5;
 }
 
@@ -110,6 +110,30 @@ void SpaceObject::chgVelocity(float deltaX, float deltaY, float max)
     setVelocity(velocity.x + deltaX, velocity.y + deltaY, max);
 }
 
+/*
+ * FUNCTION: setAngle
+ * DESCRIPTION: set the angle of the object
+ * PARAMETERS:
+ *  deg - the angle in degrees to set
+ * NOTE: does not set the angle to be within 360 degrees, this is done in getAngle()
+ */
+void SpaceObject::setAngle(float deg)
+{
+    angleDeg = deg;
+}
+
+/*
+ * FUNCTION: chgAngle
+ * DESCRIPTION: changes the angle of the object
+ * PARAMETERS:
+ *  deltaDeg - number of degrees to add to the current angle
+ * NOTE: does not set the angle to be within 360 degrees, this is done in getAngle()
+ */
+void SpaceObject::chgAngle(float deltaDeg)
+{
+    angleDeg += deltaDeg;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 /*
  * FUNCTION: getRadius
@@ -124,7 +148,7 @@ float SpaceObject::getRadius()
  * FUNCTION: getLocation
  * RETURN: location of the SpaceObject
  */
-Vect2d SpaceObject::getLocation()
+util::Vect2d SpaceObject::getLocation()
 {
     return location;
 }
@@ -133,7 +157,7 @@ Vect2d SpaceObject::getLocation()
  * FUNCTION: getVelocity
  * RETURN: current velocity of the SpaceObject
  */
-Vect2d SpaceObject::getVelocity()
+util::Vect2d SpaceObject::getVelocity()
 {
     return velocity;
 }
@@ -145,6 +169,19 @@ Vect2d SpaceObject::getVelocity()
  */
 float SpaceObject::getAngVel()
 {
-    Vect2d vel = getVelocity();
+    util::Vect2d vel = getVelocity();
     return sqrt(pow(vel.x, 2) + pow(vel.y, 2));
+}
+
+/*
+ * FUNCTION: getAngle
+ * DESCRIPTION: gets the current angle (in degrees) of the object,
+ *  ensures the angle value is within 0 and 359
+ * RETURN:
+ *  angle in degrees (between 0 and 359)
+ */
+float SpaceObject::getAngle()
+{
+    angleDeg = fmod(angleDeg, 360);
+    return angleDeg;
 }

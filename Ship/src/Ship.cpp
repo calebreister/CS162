@@ -12,7 +12,7 @@ Ship::Ship()
 {
     setLocation(WIN_MID.x, WIN_MID.y);
     setVelocity(0, 0, 0);
-    angle.set(0);
+    setAngle(45);
 }
 
 /*
@@ -26,7 +26,7 @@ Ship::Ship()
  */
 void Ship::draw(sf::RenderWindow& win)
 {
-    Vect2d loc = getLocation();
+    util::Vect2d loc = getLocation();
 
     sf::ConvexShape shp;
     shp.setPointCount(3);
@@ -42,7 +42,7 @@ void Ship::draw(sf::RenderWindow& win)
     shp.setOutlineColor(sf::Color(255, 255, 255));
 
     shp.setPosition(loc.x, loc.y);
-    shp.setRotation(angle.get() + 90);
+    shp.setRotation(getAngle() + 90);
     win.draw(shp);
 }
 
@@ -57,6 +57,6 @@ void Ship::draw(sf::RenderWindow& win)
  */
 void Ship::applyThrust(float thrust)
 {
-    float rad = Angle::deg2rad(angle.get());
+    float rad = util::deg2rad(getAngle());
     chgVelocity(thrust * cos(rad), thrust * sin(rad), MAX_SPEED);
 }
