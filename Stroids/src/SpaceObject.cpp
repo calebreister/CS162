@@ -9,10 +9,10 @@
 
 SpaceObject::SpaceObject()
 {
-    location = WIN_MID;
-    velocity = ORIGIN;
+    location = ZERO;
+    velocity = ZERO;
     angleDeg = 0;
-    radius = 5;
+    radius = 0;
 }
 
 /*
@@ -23,13 +23,18 @@ void SpaceObject::boundFix()
 {
     if (location.x > WIN_SIZE.x)
         location.x = 0;
-    if (location.x < ORIGIN.x)
+    if (location.x < ZERO.x)
         location.x = WIN_SIZE.x;
 
     if (location.y > WIN_SIZE.y)
         location.y = 0;
-    if (location.y < ORIGIN.y)
+    if (location.y < ZERO.y)
         location.y = WIN_SIZE.y;
+}
+
+void SpaceObject::setRadius(int rad)
+{
+    radius = rad;
 }
 
 /*

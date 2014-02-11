@@ -10,9 +10,10 @@ using namespace std;
 
 Ship::Ship()
 {
+    setRadius(5);
     setLocation(WIN_MID.x, WIN_MID.y);
     setVelocity(0, 0, 0);
-    setAngle(45);
+    setAngle(-45);
 }
 
 /*
@@ -43,6 +44,7 @@ void Ship::draw(sf::RenderWindow& win)
 
     shp.setPosition(loc.x, loc.y);
     shp.setRotation(getAngle() + 90);
+
     win.draw(shp);
 }
 

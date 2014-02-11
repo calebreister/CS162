@@ -15,15 +15,16 @@
 #include "config.h"
 #include "util.hpp"
 #include "Ship.hpp"
+#include "Asteroid.hpp"
 
 Ship player;
-void keyInput(float& i, Ship& shp = player);
+Asteroid stroid;
+void keyInput(Ship& shp = player);
 
 int main()
 {
-    float iter; //used for keyboard input acceleration loops
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
-                            "Gamma Quadrant",
+                            "'Stroids - Gamma Quadrant",
                             sf::Style::Titlebar | sf::Style::Close);
     window.setFramerateLimit(REF_HZ);
     ////////////////////////////////////////////////////////////////////
@@ -36,16 +37,18 @@ int main()
                 window.close();
         }
 
-        keyInput(iter);
+        keyInput();
 
         //draw new frame
         window.clear();
         player.draw(window);
         player.updateLocation();
         player.draw(window);
+        stroid.draw(window);
 
+        //value validation
         util::Vect2d vel = player.getVelocity();
-        std::cout << vel.x << "   " << vel.y << std::endl;
+        //std::cout << vel.x << "   " << vel.y << std::endl;
         assert(vel.x <= MAX_SPEED);
         assert(vel.x >= -MAX_SPEED);
         assert(vel.y <= MAX_SPEED);
@@ -62,9 +65,8 @@ int main()
  * DESCRIPTION: gets keyboard input for controlling the space player
  * PARAMETERS:
  *  shp - the ship object to use as the player
- *  i - iterator for loops
  */
-void keyInput(float& i, Ship& shp)
+void keyInput(Ship& shp)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         shp.chgAngle( -TURN_RATE);

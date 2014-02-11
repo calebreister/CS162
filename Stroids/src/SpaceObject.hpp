@@ -1,5 +1,5 @@
 /*
- * CLASS: SpaceObject
+ * CLASS: SPACE_OBJECT_HPP
  * AUTHOR: Caleb Reister
  * DESCRIPTION:
  *  Controls 2D physics for any object that floats in space
@@ -16,14 +16,15 @@
 class SpaceObject
 {
     private:
-        util::Vect2d velocity;
         util::Vect2d location;
+        util::Vect2d velocity;
         float angleDeg;
-        float radius;
+        int radius;
 
     public:
         SpaceObject();
         void boundFix();
+        void setRadius(int rad);
 
         void setLocation(float x, float y);
         void chgLocation(float deltaX, float deltaY);

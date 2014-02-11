@@ -1,11 +1,65 @@
 /*
- * PROGRAM: VectAngle
+ * PROGRAM: util
  * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation file for VectAngle.hpp
+ * DESCRIPTION: implementation file for util.hpp
  */
 
 #include "util.hpp"
 
+/*
+ * FUNCTION randInt
+ * DESCRIPTION: Returns a pseudo-random integer between given
+ *  low and high values, inclusive
+ * PARAMETERS:
+ *  low - the lowest number to be generated
+ *  high - the highest number to be generated
+ * RETURN: A pseudo-random number between low and high (inclusive)
+ */
+int util::randInt(int low, int high)
+{
+    static bool firstTime = true;
+    int randNum;
+
+    //if first time called, seed random number generator
+    if (firstTime)
+    {
+        srand(static_cast<unsigned int>(time(NULL)));
+        firstTime = false;
+    }
+
+    //generate random number between given low and high values (inclusive)
+    randNum = rand() % (high - low + 1) + low;
+    return randNum;
+}
+
+/*
+ * FUNCTION: randFloat
+ * DESCRIPTION: returns a pseudo-random flaot between low and high, inclusive
+ * PARAMETERS:
+ *  low - lowest number to be generated
+ *  high - highest number to be generated
+ * RETURN: a pseudo-random float type number
+ */
+float util::randFloat(float low, float high)
+{
+    static bool firstTime = true;
+    float randNum;
+
+    //if first time called, seed random number generator
+    if (firstTime)
+    {
+        srand(static_cast<float>(time(NULL)));
+        firstTime = false;
+    }
+
+    //generate the random number
+    randNum = fmod(0.01 * rand(), (high - low + 1) + low);
+    if ((rand() % 2) == 1)
+        randNum *= -1;
+    return randNum;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /*
  * FUNCTION: rad2deg
  * DESCRIPTION: converts radians to degrees

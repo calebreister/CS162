@@ -1,12 +1,12 @@
 /*
- * CLASS: Ship
+ * HEADER: SHIP_HPP
  * AUTHOR: Caleb Reister
  * DESCRIPTION: class for controlling a "ship" from above
  *      going to be used in my implementation of asteroids
  */
 
-#ifndef SHIP_H
-#define SHIP_H
+#ifndef SHIP_HPP
+#define SHIP_HPP
 
 #include <cmath>
 #include <SFML/System.hpp>
