@@ -13,10 +13,8 @@ Asteroid::Asteroid()
     sides = util::randInt(5, 11);
     setLocation(static_cast<float>(util::randInt(0, WIN_SIZE.x)),
                 static_cast<float>(util::randInt(0, WIN_SIZE.y)));
-    //setLocation(100, 100);
-    rotationVel = util::randFloat(.05, .25);
-    //setVelocity(util::randFloat(.1, .75), util::randFloat(.1, .75), .75);
-    setVelocity(1, 1, 1);
+    rotationVel = util::randFloat(-.1, .1);
+    setVelocity(util::randFloat(-.5, .5), util::randFloat(-.5, .5), .75);
 }
 
 /*
@@ -33,30 +31,22 @@ void Asteroid::draw(sf::RenderWindow& win)
 {
     util::Vect2d loc = getLocation();
     sf::CircleShape stroid(getRadius(), sides);
+    sf::Transform centerRotate;
+
+    //define centerRotate
+    centerRotate.rotate(getAngle(), loc.x + getRadius(),
+                        loc.y + getRadius());
 
     //define properties
-    stroid.setFillColor(sf::Color(0, 0, 0));
+    stroid.setFillColor(sf::Color(0, 0, 0, 0));
     stroid.setOutlineThickness(5);
     stroid.setOutlineColor(sf::Color(255, 255, 255));
 
     //update values
     stroid.setPosition(loc.x, loc.y);
     chgAngle(rotationVel);
-    stroid.setRotation(getAngle());
 
     //draw
     updateLocation();
-    win.draw(stroid);
-
-    //test code
-    sf::CircleShape ctr(2, 4);
-    sf::CircleShape circ(getRadius(), 300);
-    ctr.setFillColor(sf::Color(255, 255, 255));
-    circ.setFillColor(sf::Color(0, 0, 0, 0));
-    circ.setOutlineThickness(1);
-    circ.setOutlineColor(sf::Color(255, 255, 255));
-    circ.setPosition(loc.x, loc.y);
-    ctr.setPosition(loc.x, loc.y);
-    win.draw(ctr);
-    win.draw(circ);
+    win.draw(stroid, centerRotate);
 }

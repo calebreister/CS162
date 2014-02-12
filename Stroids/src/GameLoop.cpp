@@ -18,7 +18,7 @@
 #include "Asteroid.hpp"
 
 Ship player;
-Asteroid stroid;
+Asteroid stroid[10];
 void keyInput(Ship& shp = player);
 
 int main()
@@ -44,7 +44,8 @@ int main()
         player.draw(window);
         player.updateLocation();
         player.draw(window);
-        stroid.draw(window);
+        for (int i = 0; i < 10; i++)
+            stroid[i].draw(window);
 
         //value validation
         util::Vect2d vel = player.getVelocity();

@@ -54,7 +54,7 @@ float util::randFloat(float low, float high)
 
     //generate the random number
     randNum = fmod(0.01 * rand(), (high - low + 1) + low);
-    if ((rand() % 2) == 1)
+    if (util::randInt(0, 1) == 1)
         randNum *= -1;
     return randNum;
 }
