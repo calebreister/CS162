@@ -8,6 +8,9 @@
 #ifndef ASTEROID_HPP
 #define ASTEROID_HPP
 
+//#define NDEBUG
+#include <cassert>
+#include <iostream>
 #include <cmath>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -19,7 +22,14 @@ class Asteroid : public SpaceObject
 {
     private:
         unsigned int sides;
-        float rotationVel;//short for rotational velocity
+        float rotationVel; //short for rotational velocity
+
+        enum Side
+        {
+            left, right,
+            top, bottom
+        };
+        bool checkSide(Side s);
     public:
         Asteroid();
         void draw(sf::RenderWindow& win);

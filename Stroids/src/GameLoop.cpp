@@ -44,7 +44,7 @@ int main()
         player.draw(window);
         player.updateLocation();
         player.draw(window);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 1; i++)
             stroid[i].draw(window);
 
         //value validation

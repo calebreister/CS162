@@ -5,16 +5,17 @@
  */
 
 #include "Asteroid.hpp"
-#include <iostream>
 
 Asteroid::Asteroid()
 {
     setRadius(util::randInt(30, 60));
     sides = util::randInt(5, 11);
-    setLocation(static_cast<float>(util::randInt(0, WIN_SIZE.x)),
-                static_cast<float>(util::randInt(0, WIN_SIZE.y)));
-    rotationVel = util::randFloat(-.1, .1);
-    setVelocity(util::randFloat(-.5, .5), util::randFloat(-.5, .5), .75);
+    //setLocation(static_cast<float>(util::randInt(0, WIN_SIZE.x)),
+    //            static_cast<float>(util::randInt(0, WIN_SIZE.y)));
+    setLocation(100, 100);
+    rotationVel = util::randFloat( -.1, .1);
+    //setVelocity(util::randFloat( -.5, .5), util::randFloat( -.5, .5), .75);
+    setVelocity(1, 1, 1);
 }
 
 /*
@@ -31,22 +32,106 @@ void Asteroid::draw(sf::RenderWindow& win)
 {
     util::Vect2d loc = getLocation();
     sf::CircleShape stroid(getRadius(), sides);
-    sf::Transform centerRotate;
-
-    //define centerRotate
-    centerRotate.rotate(getAngle(), loc.x + getRadius(),
-                        loc.y + getRadius());
 
     //define properties
+    stroid.setOrigin(getRadius(), getRadius());
     stroid.setFillColor(sf::Color(0, 0, 0, 0));
     stroid.setOutlineThickness(5);
     stroid.setOutlineColor(sf::Color(255, 255, 255));
 
     //update values
+    stroid.setRotation(getAngle());
     stroid.setPosition(loc.x, loc.y);
     chgAngle(rotationVel);
+    stroid.rotate(rotationVel);
+    updateLocation();
 
     //draw
-    updateLocation();
-    win.draw(stroid, centerRotate);
+    win.draw(stroid);
+
+    //run edge and corner checks, and correct issues
+    /*if (checkSide(bottom) && checkSide(right))
+    {
+        stroid.setPosition( -(WIN_SIZE.x - loc.x), -(WIN_SIZE.y - loc.y));
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+    else if (checkSide(left) && checkSide(top))
+    {
+
+    }
+    else if (checkSide(right) && checkSide(top))
+    {
+
+    }
+    else if (checkSide(left) && checkSide(bottom))
+    {
+
+    }*/
+    if (checkSide(right))
+    {
+        stroid.setPosition( -(WIN_SIZE.x - loc.x), loc.y);
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+    else if (checkSide(left))
+    {
+        stroid.setPosition(WIN_SIZE.x + loc.x, loc.y);
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+
+    else if (checkSide(bottom))
+    {
+        stroid.setPosition(loc.x, -(WIN_SIZE.y - loc.y));
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+    else if (checkSide(top))
+    {
+        stroid.setPosition(loc.x, WIN_SIZE.y + loc.y);
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+}
+
+/*
+ * FUNCTION: checkSide
+ * DESCRIPTION: check a side of the screen to see if an
+ *  asteroid's radius crosses an edge of the screen
+ * PARAMETERS:
+ *  s - the side to check
+ * RETURN: whether or not the asteroid's radius crosses the given side
+ */
+bool Asteroid::checkSide(Side s)
+{
+    /*
+     * NOTE: this is not the simplest method, but the other requires extra functions,
+     * passing a location COMPONENT that is correct (*.y for top/bottom, *.x for left/right,
+     * passing the entire location vector would be pointless for individual functions). This method is
+     * also more self-documenting. In addition, no mathematical evaluation is required when
+     * checking a side as it was already passed in the parameter. In addition, the switch
+     * is a very streamlined method of writing this code, any other method would require significantly
+     * more unnecessary whitespace.
+     */
+
+    static util::Vect2d loc;//static prevents memory from having to be re-allocated repeatedly
+    loc = getLocation();
+    switch (s)
+    {
+        case left:
+            return (loc.x - getRadius() < ZERO.x) ? true : false;
+            break;
+        case right:
+            return (loc.x + getRadius() > WIN_SIZE.x) ? true : false;
+            break;
+        case top:
+            return (loc.y - getRadius() < ZERO.y) ? true : false;
+            break;
+        case bottom:
+            return (loc.y + getRadius() > WIN_SIZE.y) ? true : false;
+            break;
+    }
+    //no outside return required, this switch will be entered no matter what
+    //and a condition will be returned
 }
