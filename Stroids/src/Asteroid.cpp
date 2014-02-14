@@ -10,12 +10,12 @@ Asteroid::Asteroid()
 {
     setRadius(util::randInt(30, 60));
     sides = util::randInt(5, 11);
-    //setLocation(static_cast<float>(util::randInt(0, WIN_SIZE.x)),
-    //            static_cast<float>(util::randInt(0, WIN_SIZE.y)));
-    setLocation(100, 100);
+    setLocation(static_cast<float>(util::randInt(0, WIN_SIZE.x)),
+                static_cast<float>(util::randInt(0, WIN_SIZE.y)));
+    //setLocation(400, 400);
     rotationVel = util::randFloat( -.1, .1);
-    //setVelocity(util::randFloat( -.5, .5), util::randFloat( -.5, .5), .75);
-    setVelocity(1, 1, 1);
+    setVelocity(util::randFloat( -.5, .5), util::randFloat( -.5, .5), .75);
+    //setVelocity(1, 1, 1);
 }
 
 /*
@@ -49,8 +49,10 @@ void Asteroid::draw(sf::RenderWindow& win)
     //draw
     win.draw(stroid);
 
-    //run edge and corner checks, and correct issues
-    /*if (checkSide(bottom) && checkSide(right))
+    //run edge and corner checks, correct issues
+    //Corners must be checked first, if they are not, there is
+      //a rendering issue
+    if (checkSide(bottom) && checkSide(right))
     {
         stroid.setPosition( -(WIN_SIZE.x - loc.x), -(WIN_SIZE.y - loc.y));
         stroid.setRotation(getAngle());
@@ -58,40 +60,50 @@ void Asteroid::draw(sf::RenderWindow& win)
     }
     else if (checkSide(left) && checkSide(top))
     {
-
+        stroid.setPosition(WIN_SIZE.x + loc.x, WIN_SIZE.y + loc.y);
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
     }
     else if (checkSide(right) && checkSide(top))
     {
-
+        stroid.setPosition( -(WIN_SIZE.x - loc.x), WIN_SIZE.y + loc.y);
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
     }
     else if (checkSide(left) && checkSide(bottom))
     {
-
-    }*/
-    if (checkSide(right))
-    {
-        stroid.setPosition( -(WIN_SIZE.x - loc.x), loc.y);
+        stroid.setPosition(WIN_SIZE.x + loc.x, -(WIN_SIZE.y - loc.y));
         stroid.setRotation(getAngle());
         win.draw(stroid);
     }
-    else if (checkSide(left))
+    else
     {
-        stroid.setPosition(WIN_SIZE.x + loc.x, loc.y);
-        stroid.setRotation(getAngle());
-        win.draw(stroid);
-    }
-
-    else if (checkSide(bottom))
-    {
-        stroid.setPosition(loc.x, -(WIN_SIZE.y - loc.y));
-        stroid.setRotation(getAngle());
-        win.draw(stroid);
-    }
-    else if (checkSide(top))
-    {
-        stroid.setPosition(loc.x, WIN_SIZE.y + loc.y);
-        stroid.setRotation(getAngle());
-        win.draw(stroid);
+        //X
+        if (checkSide(right))
+        {
+            stroid.setPosition( -(WIN_SIZE.x - loc.x), loc.y);
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
+        else if (checkSide(left))
+        {
+            stroid.setPosition(WIN_SIZE.x + loc.x, loc.y);
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
+        //Y
+        if (checkSide(bottom))
+        {
+            stroid.setPosition(loc.x, -(WIN_SIZE.y - loc.y));
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
+        else if (checkSide(top))
+        {
+            stroid.setPosition(loc.x, WIN_SIZE.y + loc.y);
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
     }
 }
 
@@ -112,10 +124,10 @@ bool Asteroid::checkSide(Side s)
      * also more self-documenting. In addition, no mathematical evaluation is required when
      * checking a side as it was already passed in the parameter. In addition, the switch
      * is a very streamlined method of writing this code, any other method would require significantly
-     * more unnecessary whitespace.
+     * more unnecessary whitespace. Based off of my understanding, this is the fastest method.
      */
 
-    static util::Vect2d loc;//static prevents memory from having to be re-allocated repeatedly
+    static util::Vect2d loc; //static prevents memory from having to be re-allocated repeatedly
     loc = getLocation();
     switch (s)
     {
@@ -132,6 +144,6 @@ bool Asteroid::checkSide(Side s)
             return (loc.y + getRadius() > WIN_SIZE.y) ? true : false;
             break;
     }
-    //no outside return required, this switch will be entered no matter what
-    //and a condition will be returned
+    //no outside return required, this switch has to be entered and not doing so correctly
+    //will cause a compile time error.
 }

@@ -5,10 +5,7 @@
  *  SFML implementation of Ship class, making it move around the screen
  */
 
-//#define NDEBUG
-#include <cassert>
 #include <cmath>
-#include <iostream>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -44,7 +41,7 @@ int main()
         player.draw(window);
         player.updateLocation();
         player.draw(window);
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 10; i++)
             stroid[i].draw(window);
 
         //value validation

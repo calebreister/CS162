@@ -8,7 +8,7 @@
 #ifndef ASTEROID_HPP
 #define ASTEROID_HPP
 
-//#define NDEBUG
+#define NDEBUG
 #include <cassert>
 #include <iostream>
 #include <cmath>
