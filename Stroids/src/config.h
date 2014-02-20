@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "util.hpp"
+#include "util.h"
 
 //Hz at which to refresh the game
 const int REF_HZ = 120;

@@ -1,17 +1,17 @@
 /*
- * CLASS: SPACE_OBJECT_HPP
+ * CLASS: SPACE_OBJECT_H
  * AUTHOR: Caleb Reister
  * DESCRIPTION:
  *  Controls 2D physics for any object that floats in space
  */
 
-#ifndef SPACE_OBJECT_HPP
-#define SPACE_OBJECT_HPP
+#ifndef SPACE_OBJECT_H
+#define SPACE_OBJECT_H
 
 #include <iostream>
 #include <cmath>
 #include "config.h"
-#include "util.hpp"
+#include "util.h"
 
 class SpaceObject
 {

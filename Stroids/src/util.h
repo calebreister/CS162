@@ -1,5 +1,5 @@
 /*
- * HEADER: UTIL_HPP
+ * HEADER: UTIL_H
  * AUTHOR: Caleb Reister
  * DESCRIPTION: defines a utilities namespace
  *  - functions for angle conversion (radians, degrees, slope)
@@ -7,8 +7,8 @@
  *  - random number generators
  */
 
-#ifndef UTIL_HPP
-#define UTIL_HPP
+#ifndef UTIL_H
+#define UTIL_H
 #include <cmath>
 #include <cstdlib>
 #include <ctime>

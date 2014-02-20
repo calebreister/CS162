@@ -1,19 +1,19 @@
 /*
- * HEADER: SHIP_HPP
+ * HEADER: SHIP_H
  * AUTHOR: Caleb Reister
  * DESCRIPTION: class for controlling a "ship" from above
  *      going to be used in my implementation of asteroids
  */
 
-#ifndef SHIP_HPP
-#define SHIP_HPP
+#ifndef SHIP_H
+#define SHIP_H
 
 #include <cmath>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "util.hpp"
-#include "SpaceObject.hpp"
+#include "util.h"
+#include "SpaceObject.h"
 
 class Ship : public SpaceObject
 {

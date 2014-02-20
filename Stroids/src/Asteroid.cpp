@@ -1,10 +1,10 @@
 /*
  * PROGRAM: Asteroid
  * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation of ASTEROID_HPP
+ * DESCRIPTION: implementation of ASTEROID_H
  */
 
-#include "Asteroid.hpp"
+#include "Asteroid.h"
 
 Asteroid::Asteroid()
 {

@@ -1,12 +1,12 @@
 /*
- * HEADER: ASTEROIRD_HPP
+ * HEADER: ASTEROIRD_H
  * AUTHOR: Caleb Reister
  * DESCRIPTION: contains class declaration for a single
  *  asteroid for use in my Asteroids clone
  */
 
-#ifndef ASTEROID_HPP
-#define ASTEROID_HPP
+#ifndef ASTEROID_H
+#define ASTEROID_H
 
 #define NDEBUG
 #include <cassert>
@@ -15,8 +15,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "util.hpp"
-#include "SpaceObject.hpp"
+#include "util.h"
+#include "SpaceObject.h"
 
 class Asteroid : public SpaceObject
 {
