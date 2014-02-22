@@ -1,10 +1,10 @@
 /*
  * PROGRAM: util
  * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation file for util.h
+ * DESCRIPTION: implementation file for util.hpp
  */
 
-#include "util.h"
+#include "util.hpp"
 
 /*
  * FUNCTION randInt

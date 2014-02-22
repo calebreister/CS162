@@ -9,10 +9,10 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "config.h"
-#include "util.h"
-#include "Ship.h"
-#include "Asteroid.h"
+#include "config.hpp"
+#include "util.hpp"
+#include "Ship.hpp"
+#include "Asteroid.hpp"
 
 Ship player;
 Asteroid stroid[10];

@@ -4,7 +4,7 @@
  * DESCRIPTION: implementation of ASTEROID_H
  */
 
-#include "Asteroid.h"
+#include "Asteroid.hpp"
 
 Asteroid::Asteroid()
 {

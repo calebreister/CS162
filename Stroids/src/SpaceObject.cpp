@@ -5,7 +5,7 @@
  *      Author: caleb
  */
 
-#include "SpaceObject.h"
+#include "SpaceObject.hpp"
 
 SpaceObject::SpaceObject()
 {
