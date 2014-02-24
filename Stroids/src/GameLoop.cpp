@@ -5,21 +5,27 @@
  *  SFML implementation of Ship class, making it move around the screen
  */
 
+#include "util.hpp" //include cassert
 #include <cmath>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "config.hpp"
-#include "util.hpp"
 #include "Ship.hpp"
 #include "Asteroid.hpp"
 
-Ship player;
-Asteroid stroid[10];
-void keyInput(Ship& shp = player);
+void keyInput(Ship& shp);
 
 int main()
 {
+    //create ship and asteroids
+    Ship player;
+    Asteroid* stroid[MAX_STROIDS] = {NULL};
+    for (int i = 0; i < 5; i++)
+        stroid[i] = new Asteroid;
+
+    ////////////////////////////////////////////////////////////////////
+    //initialize SFML window
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
                             "'Stroids - Gamma Quadrant",
                             sf::Style::Titlebar | sf::Style::Close);
@@ -34,23 +40,38 @@ int main()
                 window.close();
         }
 
-        keyInput();
+        //get user input
+        keyInput(player);
 
         //draw new frame
         window.clear();
+
+        //draw ship
         player.draw(window);
         player.updateLocation();
         player.draw(window);
-        for (int i = 0; i < 10; i++)
-            stroid[i].draw(window);
+
+        for (int i = 0; i < MAX_STROIDS; i++)
+        {
+            if (stroid[i] != NULL)
+                stroid[i]->draw(window);
+        }
 
         //value validation
+        //ship
         util::Vect2d vel = player.getVelocity();
-        //std::cout << vel.x << "   " << vel.y << std::endl;
         assert(vel.x <= MAX_SPEED);
         assert(vel.x >= -MAX_SPEED);
         assert(vel.y <= MAX_SPEED);
         assert(vel.y >= -MAX_SPEED);
+        //stroid
+        for (int i; i < MAX_STROIDS; i++)
+        {
+            if (i < 5)
+                assert(stroid[i] != NULL);
+            else
+                assert(stroid[i] == NULL);
+        }
 
         //redisplay window
         window.display();

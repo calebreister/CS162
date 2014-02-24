@@ -9,6 +9,11 @@
 
 #ifndef UTIL_HPP
 #define UTIL_HPP
+
+//#define NDEBUG
+#include <cassert>
+//cassert needs to be in a file that is included in multiple places
+//this files is included in almost everything.
 #include <cmath>
 #include <cstdlib>
 #include <ctime>

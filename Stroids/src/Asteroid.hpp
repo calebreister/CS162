@@ -8,8 +8,6 @@
 #ifndef ASTEROID_HPP
 #define ASTEROID_HPP
 
-#define NDEBUG
-#include <cassert>
 #include <iostream>
 #include <cmath>
 #include <SFML/System.hpp>

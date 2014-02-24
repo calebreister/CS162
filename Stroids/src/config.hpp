@@ -17,4 +17,6 @@ const float MAX_SPEED = 6;
 //degrees to turn per loop cycle
 const float TURN_RATE = 2;
 
+const int MAX_STROIDS = 20;
+
 #endif
