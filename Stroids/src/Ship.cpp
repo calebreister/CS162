@@ -13,7 +13,30 @@ Ship::Ship()
     setRadius(5);
     setLocation(WIN_MID.x, WIN_MID.y);
     setVelocity(0, 0, 0);
-    setAngle(-45);
+    setAngle( -45);
+    state = GOOD;
+}
+
+/*
+ * FUNCTION: keyInput
+ * DESCRIPTION: gets keyboard input for controlling the ship
+ */
+void Ship::keyCtrl()
+{
+    if (state == GOOD)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            chgAngle( -TURN_RATE);
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            chgAngle(TURN_RATE);
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            applyThrust(.05);
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            applyThrust( -.05);
+    }
 }
 
 /*
@@ -61,4 +84,10 @@ void Ship::applyThrust(float thrust)
 {
     float rad = util::deg2rad(getAngle());
     chgVelocity(thrust * cos(rad), thrust * sin(rad), MAX_SPEED);
+}
+
+void Ship::explode()
+{
+    state = EXPLODE;
+    setVelocity(0, 0, 0);
 }

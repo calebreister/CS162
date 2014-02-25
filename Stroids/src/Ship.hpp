@@ -15,13 +15,23 @@
 #include "util.hpp"
 #include "SpaceObject.hpp"
 
+enum ShipState
+{
+    GOOD, EXPLODE, GONE
+};
+
 class Ship : public SpaceObject
 {
+    private:
+        ShipState state;
+
     public:
         Ship();
+        void keyCtrl();
         void draw(sf::RenderWindow& win);
         //User interaction
         void applyThrust(float thrust);
+        void explode();
 };
 
 #endif

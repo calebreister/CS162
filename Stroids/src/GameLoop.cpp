@@ -5,7 +5,7 @@
  *  SFML implementation of Ship class, making it move around the screen
  */
 
-#include "util.hpp" //include cassert
+#include "util.hpp"
 #include <cmath>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -41,7 +41,7 @@ int main()
         }
 
         //get user input
-        keyInput(player);
+        player.keyCtrl();
 
         //draw new frame
         window.clear();
@@ -79,23 +79,3 @@ int main()
     return 0;
 }
 
-/*
- * FUNCTION: keyInput
- * DESCRIPTION: gets keyboard input for controlling the space player
- * PARAMETERS:
- *  shp - the ship object to use as the player
- */
-void keyInput(Ship& shp)
-{
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        shp.chgAngle( -TURN_RATE);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        shp.chgAngle(TURN_RATE);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        shp.applyThrust(.05);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        shp.applyThrust( -.05);
-}
