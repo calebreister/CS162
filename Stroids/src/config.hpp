@@ -4,7 +4,7 @@
 #include "util.hpp"
 
 //Hz at which to refresh the game
-const int REF_HZ = 10;
+const int REF_HZ = 120;
 
 //size of the window
 const util::Vect2d WIN_SIZE = { 800, 800 };

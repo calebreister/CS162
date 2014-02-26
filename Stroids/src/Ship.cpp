@@ -16,9 +16,6 @@ Ship::Ship()
     setAngle( -45);
     state = GOOD;
     size = 1;
-
-    //alpha = 255;
-    //alphaStep = static_cast<int>(255 / STEP);
 }
 
 /*
@@ -30,8 +27,8 @@ Ship::Ship()
  */
 void Ship::draw(float explodeAlpha)
 {
-    static int alpha = 255; //alpha (aka opacity)
-    static int alphaStep = static_cast<int>(255 / STEP);
+    static float alpha = 256; //alpha (aka opacity)
+    //static float alphaStep = 255 / (MAX_SIZE / STEP);
 
     //map the points
     ship.setPointCount(3);
@@ -47,7 +44,7 @@ void Ship::draw(float explodeAlpha)
     }
     else if (state == EXPLODE)
     {
-        alpha = alpha - alphaStep;
+        alpha -= 1;
 
         ship.setScale(size, size);
         ship.setFillColor(sf::Color(0, 0, 0, alpha));
@@ -62,6 +59,7 @@ void Ship::draw(float explodeAlpha)
     ship.setOutlineThickness(1);
 }
 
+////////////////////////////////////////////////////////////////////////
 /*
  * FUNCTION: keyInput
  * DESCRIPTION: gets keyboard input for controlling the ship
@@ -103,8 +101,12 @@ void Ship::render(sf::RenderWindow& win)
 
     if (state == EXPLODE)
     {
-        if (size < MAX_SIZE)
+        static int i = 1;
+        if ( i < 256)
+        {
             size += STEP;
+            i++;
+        }
         else
             state = GONE;
         draw();

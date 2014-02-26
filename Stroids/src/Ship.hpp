@@ -27,8 +27,8 @@ class Ship : public SpaceObject
         ShipState state;
         //EXPLODE STATE VARS
         float size; //size multiplier for scaling
-        const int MAX_SIZE = 5;
-        const float STEP = .02; //step used for increasing size
+        //const int MAX_SIZE = 5;
+        const float STEP = .01; //step used for increasing size
         ////////////////////////////////
         void draw(float explodeAlpha = 0);
 
