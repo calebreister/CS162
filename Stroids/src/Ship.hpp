@@ -25,15 +25,8 @@ class Ship : public SpaceObject
     private:
         sf::ConvexShape ship; //the SFML rendering of the ship
         ShipState state;
-        //EXPLODE STATE VARS
-        float size; //size multiplier for scaling
-        //const int MAX_SIZE = 5;
-        const float STEP = .01; //step used for increasing size
-        ////////////////////////////////
-        void draw(float explodeAlpha = 0);
-
-        //int alpha; //alpha (aka opacity)
-        //int alphaStep;
+        //////////////////////////////
+        void draw();
 
     public:
         Ship();

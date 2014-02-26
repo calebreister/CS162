@@ -15,9 +15,9 @@ Ship::Ship()
     setVelocity(0, 0, 0);
     setAngle( -45);
     state = GOOD;
-    size = 1;
 }
 
+////////////////////////////////////////////////////////////////////////////
 /*
  * draw()
  * contains drawing instructions for the ship based on its current state
@@ -25,10 +25,13 @@ Ship::Ship()
  * PARAMETERS:
  * explodeAlpha - Alpha reduction during ship explosion
  */
-void Ship::draw(float explodeAlpha)
+void Ship::draw()
 {
-    static float alpha = 256; //alpha (aka opacity)
-    //static float alphaStep = 255 / (MAX_SIZE / STEP);
+    //explosion variables
+    const int STEPS = 100; //resolution of explosion, dictates speed
+    static int count = 1;//counts times function has been executed
+    static int alpha = 255; //sets alpha (aka opacity)
+    static float size = 1;
 
     //map the points
     ship.setPointCount(3);
@@ -44,16 +47,25 @@ void Ship::draw(float explodeAlpha)
     }
     else if (state == EXPLODE)
     {
-        alpha -= 1;
+        //increment explosion variables
+        count += 1;
+        size += .005;
+        alpha -= (255 / STEPS);
 
-        ship.setScale(size, size);
-        ship.setFillColor(sf::Color(0, 0, 0, alpha));
-        ship.setOutlineColor(sf::Color(255, 0, 0, alpha));
+        if (count <= STEPS)
+        {
+            ship.setScale(size, size);
+            ship.setFillColor(sf::Color(0, 0, 0, alpha));
+            ship.setOutlineColor(sf::Color(255, 0, 0, alpha));
+        }
+        else
+            state = GONE;
     }
     else
     {
         ship.setFillColor(sf::Color(0, 0, 0));
         ship.setOutlineColor(sf::Color(0, 0, 0));
+        count = 0;
     }
 
     ship.setOutlineThickness(1);
@@ -99,22 +111,7 @@ void Ship::render(sf::RenderWindow& win)
     ship.setPosition(loc.x, loc.y);
     ship.setRotation(getAngle() + 90);
 
-    if (state == EXPLODE)
-    {
-        static int i = 1;
-        if ( i < 256)
-        {
-            size += STEP;
-            i++;
-        }
-        else
-            state = GONE;
-        draw();
-        win.draw(ship);
-    }
-    else
-        draw();
-
+    draw();
     win.draw(ship);
 }
 
@@ -139,6 +136,7 @@ void Ship::applyThrust(float thrust)
  */
 void Ship::explode()
 {
-    state = EXPLODE;
+    if (state != GONE)
+        state = EXPLODE;
     setVelocity(0, 0, 0);
 }
