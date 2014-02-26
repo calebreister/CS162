@@ -14,13 +14,11 @@
 #include "Ship.hpp"
 #include "Asteroid.hpp"
 
-void keyInput(Ship& shp);
-
 int main()
 {
     //create ship and asteroids
     Ship player;
-    Asteroid* stroid[MAX_STROIDS] = {NULL};
+    Asteroid* stroid[MAX_STROIDS] = { NULL };
     for (int i = 0; i < 5; i++)
         stroid[i] = new Asteroid;
 
@@ -47,9 +45,9 @@ int main()
         window.clear();
 
         //draw ship
-        player.draw(window);
+        player.render(window);
         player.updateLocation();
-        player.draw(window);
+        player.render(window);
 
         for (int i = 0; i < MAX_STROIDS; i++)
         {
@@ -57,7 +55,7 @@ int main()
                 stroid[i]->draw(window);
         }
 
-        //value validation
+        /////////////////TEST CODE//////////////////////
         //ship
         util::Vect2d vel = player.getVelocity();
         assert(vel.x <= MAX_SPEED);
@@ -68,10 +66,13 @@ int main()
         for (int i; i < MAX_STROIDS; i++)
         {
             if (i < 5)
-                assert(stroid[i] != NULL);
+            assert(stroid[i] != NULL);
             else
-                assert(stroid[i] == NULL);
+            assert(stroid[i] == NULL);
         }
+
+        player.explode();
+        /////////////////END TEST CODE////////////////////
 
         //redisplay window
         window.display();

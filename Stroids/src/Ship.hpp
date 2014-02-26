@@ -23,15 +23,25 @@ enum ShipState
 class Ship : public SpaceObject
 {
     private:
+        sf::ConvexShape ship; //the SFML rendering of the ship
         ShipState state;
+        //EXPLODE STATE VARS
+        float size; //size multiplier for scaling
+        const int MAX_SIZE = 5;
+        const float STEP = .02; //step used for increasing size
+        ////////////////////////////////
+        void draw(float explodeAlpha = 0);
+
+        //int alpha; //alpha (aka opacity)
+        //int alphaStep;
 
     public:
         Ship();
-        void keyCtrl();
-        void draw(sf::RenderWindow& win);
-        //User interaction
-        void applyThrust(float thrust);
+        void render(sf::RenderWindow& win);
         void explode();
+        //USER INTERACTION
+        void applyThrust(float thrust);
+        void keyCtrl();
 };
 
 #endif

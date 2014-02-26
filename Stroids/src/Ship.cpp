@@ -15,6 +15,51 @@ Ship::Ship()
     setVelocity(0, 0, 0);
     setAngle( -45);
     state = GOOD;
+    size = 1;
+
+    //alpha = 255;
+    //alphaStep = static_cast<int>(255 / STEP);
+}
+
+/*
+ * draw()
+ * contains drawing instructions for the ship based on its current state
+ *
+ * PARAMETERS:
+ * explodeAlpha - Alpha reduction during ship explosion
+ */
+void Ship::draw(float explodeAlpha)
+{
+    static int alpha = 255; //alpha (aka opacity)
+    static int alphaStep = static_cast<int>(255 / STEP);
+
+    //map the points
+    ship.setPointCount(3);
+    ship.setPoint(0, sf::Vector2f(10, 0));
+    ship.setPoint(1, sf::Vector2f(0, 25));
+    ship.setPoint(2, sf::Vector2f(20, 25));
+
+    //check the state of the ship
+    if (state == GOOD)
+    {
+        ship.setFillColor(sf::Color(0, 0, 0));
+        ship.setOutlineColor(sf::Color(255, 0, 0));
+    }
+    else if (state == EXPLODE)
+    {
+        alpha = alpha - alphaStep;
+
+        ship.setScale(size, size);
+        ship.setFillColor(sf::Color(0, 0, 0, alpha));
+        ship.setOutlineColor(sf::Color(255, 0, 0, alpha));
+    }
+    else
+    {
+        ship.setFillColor(sf::Color(0, 0, 0));
+        ship.setOutlineColor(sf::Color(0, 0, 0));
+    }
+
+    ship.setOutlineThickness(1);
 }
 
 /*
@@ -40,35 +85,35 @@ void Ship::keyCtrl()
 }
 
 /*
- * FUNCTIOPN: draw
- * DESCRIPTION: draws the ship in the given window
+ * FUNCTIOPN: render
+ * DESCRIPTION: renders the ship in the given window
  *  and gets position information from the class.
- *  Defines the shape of the ship
  *  Does NOT get input for positioning
  * PARAMETERS:
  *  win - the window in which to draw the ship
  */
-void Ship::draw(sf::RenderWindow& win)
+void Ship::render(sf::RenderWindow& win)
 {
     util::Vect2d loc = getLocation();
 
-    sf::ConvexShape shp;
-    shp.setPointCount(3);
-    shp.setPoint(0, sf::Vector2f(10, 0));
-    shp.setPoint(1, sf::Vector2f(0, 25));
-    shp.setPoint(2, sf::Vector2f(20, 25));
-
     sf::Vector2f midpoint(10, 15);
-    shp.setOrigin(midpoint);
+    ship.setOrigin(midpoint);
+    ship.setPosition(loc.x, loc.y);
+    ship.setRotation(getAngle() + 90);
 
-    shp.setFillColor(sf::Color(0, 0, 0));
-    shp.setOutlineThickness(1);
-    shp.setOutlineColor(sf::Color(255, 255, 255));
+    if (state == EXPLODE)
+    {
+        if (size < MAX_SIZE)
+            size += STEP;
+        else
+            state = GONE;
+        draw();
+        win.draw(ship);
+    }
+    else
+        draw();
 
-    shp.setPosition(loc.x, loc.y);
-    shp.setRotation(getAngle() + 90);
-
-    win.draw(shp);
+    win.draw(ship);
 }
 
 //////////////////////////////////////////////////////////////
@@ -86,6 +131,10 @@ void Ship::applyThrust(float thrust)
     chgVelocity(thrust * cos(rad), thrust * sin(rad), MAX_SPEED);
 }
 
+/*
+ * explode()
+ * Change the state of the ship to explode, set velocity to 0.
+ */
 void Ship::explode()
 {
     state = EXPLODE;
