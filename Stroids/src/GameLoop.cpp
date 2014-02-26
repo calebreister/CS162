@@ -52,7 +52,11 @@ int main()
         for (int i = 0; i < MAX_STROIDS; i++)
         {
             if (stroid[i] != NULL)
+            {
                 stroid[i]->draw(window);
+                if (objectsIntersect(player, stroid[i]))
+                    player.explode();
+            }
         }
 
         /////////////////TEST CODE//////////////////////
@@ -70,8 +74,6 @@ int main()
             else
             assert(stroid[i] == NULL);
         }
-
-        player.explode();
         /////////////////END TEST CODE////////////////////
 
         //redisplay window

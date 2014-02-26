@@ -15,7 +15,7 @@
 
 class SpaceObject
 {
-    private:
+    protected:
         util::Vect2d location;
         util::Vect2d velocity;
         float angleDeg;
@@ -42,6 +42,8 @@ class SpaceObject
         util::Vect2d getVelocity();
         float getAngVel();
         float getAngle();
+        //////////////////////////////
+        friend bool objectsIntersect(SpaceObject obj1, SpaceObject obj2);
 };
 
 #endif

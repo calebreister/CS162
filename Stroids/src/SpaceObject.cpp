@@ -190,3 +190,26 @@ float SpaceObject::getAngle()
     angleDeg = fmod(angleDeg, 360);
     return angleDeg;
 }
+
+///////////////////////////////////////////////////////////////////////
+/*
+ * objectsIntersect(SpaceObject obj1, SpaceObject obj2)
+ * Checks to see whether the radius of one SpaceObject intersects another
+ *
+ * obj1: the first object to check
+ * obj2: the second object to check
+ *
+ * RETURN: bool whether or not objects intersect
+ */
+bool objectsIntersect(SpaceObject obj1, SpaceObject obj2)
+{
+    double distBetween =
+                         sqrt(
+                              pow(obj2.location.x - obj1.location.x, 2) +
+                              pow(obj2.location.y - obj1.location.y, 2));
+
+    if (distBetween < obj1.radius + obj2.radius)
+        return true;
+    else
+        return false;
+}
