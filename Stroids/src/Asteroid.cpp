@@ -30,7 +30,7 @@ Asteroid::Asteroid()
  */
 void Asteroid::draw(sf::RenderWindow& win)
 {
-    util::Vect2d loc = getLocation();
+    Vect2d loc = getLocation();
     sf::CircleShape stroid(getRadius(), sides);
 
     //define properties
@@ -120,14 +120,15 @@ bool Asteroid::checkSide(Side s)
     /*
      * NOTE: this is not the simplest method, but the other requires extra functions,
      * passing a location COMPONENT that is correct (*.y for top/bottom, *.x for left/right,
-     * passing the entire location vector would be pointless for individual functions). This method is
-     * also more self-documenting. In addition, no mathematical evaluation is required when
-     * checking a side as it was already passed in the parameter. In addition, the switch
-     * is a very streamlined method of writing this code, any other method would require significantly
-     * more unnecessary whitespace. Based off of my understanding, this is the fastest method.
+     * passing the entire location vector would be pointless for individual functions).
+     * This method is also more self-documenting. In addition, no mathematical evaluation is
+     * required when checking a side as it was already passed in the parameter. In addition,
+     * the switch is a very streamlined method of writing this code, any other method would
+     * require significantly more unnecessary whitespace. Based off of my understanding,
+     * this is the fastest method.
      */
 
-    static util::Vect2d loc; //static prevents memory from having to be re-allocated repeatedly
+    static Vect2d loc; //static prevents memory from having to be re-allocated repeatedly
     loc = getLocation();
     switch (s)
     {
@@ -144,6 +145,5 @@ bool Asteroid::checkSide(Side s)
             return (loc.y + getRadius() > WIN_SIZE.y) ? true : false;
             break;
     }
-    //no outside return required, this switch has to be entered and not doing so correctly
-    //will cause a compile time error.
+    return false;
 }

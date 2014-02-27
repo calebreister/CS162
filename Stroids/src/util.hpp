@@ -19,22 +19,23 @@
 
 const float PI = M_PI;
 
+struct Vect2d
+{
+        float x;
+        float y;
+        friend std::ostream& operator<<(std::ostream& out,
+                                        const Vect2d& in);
+        friend void operator+=(Vect2d& out, float op);
+        friend void operator-=(Vect2d& out, float op);
+        friend void operator*=(Vect2d& out, float op);
+        friend void operator/=(Vect2d& out, float op);
+        friend Vect2d operator+(const Vect2d& in, float op);
+        friend Vect2d operator-(const Vect2d& in, float op);
+        friend Vect2d operator*(const Vect2d& in, float op);
+        friend Vect2d operator/(const Vect2d& in, float op);
+};
 namespace util
 {
-    struct Vect2d
-    {
-            float x;
-            float y;
-            friend std::ostream& operator<<(std::ostream& out,
-                                            const Vect2d& obj);
-    };
-    //Print Vect2d
-    std::ostream& operator<<(std::ostream& out, const Vect2d& vect)
-    {
-        out << "(" << vect.x << ", " << vect.y << ")";
-        return out;
-    }
-
     //Random number generator
     int randInt(int low, int high);
     float randFloat(float low, float high);

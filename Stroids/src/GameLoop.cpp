@@ -61,7 +61,7 @@ int main()
 
         /////////////////TEST CODE//////////////////////
         //ship
-        util::Vect2d vel = player.getVelocity();
+        Vect2d vel = player.getVelocity();
         assert(vel.x <= MAX_SPEED);
         assert(vel.x >= -MAX_SPEED);
         assert(vel.y <= MAX_SPEED);

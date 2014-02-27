@@ -103,7 +103,7 @@ void Ship::keyCtrl()
  */
 void Ship::render(sf::RenderWindow& win)
 {
-    util::Vect2d loc = getLocation();
+    Vect2d loc = getLocation();
 
     sf::Vector2f midpoint(10, 15);
     ship.setOrigin(midpoint);

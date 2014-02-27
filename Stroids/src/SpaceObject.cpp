@@ -50,6 +50,11 @@ void SpaceObject::setLocation(float x, float y)
     location.y = y;
     boundFix();
 }
+void SpaceObject::setLocation(Vect2d loc)
+{
+    location = loc;
+    boundFix();
+}
 
 /*
  * FUNCTION: chgLocation
@@ -90,6 +95,18 @@ void SpaceObject::setVelocity(float velX, float velY, float max)
 {
     velocity.x = velX;
     velocity.y = velY;
+
+    //SPEED LIMITING
+    float angMaxRatio = getAngVel() / max; // angular velocity / max velocity
+    if (angMaxRatio > 1)
+    {
+        velocity.x /= angMaxRatio;
+        velocity.y /= angMaxRatio;
+    }
+}
+void SpaceObject::setVelocity(Vect2d vel, float max)
+{
+    velocity = vel;
 
     //SPEED LIMITING
     float angMaxRatio = getAngVel() / max; // angular velocity / max velocity
@@ -153,7 +170,7 @@ float SpaceObject::getRadius()
  * FUNCTION: getLocation
  * RETURN: location of the SpaceObject
  */
-util::Vect2d SpaceObject::getLocation()
+Vect2d SpaceObject::getLocation()
 {
     return location;
 }
@@ -162,7 +179,7 @@ util::Vect2d SpaceObject::getLocation()
  * FUNCTION: getVelocity
  * RETURN: current velocity of the SpaceObject
  */
-util::Vect2d SpaceObject::getVelocity()
+Vect2d SpaceObject::getVelocity()
 {
     return velocity;
 }
@@ -174,7 +191,7 @@ util::Vect2d SpaceObject::getVelocity()
  */
 float SpaceObject::getAngVel()
 {
-    util::Vect2d vel = getVelocity();
+    Vect2d vel = getVelocity();
     return sqrt(pow(vel.x, 2) + pow(vel.y, 2));
 }
 

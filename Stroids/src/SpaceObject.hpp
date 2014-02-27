@@ -10,14 +10,17 @@
 
 #include <iostream>
 #include <cmath>
-#include "config.hpp"
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include "util.hpp"
+#include "config.hpp"
 
 class SpaceObject
 {
     private:
-        util::Vect2d location;
-        util::Vect2d velocity;
+        Vect2d location;
+        Vect2d velocity;
         float angleDeg;
         int radius;
 
@@ -27,10 +30,12 @@ class SpaceObject
         void setRadius(int rad);
 
         void setLocation(float x, float y);
+        void setLocation(Vect2d loc);
         void chgLocation(float deltaX, float deltaY);
         void updateLocation();
 
         void setVelocity(float velX, float velY, float maxAngVel);
+        void setVelocity(Vect2d vel, float max);
         void chgVelocity(float deltaX, float deltaY, float max);
 
         void setAngle(float deg);
@@ -38,8 +43,8 @@ class SpaceObject
 
         //////////////////////////////
         float getRadius();
-        util::Vect2d getLocation();
-        util::Vect2d getVelocity();
+        Vect2d getLocation();
+        Vect2d getVelocity();
         float getAngVel();
         float getAngle();
         //////////////////////////////

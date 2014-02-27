@@ -5,7 +5,64 @@
  */
 
 #include "util.hpp"
+using namespace util;
 
+//////////////////////////////////////////////////////////////////
+//Operator overloads for Vect2d
+std::ostream& operator<<(std::ostream& out, const Vect2d& in)
+{
+    out << "(" << in.x << ", " << in.y << ")";
+    return out;
+}
+Vect2d operator+(const Vect2d& in, float op)
+{
+    Vect2d result;
+    result.x = in.x + op;
+    result.y = in.y + op;
+    return result;
+}
+Vect2d operator-(const Vect2d& in, float op)
+{
+    Vect2d out;
+    out.x = in.x - op;
+    out.y = in.y - op;
+    return out;
+}
+Vect2d operator*(const Vect2d& in, float op)
+{
+    Vect2d out;
+    out.x = in.x * op;
+    out.y = in.y * op;
+    return out;
+}
+Vect2d operator/(const Vect2d& in, float op)
+{
+    Vect2d out;
+    out.x = in.x / op;
+    out.y = in.y / op;
+    return out;
+}
+void operator+=(Vect2d& out, float op)
+{
+    out.x += op;
+    out.y += op;
+}
+void operator-=(Vect2d& out, float op)
+{
+    out.x -= op;
+    out.y -= op;
+}
+void operator*=(Vect2d& out, float op)
+{
+    out.x *= op;
+    out.y *= op;
+}
+void operator/=(Vect2d& out, float op)
+{
+    out.x /= op;
+    out.y /= op;
+}
+////////////////////////////////////////////////////////////////////////
 /*
  * FUNCTION randInt
  * DESCRIPTION: Returns a pseudo-random integer between given
@@ -54,7 +111,7 @@ float util::randFloat(float low, float high)
 
     //generate the random number
     randNum = fmod(0.01 * rand(), (high - low + 1) + low);
-    if (util::randInt(0, 1) == 1)
+    if (randInt(0, 1) == 1)
         randNum *= -1;
     return randNum;
 }
@@ -93,12 +150,12 @@ float util::deg2rad(float deg)
  *  slope (vector) - the rise (y) and run (x) values of the slope
  *  slope (float) - the rise and run, pre-divided
  */
-float util::slope2deg(Vect2d slope)
+float slope2deg(Vect2d slope)
 {
     return rad2deg(atan(slope.y / slope.x));
 }
 
-float util::slope2deg(float slope)
+float slope2deg(float slope)
 {
     return rad2deg(atan(slope));
 }
@@ -109,7 +166,7 @@ float util::slope2deg(float slope)
  *  a Cartesian plane, ranged
  * RETURN: slope of angle expressed as a vector
  */
-util::Vect2d util::deg2slope(float deg)
+Vect2d deg2slope(float deg)
 {
     Vect2d slope;
     slope.x = cos(deg2rad(deg));
