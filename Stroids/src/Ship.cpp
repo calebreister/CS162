@@ -3,7 +3,6 @@
  * AUTHOR: Caleb Reister
  * DESCRIPTION: implementation of Ship.hpp
  */
-
 #include "config.hpp"
 #include "Ship.hpp"
 using namespace std;

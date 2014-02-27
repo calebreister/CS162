@@ -11,9 +11,8 @@
 #define UTIL_HPP
 
 //#define NDEBUG
-#include <cassert>
-//cassert needs to be in a file that is included in multiple places
-//this files is included in almost everything.
+#include <cassert>//master cassert
+#include <iostream>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
@@ -26,7 +25,15 @@ namespace util
     {
             float x;
             float y;
+            friend std::ostream& operator<<(std::ostream& out,
+                                            const Vect2d& obj);
     };
+    //Print Vect2d
+    std::ostream& operator<<(std::ostream& out, const Vect2d& vect)
+    {
+        out << "(" << vect.x << ", " << vect.y << ")";
+        return out;
+    }
 
     //Random number generator
     int randInt(int low, int high);

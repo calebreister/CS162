@@ -201,14 +201,14 @@ float SpaceObject::getAngle()
  *
  * RETURN: bool whether or not objects intersect
  */
-bool objectsIntersect(SpaceObject obj1, SpaceObject obj2)
+bool objectsIntersect(SpaceObject obj1, SpaceObject* obj2)
 {
     double distBetween =
                          sqrt(
-                              pow(obj2.location.x - obj1.location.x, 2) +
-                              pow(obj2.location.y - obj1.location.y, 2));
+                              pow(obj2->location.x - obj1.location.x, 2) +
+                              pow(obj2->location.y - obj1.location.y, 2));
 
-    if (distBetween < obj1.radius + obj2.radius)
+    if (distBetween < obj1.radius + obj2->radius)
         return true;
     else
         return false;
