@@ -8,15 +8,18 @@
 #ifndef MUNITION_HPP_
 #define MUNITION_HPP_
 
+#include "util.hpp"
 #include "SpaceObject.hpp"
 
-class Munition : public SpaceObject
+class Gun : public SpaceObject
 {
     private:
         int timeToLive;
+        sf::RectangleShape pulse;
     public:
-        Munition();
-        Munition(Vect2d loc, Vect2d vel, float ang);
+        Gun();
+        Gun(Vect2d loc, float ang);
+        void kill();
         bool dead();
         void draw(sf::RenderWindow& win);
 };

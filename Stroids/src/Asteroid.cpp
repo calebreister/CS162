@@ -35,7 +35,7 @@ void Asteroid::draw(sf::RenderWindow& win)
 
     //define properties
     stroid.setOrigin(getRadius(), getRadius());
-    stroid.setFillColor(sf::Color(0, 0, 0, 0));
+    stroid.setFillColor(sf::Color(0, 0, 0));
     stroid.setOutlineThickness(5);
     stroid.setOutlineColor(sf::Color(255, 255, 255));
 

@@ -27,7 +27,7 @@ Ship::Ship()
 void Ship::draw()
 {
     //explosion variables
-    const int STEPS = 100; //resolution of explosion, dictates speed
+    const int STEPS = 100; //resolution (FPS) of explosion, dictates speed
     static int count = 1;//counts times function has been executed
     static int alpha = 255; //sets alpha (aka opacity)
     static float size = 1;
@@ -62,8 +62,8 @@ void Ship::draw()
     }
     else
     {
-        ship.setFillColor(sf::Color(0, 0, 0));
-        ship.setOutlineColor(sf::Color(0, 0, 0));
+        ship.setFillColor(sf::Color(0, 0, 0, 0));
+        ship.setOutlineColor(sf::Color(0, 0, 0, 0));
         count = 0;
     }
 

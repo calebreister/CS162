@@ -5,7 +5,6 @@
  */
 
 #include "util.hpp"
-using namespace util;
 
 //////////////////////////////////////////////////////////////////
 //Operator overloads for Vect2d
@@ -150,12 +149,12 @@ float util::deg2rad(float deg)
  *  slope (vector) - the rise (y) and run (x) values of the slope
  *  slope (float) - the rise and run, pre-divided
  */
-float slope2deg(Vect2d slope)
+float util::slope2deg(Vect2d slope)
 {
     return rad2deg(atan(slope.y / slope.x));
 }
 
-float slope2deg(float slope)
+float util::slope2deg(float slope)
 {
     return rad2deg(atan(slope));
 }
@@ -166,7 +165,7 @@ float slope2deg(float slope)
  *  a Cartesian plane, ranged
  * RETURN: slope of angle expressed as a vector
  */
-Vect2d deg2slope(float deg)
+Vect2d util::deg2slope(float deg)
 {
     Vect2d slope;
     slope.x = cos(deg2rad(deg));

@@ -19,4 +19,6 @@ const float TURN_RATE = 2;
 
 const int MAX_STROIDS = 20;
 
+const int MAX_LASER_PULSE = 10;
+
 #endif
