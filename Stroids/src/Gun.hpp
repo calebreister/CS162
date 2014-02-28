@@ -19,6 +19,7 @@ class Gun : public SpaceObject
     public:
         Gun();
         Gun(Vect2d loc, float ang);
+        //projectile functions
         void kill();
         bool dead();
         void draw(sf::RenderWindow& win);

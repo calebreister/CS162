@@ -32,9 +32,8 @@ class Ship : public SpaceObject
         Ship();
         void render(sf::RenderWindow& win);
         void explode();
-        //USER INTERACTION
         void applyThrust(float thrust);
-        void keyCtrl();
+        ShipState getState();
 };
 
 #endif

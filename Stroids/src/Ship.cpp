@@ -75,7 +75,7 @@ void Ship::draw()
  * FUNCTION: keyInput
  * DESCRIPTION: gets keyboard input for controlling the ship
  */
-void Ship::keyCtrl()
+/*void Ship::keyCtrl()
 {
     if (state == GOOD)
     {
@@ -91,7 +91,7 @@ void Ship::keyCtrl()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             applyThrust( -.05);
     }
-}
+}*/
 
 /*
  * FUNCTIOPN: render
@@ -138,4 +138,9 @@ void Ship::explode()
     if (state != GONE)
         state = EXPLODE;
     setVelocity(0, 0, 0);
+}
+
+ShipState Ship::getState()
+{
+    return state;
 }
