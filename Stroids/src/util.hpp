@@ -10,8 +10,6 @@
 #ifndef UTIL_HPP
 #define UTIL_HPP
 
-//#define NDEBUG
-#include <cassert>//master cassert
 #include <iostream>
 #include <cmath>
 #include <cstdlib>

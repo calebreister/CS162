@@ -4,107 +4,40 @@
  * DESCRIPTION: implementation of ASTEROID_H
  */
 
+#define NDEBUG
+#include <cassert>
 #include "Asteroid.hpp"
 
 Asteroid::Asteroid()
 {
-    setRadius(util::randInt(30, 60));
+    //initialize variables
+    setRadius(util::randInt(10, 30));
     sides = util::randInt(5, 11);
-    setLocation(static_cast<float>(util::randInt(0, WIN_SIZE.x)),
-                static_cast<float>(util::randInt(0, WIN_SIZE.y)));
+    Vect2d loc = { util::randFloat(0, WIN_SIZE.x),
+                   util::randFloat(0, WIN_SIZE.y) };
+
+    //check/correct location bounds
+    if (checkLocBound(pp, loc))
+        loc += 100;
+    else if (checkLocBound(nn, loc))
+        loc -= 100;
+    else if (checkLocBound(pn, loc))
+    {
+        loc.x += 100;
+        loc.y -= 100;
+    }
+    else if (checkLocBound(np, loc))
+    {
+        loc.x -= 100;
+        loc.y += 100;
+    }
+
+    //set values
+    setLocation(loc.x, loc.y);
     //setLocation(400, 400);
-    rotationVel = util::randFloat( -.1, .1);
-    setVelocity(util::randFloat( -.5, .5), util::randFloat( -.5, .5), .75);
+    rotationVel = util::randFloat(-.1, .1);
+    setVelocity(util::randFloat(-.5, .5), util::randFloat(-.5, .5), .75);
     //setVelocity(1, 1, 1);
-}
-
-/*
- * FUNCTION: draw
- * DESCRIPTION: draw an asteroid
- *  - Change the angle by the rotational velocity amount.
- *  - Then draw the asteroid as a regular polygon of the given number of sides.
- *  - If it’s near an edge (within one radius), you should draw it again off the
- *     opposite edge so the part that is there shows up.
- * PARAMETERS:
- *  win - the window in which to draw the asteroid
- */
-void Asteroid::draw(sf::RenderWindow& win)
-{
-    Vect2d loc = getLocation();
-    sf::CircleShape stroid(getRadius(), sides);
-
-    //define properties
-    stroid.setOrigin(getRadius(), getRadius());
-    stroid.setFillColor(sf::Color(0, 0, 0));
-    stroid.setOutlineThickness(5);
-    stroid.setOutlineColor(sf::Color(255, 255, 255));
-
-    //update values
-    stroid.setRotation(getAngle());
-    stroid.setPosition(loc.x, loc.y);
-    chgAngle(rotationVel);
-    stroid.rotate(rotationVel);
-    updateLocation();
-
-    //draw
-    win.draw(stroid);
-
-    //run edge and corner checks, correct issues
-    //Corners must be checked first, if they are not, there is
-      //a rendering issue
-    if (checkSide(bottom) && checkSide(right))
-    {
-        stroid.setPosition( -(WIN_SIZE.x - loc.x), -(WIN_SIZE.y - loc.y));
-        stroid.setRotation(getAngle());
-        win.draw(stroid);
-    }
-    else if (checkSide(left) && checkSide(top))
-    {
-        stroid.setPosition(WIN_SIZE.x + loc.x, WIN_SIZE.y + loc.y);
-        stroid.setRotation(getAngle());
-        win.draw(stroid);
-    }
-    else if (checkSide(right) && checkSide(top))
-    {
-        stroid.setPosition( -(WIN_SIZE.x - loc.x), WIN_SIZE.y + loc.y);
-        stroid.setRotation(getAngle());
-        win.draw(stroid);
-    }
-    else if (checkSide(left) && checkSide(bottom))
-    {
-        stroid.setPosition(WIN_SIZE.x + loc.x, -(WIN_SIZE.y - loc.y));
-        stroid.setRotation(getAngle());
-        win.draw(stroid);
-    }
-    else
-    {
-        //X
-        if (checkSide(right))
-        {
-            stroid.setPosition( -(WIN_SIZE.x - loc.x), loc.y);
-            stroid.setRotation(getAngle());
-            win.draw(stroid);
-        }
-        else if (checkSide(left))
-        {
-            stroid.setPosition(WIN_SIZE.x + loc.x, loc.y);
-            stroid.setRotation(getAngle());
-            win.draw(stroid);
-        }
-        //Y
-        if (checkSide(bottom))
-        {
-            stroid.setPosition(loc.x, -(WIN_SIZE.y - loc.y));
-            stroid.setRotation(getAngle());
-            win.draw(stroid);
-        }
-        else if (checkSide(top))
-        {
-            stroid.setPosition(loc.x, WIN_SIZE.y + loc.y);
-            stroid.setRotation(getAngle());
-            win.draw(stroid);
-        }
-    }
 }
 
 /*
@@ -147,3 +80,166 @@ bool Asteroid::checkSide(Side s)
     }
     return false;
 }
+
+/*
+ * FUNCTION: checkLocBound
+ * DESCRIPTION: checks to see if an asteroid is going to spawn too close
+ *  to a pointer with a given radius
+ *
+ * PARAMETERS:
+ *  quadrant - string stating which quadrant can be checked, uses a graph
+ *             with loc as the origin.
+ *             pp covers points (x, y)
+ *             nn covers points (-x, -y)
+ *             pn covers points (x, -y)
+ *             np covers points (-x, y)
+ *  loc - the location of the object
+ *  point - the point to avoid
+ *  radius - defines the space around the point to avoid
+ *
+ * RETURN:
+ *  if ++ and within radius of point return true
+ *  if -- and within radius of point return true
+ *  if +- and within radius of point return true
+ *  if -+ and within radius of point return true
+ *  else return false
+ */
+bool Asteroid::checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
+                             int radius)
+{
+    assert(quad == pp
+           || quad == nn
+           || quad == pn
+           || quad == np);
+
+    switch (quad)
+    {
+        case pp:
+            if (loc.x > point.x
+                && loc.y > point.y
+                && loc.x < point.x + radius
+                && loc.y < point.y + radius)
+                return true;
+            else
+                return false;
+            break;
+        case nn:
+            if (loc.x < point.x
+                && loc.y < point.y
+                && loc.x > point.x - radius
+                && loc.y > point.y - radius)
+                return true;
+            else
+                return false;
+            break;
+        case pn:
+            if (loc.x > point.x
+                && loc.y < point.y
+                && loc.x < point.x + radius
+                && loc.y > point.y - radius)
+                return true;
+            else
+                return false;
+            break;
+        case np:
+            if (loc.x < point.x
+                && loc.y > point.y
+                && loc.x > point.x - radius
+                && loc.y < point.y + radius)
+                return true;
+            else
+                return false;
+            break;
+    }
+    //no return here necessary
+}
+
+/*
+ * FUNCTION: draw
+ * DESCRIPTION: draw an asteroid
+ *  - Change the angle by the rotational velocity amount.
+ *  - Then draw the asteroid as a regular polygon of the given number of sides.
+ *  - If it’s near an edge (within one radius), you should draw it again off the
+ *     opposite edge so the part that is there shows up.
+ * PARAMETERS:
+ *  win - the window in which to draw the asteroid
+ */
+void Asteroid::draw(sf::RenderWindow& win)
+{
+    Vect2d loc = getLocation();
+    sf::CircleShape stroid(getRadius(), sides);
+
+    //define properties
+    stroid.setOrigin(getRadius(), getRadius());
+    stroid.setFillColor(sf::Color(0, 0, 0));
+    stroid.setOutlineThickness(5);
+    stroid.setOutlineColor(sf::Color(255, 255, 255));
+
+    //update values
+    stroid.setRotation(getAngle());
+    stroid.setPosition(loc.x, loc.y);
+    chgAngle(rotationVel);
+    stroid.rotate(rotationVel);
+    updateLocation();
+
+    //draw
+    win.draw(stroid);
+
+    //run edge and corner checks, correct issues
+    //Corners must be checked first, if they are not, there is
+    //a rendering issue
+    if (checkSide(bottom) && checkSide(right))
+    {
+        stroid.setPosition(-(WIN_SIZE.x - loc.x), -(WIN_SIZE.y - loc.y));
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+    else if (checkSide(left) && checkSide(top))
+    {
+        stroid.setPosition(WIN_SIZE.x + loc.x, WIN_SIZE.y + loc.y);
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+    else if (checkSide(right) && checkSide(top))
+    {
+        stroid.setPosition(-(WIN_SIZE.x - loc.x), WIN_SIZE.y + loc.y);
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+    else if (checkSide(left) && checkSide(bottom))
+    {
+        stroid.setPosition(WIN_SIZE.x + loc.x, -(WIN_SIZE.y - loc.y));
+        stroid.setRotation(getAngle());
+        win.draw(stroid);
+    }
+    else
+    {
+        //X
+        if (checkSide(right))
+        {
+            stroid.setPosition(-(WIN_SIZE.x - loc.x), loc.y);
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
+        else if (checkSide(left))
+        {
+            stroid.setPosition(WIN_SIZE.x + loc.x, loc.y);
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
+        //Y
+        if (checkSide(bottom))
+        {
+            stroid.setPosition(loc.x, -(WIN_SIZE.y - loc.y));
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
+        else if (checkSide(top))
+        {
+            stroid.setPosition(loc.x, WIN_SIZE.y + loc.y);
+            stroid.setRotation(getAngle());
+            win.draw(stroid);
+        }
+    }
+}
+

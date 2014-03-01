@@ -5,11 +5,13 @@
  * DESCRIPTION:
  */
 
+#define NDEBUG
+#include <cassert>
 #include "GameGraphics.hpp"
 
 GameGraphics::GameGraphics()
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < START_STROIDS; i++)
         stroid[i] = new Asteroid;
 }
 
@@ -17,7 +19,7 @@ GameGraphics::~GameGraphics()
 {
     for (int i = 0; i < MAX_STROIDS; i++)
         if (stroid[i] != NULL)
-        delete stroid[i];
+            delete stroid[i];
     for (int i = 0; i < MAX_PULSE; i++)
         delete laser[i];
 }
@@ -33,6 +35,8 @@ void GameGraphics::testCode()
 
 void GameGraphics::keyInput()
 {
+    sf::Event event;
+
     if (ship.getState() == GOOD)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -47,6 +51,14 @@ void GameGraphics::keyInput()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             ship.applyThrust(-.05);
     }
+
+    if (event.type == sf::Event::KeyPressed)
+    {
+        if (event.key.code == sf::Keyboard::Space)
+        {
+            std::cout << "space pressed" << std::endl;
+        }
+    }
 }
 
 void GameGraphics::drawStroids(sf::RenderWindow& win)
@@ -60,25 +72,17 @@ void GameGraphics::drawStroids(sf::RenderWindow& win)
 
 void GameGraphics::drawPulses(sf::RenderWindow& win)
 {
-    /*        if (event.type == sf::Event::KeyPressed && event.key.code
-     == sf::Keyboard::Space)
-     {
-     for (int i = 0; i < MAX_LASER_PULSE; i++)
-     {
-     if (laser[i] == NULL)
-     {*/
-    int i = 0;
-    if (laser[i] == NULL)
-        laser[i] = new Gun(ship.getLocation(), ship.getAngle());
-    if (laser[i]->dead())
-    delete laser[i];
-    else
-    laser[i]->draw(win);
-    /*break;
-     }
-     }
-     assert(laser[0] != NULL);
-     }*/
+    for (int i = 0; i < MAX_PULSE; i++)
+    {
+        if (laser[i] == NULL)
+        {
+            int i = 0;
+            if (laser[i] == NULL)
+                laser[i] = new Gun(ship.getLocation(), ship.getAngle());
+            (laser[i]->dead()) ? delete laser[i] : laser[i]->draw(win);
+        }
+    }
+    assert(laser[0] != NULL);
 }
 
 void GameGraphics::drawShip(sf::RenderWindow& win)

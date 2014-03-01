@@ -33,7 +33,7 @@ int main()
 
         window.clear();
         game.drawStroids(window);
-        //game.drawPulses(window);
+        game.drawPulses(window);
         game.drawShip(window);
         game.checkCollisions();
 
