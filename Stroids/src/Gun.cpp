@@ -25,8 +25,7 @@ Gun::Gun(Vect2d loc, float ang)
     setLocation(loc);
     setAngle(ang);
 
-    //vel += 5;
-    setVelocity(vel, .1);
+    setVelocity(vel, 2);
     pulse.setRotation(getAngle());
     pulse.setPosition(loc.x, loc.y);
     pulse.setSize(sf::Vector2f(15, 3));

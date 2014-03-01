@@ -20,6 +20,6 @@ const float TURN_RATE = 2;
 const int MAX_STROIDS = 100;
 const int START_STROIDS = 5;
 
-const int MAX_PULSE = 10;
+const int MAX_PULSE = 4000;
 
 #endif
