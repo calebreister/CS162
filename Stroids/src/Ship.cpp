@@ -3,6 +3,7 @@
  * AUTHOR: Caleb Reister
  * DESCRIPTION: implementation of Ship.hpp
  */
+
 #include "config.hpp"
 #include "Ship.hpp"
 using namespace std;
@@ -12,7 +13,7 @@ Ship::Ship()
     setRadius(5);
     setLocation(WIN_MID.x, WIN_MID.y);
     setVelocity(0, 0, 0);
-    setAngle( -45);
+    setAngle(-45);
     state = GOOD;
 }
 
@@ -28,7 +29,7 @@ void Ship::draw()
 {
     //explosion variables
     const int STEPS = 100; //resolution (FPS) of explosion, dictates speed
-    static int count = 1;//counts times function has been executed
+    static int count = 1; //counts times function has been executed
     static int alpha = 255; //sets alpha (aka opacity)
     static float size = 1;
 
@@ -71,28 +72,6 @@ void Ship::draw()
 }
 
 ////////////////////////////////////////////////////////////////////////
-/*
- * FUNCTION: keyInput
- * DESCRIPTION: gets keyboard input for controlling the ship
- */
-/*void Ship::keyCtrl()
-{
-    if (state == GOOD)
-    {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            chgAngle( -TURN_RATE);
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            chgAngle(TURN_RATE);
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            applyThrust(.05);
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            applyThrust( -.05);
-    }
-}*/
-
 /*
  * FUNCTIOPN: render
  * DESCRIPTION: renders the ship in the given window

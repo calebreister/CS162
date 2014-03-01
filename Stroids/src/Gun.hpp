@@ -14,14 +14,14 @@
 class Gun : public SpaceObject
 {
     private:
-        int timeToLive;
         sf::RectangleShape pulse;
+        int timeToLive; //lifetime of pulse
     public:
         Gun();
         Gun(Vect2d loc, float ang);
-        //projectile functions
-        void kill();
-        bool dead();
+        //projectile
+        void hit();
+        bool pulseDead();
         void draw(sf::RenderWindow& win);
 };
 

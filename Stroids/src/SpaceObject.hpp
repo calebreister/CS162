@@ -20,9 +20,9 @@ class SpaceObject
 {
     private:
         Vect2d location;
-        Vect2d velocity;
         float angleDeg;
         int radius;
+        Vect2d velocity;
 
     public:
         SpaceObject();

@@ -25,11 +25,11 @@ class GameGraphics
         Asteroid* stroid[MAX_STROIDS] = { NULL };
         Gun* laser[MAX_PULSE] = { NULL };
         Ship ship;
+        void fireGun();
 
     public:
         GameGraphics();
         ~GameGraphics();
-        void testCode();
         void keyInput();
         void drawStroids(sf::RenderWindow& win);
         void drawPulses(sf::RenderWindow& win);

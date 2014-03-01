@@ -5,7 +5,7 @@
  * DESCRIPTION:
  */
 
-#define NDEBUG
+//#define NDEBUG
 #include <cassert>
 #include "GameGraphics.hpp"
 
@@ -24,18 +24,16 @@ GameGraphics::~GameGraphics()
         delete laser[i];
 }
 
-void GameGraphics::testCode()
+void GameGraphics::fireGun()
 {
-    Vect2d vel = ship.getVelocity();
-    assert(vel.x <= MAX_SPEED);
-    assert(vel.x >= -MAX_SPEED);
-    assert(vel.y <= MAX_SPEED);
-    assert(vel.y >= -MAX_SPEED);
+    int i;
+    for(i = 0; laser[i] != NULL; i++);
+    laser[i] = new Gun(ship.getLocation(), ship.getAngle());
 }
 
 void GameGraphics::keyInput()
 {
-    sf::Event event;
+    //sf::Event event;
 
     if (ship.getState() == GOOD)
     {
@@ -52,13 +50,16 @@ void GameGraphics::keyInput()
             ship.applyThrust(-.05);
     }
 
-    if (event.type == sf::Event::KeyPressed)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        fireGun();
+
+    /*if (event.type == sf::Event::KeyPressed)
     {
         if (event.key.code == sf::Keyboard::Space)
         {
             std::cout << "space pressed" << std::endl;
         }
-    }
+    }*/
 }
 
 void GameGraphics::drawStroids(sf::RenderWindow& win)
@@ -74,15 +75,14 @@ void GameGraphics::drawPulses(sf::RenderWindow& win)
 {
     for (int i = 0; i < MAX_PULSE; i++)
     {
-        if (laser[i] == NULL)
+        if (laser[i] != NULL)
         {
-            int i = 0;
-            if (laser[i] == NULL)
-                laser[i] = new Gun(ship.getLocation(), ship.getAngle());
-            (laser[i]->dead()) ? delete laser[i] : laser[i]->draw(win);
+            if (laser[i]->pulseDead())
+                delete laser[i];
+            else
+                laser[i]->draw(win);
         }
     }
-    assert(laser[0] != NULL);
 }
 
 void GameGraphics::drawShip(sf::RenderWindow& win)

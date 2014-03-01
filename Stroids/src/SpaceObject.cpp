@@ -5,6 +5,8 @@
  *      Author: caleb
  */
 
+#define NDEBUG
+#include <cassert>
 #include "SpaceObject.hpp"
 
 SpaceObject::SpaceObject()
@@ -103,6 +105,11 @@ void SpaceObject::setVelocity(float velX, float velY, float max)
         velocity.x /= angMaxRatio;
         velocity.y /= angMaxRatio;
     }
+
+    assert(velocity.x <= max);
+    assert(velocity.x >= -max);
+    assert(velocity.y <= max);
+    assert(velocity.y >= -max);
 }
 void SpaceObject::setVelocity(Vect2d vel, float max)
 {
@@ -130,6 +137,10 @@ void SpaceObject::setVelocity(Vect2d vel, float max)
 void SpaceObject::chgVelocity(float deltaX, float deltaY, float max)
 {
     setVelocity(velocity.x + deltaX, velocity.y + deltaY, max);
+    assert(velocity.x <= max);
+    assert(velocity.x >= -max);
+    assert(velocity.y <= max);
+    assert(velocity.y >= -max);
 }
 
 /*
