@@ -32,6 +32,7 @@ struct Vect2d
         friend Vect2d operator*(const Vect2d& in, float op);
         friend Vect2d operator/(const Vect2d& in, float op);
 };
+
 namespace util
 {
     //Random number generator

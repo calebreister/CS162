@@ -15,7 +15,7 @@ class Gun : public SpaceObject
 {
     private:
         sf::RectangleShape pulse;
-        int timeToLive; //lifetime of pulse
+        unsigned int timeToLive; //lifetime of pulse
     public:
         Gun();
         Gun(Vect2d loc, float ang);

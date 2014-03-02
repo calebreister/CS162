@@ -6,6 +6,8 @@
  *  by the ship in the asteroids game implementation.
  */
 
+//#define NDEBUG
+#include <cassert>
 #include "Gun.hpp"
 
 Gun::Gun()
@@ -20,12 +22,13 @@ Gun::Gun()
 Gun::Gun(Vect2d loc, float ang)
 {
     Vect2d vel = util::deg2slope(ang);
-    timeToLive = 255;
+    timeToLive = 50;
     setRadius(1);
     setLocation(loc);
     setAngle(ang);
 
-    setVelocity(vel, 2);
+    vel *= 100;
+    setVelocity(vel, 10);
     pulse.setRotation(getAngle());
     pulse.setPosition(loc.x, loc.y);
     pulse.setSize(sf::Vector2f(15, 3));
@@ -39,19 +42,24 @@ void Gun::hit()
 
 bool Gun::pulseDead()
 {
-    return (timeToLive <= 0) ? true : false;
+    assert(timeToLive >= 0);
+    if (timeToLive == 0)
+        return true;
+    else
+        return false;
 }
 
 void Gun::draw(sf::RenderWindow& win)
 {
     Vect2d loc = getLocation();
     static const int STEPS = timeToLive;
-    static int alpha = 255;
+    static unsigned int alpha = 255;//hard coded, max alpha SFML accepts
 
     pulse.setPosition(loc.x, loc.y);
     pulse.setFillColor(sf::Color(255, 255, 255, alpha));
 
     win.draw(pulse);
     alpha -= (255 / STEPS);
+    timeToLive--;
     updateLocation();
 }

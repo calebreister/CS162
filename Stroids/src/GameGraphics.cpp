@@ -13,6 +13,11 @@ GameGraphics::GameGraphics()
 {
     for (int i = 0; i < START_STROIDS; i++)
         stroid[i] = new Asteroid;
+    for (int i = START_STROIDS; i < MAX_STROIDS; i++)
+        stroid[i] = NULL;
+
+    for (int i = 0; i < MAX_PULSE; i++)
+        laser[i] = NULL;
 }
 
 GameGraphics::~GameGraphics()
@@ -27,7 +32,8 @@ GameGraphics::~GameGraphics()
 void GameGraphics::fireGun()
 {
     int i;
-    for(i = 0; laser[i] != NULL; i++);
+    for (i = 0; laser[i] != NULL; i++)
+        ;
     laser[i] = new Gun(ship.getLocation(), ship.getAngle());
 }
 
@@ -54,12 +60,12 @@ void GameGraphics::keyInput()
         fireGun();
 
     /*if (event.type == sf::Event::KeyPressed)
-    {
-        if (event.key.code == sf::Keyboard::Space)
-        {
-            std::cout << "space pressed" << std::endl;
-        }
-    }*/
+     {
+     if (event.key.code == sf::Keyboard::Space)
+     {
+     std::cout << "space pressed" << std::endl;
+     }
+     }*/
 }
 
 void GameGraphics::drawStroids(sf::RenderWindow& win)
@@ -78,7 +84,10 @@ void GameGraphics::drawPulses(sf::RenderWindow& win)
         if (laser[i] != NULL)
         {
             if (laser[i]->pulseDead())
+            {
                 delete laser[i];
+                laser[i] = NULL;
+            }
             else
                 laser[i]->draw(win);
         }

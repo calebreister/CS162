@@ -22,8 +22,8 @@ class GameGraphics
 {
     private:
         //rendering order
-        Asteroid* stroid[MAX_STROIDS] = { NULL };
-        Gun* laser[MAX_PULSE] = { NULL };
+        Asteroid* stroid[MAX_STROIDS];
+        Gun* laser[MAX_PULSE];
         Ship ship;
         void fireGun();
 
