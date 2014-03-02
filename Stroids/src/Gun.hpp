@@ -9,6 +9,7 @@
 #define MUNITION_HPP_
 
 #include "util.hpp"
+#include "config.hpp"
 #include "SpaceObject.hpp"
 
 class Gun : public SpaceObject

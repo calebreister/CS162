@@ -18,6 +18,8 @@ GameGraphics::GameGraphics()
 
     for (int i = 0; i < MAX_PULSE; i++)
         laser[i] = NULL;
+
+    gunCool = GUN_COOL_TIME;
 }
 
 GameGraphics::~GameGraphics()
@@ -32,15 +34,12 @@ GameGraphics::~GameGraphics()
 void GameGraphics::fireGun()
 {
     int i;
-    for (i = 0; laser[i] != NULL; i++)
-        ;
+    for (i = 0; laser[i] != NULL; i++);
     laser[i] = new Gun(ship.getLocation(), ship.getAngle());
 }
 
 void GameGraphics::keyInput()
 {
-    //sf::Event event;
-
     if (ship.getState() == GOOD)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -57,15 +56,25 @@ void GameGraphics::keyInput()
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-        fireGun();
+    {
+        if (gunCool == 0)
+        {
+            fireGun();
+            gunCool = GUN_COOL_TIME;
+        }
+        else
+            gunCool--;
+    }
 
-    /*if (event.type == sf::Event::KeyPressed)
-     {
-     if (event.key.code == sf::Keyboard::Space)
-     {
-     std::cout << "space pressed" << std::endl;
-     }
-     }*/
+    //EVENT BELOW DOES NOT WORK
+    /*sf::Event event;
+    if (event.type == sf::Event::KeyPressed)
+    {
+        if (event.key.code == sf::Keyboard::Space)
+        {
+            std::cout << "space pressed" << std::endl;
+        }
+    }*/
 }
 
 void GameGraphics::drawStroids(sf::RenderWindow& win)
@@ -86,7 +95,8 @@ void GameGraphics::drawPulses(sf::RenderWindow& win)
             if (laser[i]->pulseDead())
             {
                 delete laser[i];
-                laser[i] = NULL;
+                laser[i] = NULL; //prevents program from cashing
+                                 //not sure why
             }
             else
                 laser[i]->draw(win);

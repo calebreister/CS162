@@ -25,6 +25,7 @@ class GameGraphics
         Asteroid* stroid[MAX_STROIDS];
         Gun* laser[MAX_PULSE];
         Ship ship;
+        int gunCool;
         void fireGun();
 
     public:

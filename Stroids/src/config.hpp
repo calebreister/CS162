@@ -12,7 +12,7 @@ const Vect2d WIN_SIZE = { 800, 800 };
 const Vect2d WIN_MID = { 400, 400 };
 const Vect2d ZERO = { 0, 0 };
 
-const float MAX_SPEED = 6;
+const float SHIP_SPEED = 6;
 
 //degrees to turn per loop cycle
 const float TURN_RATE = 2;
@@ -21,5 +21,6 @@ const int MAX_STROIDS = 100;
 const int START_STROIDS = 5;
 
 const int MAX_PULSE = 100;
+const int GUN_COOL_TIME = 50;
 
 #endif

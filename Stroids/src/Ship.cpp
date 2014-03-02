@@ -105,7 +105,7 @@ void Ship::render(sf::RenderWindow& win)
 void Ship::applyThrust(float thrust)
 {
     float rad = util::deg2rad(getAngle());
-    chgVelocity(thrust * cos(rad), thrust * sin(rad), MAX_SPEED);
+    chgVelocity(thrust * cos(rad), thrust * sin(rad), SHIP_SPEED);
 }
 
 /*
