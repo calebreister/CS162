@@ -41,6 +41,7 @@ class Asteroid : public SpaceObject
                            int radius = 200);
 
     public:
+        bool hit;
         Asteroid();
         void draw(sf::RenderWindow& win);
 };

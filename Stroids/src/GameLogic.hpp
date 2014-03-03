@@ -5,8 +5,8 @@
  * DESCRIPTION: Graphics of asteroids game
  */
 
-#ifndef GAME_GRAPHICS_HPP_
-#define GAME_GRAPHICS_HPP_
+#ifndef GAME_LOGIC_HPP_
+#define GAME_LOGIC_HPP_
 
 #include <cmath>
 #include <SFML/System.hpp>
@@ -18,7 +18,7 @@
 #include "Asteroid.hpp"
 #include "Gun.hpp"
 
-class GameGraphics
+class GameLogic
 {
     private:
         //rendering order
@@ -29,8 +29,8 @@ class GameGraphics
         void fireGun();
 
     public:
-        GameGraphics();
-        ~GameGraphics();
+        GameLogic();
+        ~GameLogic();
         void keyInput();
         void drawStroids(sf::RenderWindow& win);
         void drawPulses(sf::RenderWindow& win);

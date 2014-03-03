@@ -8,11 +8,11 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "GameGraphics.hpp"
+#include "GameLogic.hpp"
 
 int main()
 {
-    GameGraphics game;
+    GameLogic game;
 
     //initialize SFML window
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
