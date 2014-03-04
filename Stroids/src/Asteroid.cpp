@@ -33,18 +33,16 @@ Asteroid::Asteroid()
     }
 
     //set values
-    location = {loc.x, loc.y};
+    location =
+    {   loc.x, loc.y};
     //setLocation(400, 400);
     rotationVel = util::randFloat(-.1, .1);
     setVelocity(util::randFloat(-.5, .5), util::randFloat(-.5, .5), .75);
     //setVelocity(1, 1, 1);
 
-    color =
-    {
-        static_cast<unsigned char>(util::randInt(util::randInt(0, 100), 255)),
-        static_cast<unsigned char>(util::randInt(util::randInt(0, 100), 255)),
-        static_cast<unsigned char>(util::randInt(util::randInt(0, 100), 255))
-    };
+    color = sf::Color(util::randInt(util::randInt(0, 100), 255),
+                      util::randInt(util::randInt(0, 100), 255),
+                      util::randInt(util::randInt(0, 100), 255));
 
     hit = false;
     split = false;

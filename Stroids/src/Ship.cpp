@@ -11,7 +11,7 @@ using namespace std;
 Ship::Ship()
 {
     radius = 5;
-    location = {WIN_MID.x, WIN_MID.y};
+    location = WIN_MID;
     setVelocity(0, 0, 0);
     setAngle(-45);
     state = GOOD;

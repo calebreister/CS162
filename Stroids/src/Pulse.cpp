@@ -17,7 +17,7 @@ Pulse::Pulse()
 {
     timeToLive = 250;
     radius = 0;
-    location = {0, 0};
+    location = ZERO;
     setVelocity(0, 0, 0);
     setAngle(0);
 }
