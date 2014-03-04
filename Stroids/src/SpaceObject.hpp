@@ -19,30 +19,24 @@
 class SpaceObject
 {
     private:
-        Vect2d location;
         float angleDeg;
-        int radius;
         Vect2d velocity;
 
     protected:
+        int radius;
+        Vect2d location;
         void boundFix();
+        void setVelocity(float velX, float velY, float maxAngVel);
+        void setVelocity(Vect2d vel, float max);
+        void setAngle(float deg);
+        void updateLocation();
 
     public:
         SpaceObject();
-        void setRadius(int rad);
-
-        void setLocation(float x, float y);
-        void setLocation(Vect2d loc);
+        //////////////////////////////
         void chgLocation(float deltaX, float deltaY);
-        void updateLocation();
-
-        void setVelocity(float velX, float velY, float maxAngVel);
-        void setVelocity(Vect2d vel, float max);
         void chgVelocity(float deltaX, float deltaY, float max);
-
-        void setAngle(float deg);
         void chgAngle(float deltaDeg);
-
         //////////////////////////////
         float getRadius();
         Vect2d getLocation();

@@ -25,6 +25,7 @@ class GameLogic
         Asteroid* stroid[MAX_STROIDS];
         Pulse* laser[MAX_PULSE];
         Ship ship;
+        int findFreeStroid();
 
     public:
         GameLogic();

@@ -19,8 +19,10 @@ class Pulse : public SpaceObject
         unsigned int timeToLive; //lifetime of pulse
         void checkScreenEdge();
 
-    public:
+    protected:
         Pulse();
+
+    public:
         Pulse(Vect2d loc, float ang);
         void hit();
         bool isDead();

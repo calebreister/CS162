@@ -10,8 +10,8 @@ using namespace std;
 
 Ship::Ship()
 {
-    setRadius(5);
-    setLocation(WIN_MID.x, WIN_MID.y);
+    radius = 5;
+    location = {WIN_MID.x, WIN_MID.y};
     setVelocity(0, 0, 0);
     setAngle(-45);
     state = GOOD;
@@ -27,6 +27,8 @@ Ship::Ship()
  */
 void Ship::draw()
 {
+    boundFix();
+
     //explosion variables
     const int STEPS = 100; //resolution (FPS) of explosion, dictates speed
     static int count = 1; //counts times function has been executed
@@ -72,13 +74,12 @@ void Ship::draw()
 }
 
 ////////////////////////////////////////////////////////////////////////
-/*
- * FUNCTIOPN: render
- * DESCRIPTION: renders the ship in the given window
- *  and gets position information from the class.
- *  Does NOT get input for positioning
- * PARAMETERS:
- *  win - the window in which to draw the ship
+/* void render(sf::RenderWindow& win
+ * Renders the ship in the given window
+ * and gets position information from the class.
+ * Does NOT get input for positioning
+ *
+ * sf::RenderWindow& win - the window in which to draw the ship
  */
 void Ship::render(sf::RenderWindow& win)
 {
@@ -91,6 +92,7 @@ void Ship::render(sf::RenderWindow& win)
 
     draw();
     win.draw(ship);
+    updateLocation();
 }
 
 //////////////////////////////////////////////////////////////

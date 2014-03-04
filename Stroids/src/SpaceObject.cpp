@@ -34,30 +34,6 @@ void SpaceObject::boundFix()
         location.y = WIN_SIZE.y;
 }
 
-void SpaceObject::setRadius(int rad)
-{
-    radius = rad;
-}
-
-/*
- * FUNCTION: setLocation
- * DESCRIPTION: Set the location of the SpaceObject
- * PARAMETERS:
- *  x: the x-coordinate to position the SpaceObject
- *  y: the y-coordinate to position the SpaceObject
- */
-void SpaceObject::setLocation(float x, float y)
-{
-    location.x = x;
-    location.y = y;
-    boundFix();
-}
-void SpaceObject::setLocation(Vect2d loc)
-{
-    location = loc;
-    boundFix();
-}
-
 /*
  * FUNCTION: chgLocation
  * DESCRIPTION: changes the ships location (in relation to the current position)

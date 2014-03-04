@@ -29,23 +29,20 @@ GameLogic::~GameLogic()
         delete laser[i];
 }
 
-/* void fireGun(sf::Event& event)
- * Fires pulses from the ship. Gets event-based input for gunfire.
- *
- * sf::Event& event - the SFML event from which to capture the fire button
- */
-void GameLogic::fireGun(sf::Event& event)
+int GameLogic::findFreeStroid()
 {
-    if (ship.getState() != GONE && ship.getState() != EXPLODE)
+    int i = 0;
+    while (i < MAX_STROIDS)
     {
-        if (event.type == sf::Event::KeyReleased
-            && event.key.code == sf::Keyboard::Space)
+        if (stroid[i] == NULL)
         {
-            int i;
-            for (i = 0; laser[i] != NULL; i++);
-            laser[i] = new Pulse(ship.getLocation(), ship.getAngle());
+            //std::cout << i << std::endl;
+            return i;
         }
+        i++;
     }
+    std::cout << "Error: asteroid memory full." << std::endl;
+    return -1; //Error: no memory
 }
 
 /* void keyInput()
@@ -69,6 +66,26 @@ void GameLogic::keyInput()
     }
 }
 
+/* void fireGun(sf::Event& event)
+ * Fires pulses from the ship. Gets event-based input for gunfire.
+ *
+ * sf::Event& event - the SFML event from which to capture the fire button
+ */
+void GameLogic::fireGun(sf::Event& event)
+{
+    if (ship.getState() != GONE && ship.getState() != EXPLODE)
+    {
+        if (event.type == sf::Event::KeyReleased
+            && event.key.code == sf::Keyboard::Space)
+        {
+            int i;
+            for (i = 0; laser[i] != NULL; i++)
+                ;
+            laser[i] = new Pulse(ship.getLocation(), ship.getAngle());
+        }
+    }
+}
+
 /* void stroidLogic(sf::RenderWindow& win);
  * Allocates and deallocates all asteroids. Draws asteroids.
  *
@@ -76,18 +93,42 @@ void GameLogic::keyInput()
  */
 void GameLogic::stroidLogic(sf::RenderWindow& win)
 {
+    static int count = 0;
+
     for (int i = 0; i < MAX_STROIDS; i++)
     {
         if (stroid[i] != NULL)
         {
+            //if an asteroid is destroyed...
             if (stroid[i]->hit)
             {
-                delete stroid[i];
-                stroid[i] = NULL;
+                if (stroid[i]->split)
+                {
+                    delete stroid[i];
+                    stroid[i] = NULL;
+                }
+                else
+                {
+                    //create 2 new ones in its place
+                    if (findFreeStroid() != -1)
+                    {
+                        stroid[findFreeStroid()] = new Asteroid(stroid[i]);
+                        stroid[findFreeStroid()] = new Asteroid(stroid[i]);
+                    }
+                    delete stroid[i];
+                    stroid[i] = NULL;
+                }
             }
             else
                 stroid[i]->draw(win);
         }
+    }
+
+    count++;
+    if (count == REF_HZ * STROID_SPAWN_RATE)
+    {
+        count = 0;
+        stroid[findFreeStroid()] = new Asteroid();
     }
 }
 
@@ -121,8 +162,6 @@ void GameLogic::pulseLogic(sf::RenderWindow& win)
  */
 void GameLogic::drawShip(sf::RenderWindow& win)
 {
-    ship.render(win);
-    ship.updateLocation();
     ship.render(win);
 }
 

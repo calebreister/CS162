@@ -11,10 +11,10 @@
 Asteroid::Asteroid()
 {
     //initialize variables
-    setRadius(util::randInt(10, 30));
-    sides = util::randInt(5, 11);
-    Vect2d loc = { util::randFloat(0, WIN_SIZE.x),
-                   util::randFloat(0, WIN_SIZE.y) };
+    radius = util::randInt(10, 30);
+    sides = util::randInt(6, 11);
+    Vect2d loc = {util::randFloat(0, WIN_SIZE.x),
+                  util::randFloat(0, WIN_SIZE.y)};
 
     //check/correct location bounds
     if (checkLocBound(pp, loc))
@@ -33,11 +33,45 @@ Asteroid::Asteroid()
     }
 
     //set values
-    setLocation(loc.x, loc.y);
+    location = {loc.x, loc.y};
     //setLocation(400, 400);
     rotationVel = util::randFloat(-.1, .1);
     setVelocity(util::randFloat(-.5, .5), util::randFloat(-.5, .5), .75);
     //setVelocity(1, 1, 1);
+
+    color =
+    {
+        static_cast<unsigned char>(util::randInt(util::randInt(0, 100), 255)),
+        static_cast<unsigned char>(util::randInt(util::randInt(0, 100), 255)),
+        static_cast<unsigned char>(util::randInt(util::randInt(0, 100), 255))
+    };
+
+    hit = false;
+    split = false;
+}
+
+/* Asteroid(Vect2d loc)
+ * Asteroid constructor with a definite starting location, used for asteroids
+ * that have been hit once and split. Due to the split status, it has several other
+ * non-random properties.
+ *
+ * Asteroid* old - the asteroid from which to base the new one
+ */
+Asteroid::Asteroid(Asteroid* old)
+{
+    //initialize variables
+    radius = old->radius / 2;
+    sides = old->sides / 2;
+
+    //set values
+    location = old->location;
+    rotationVel = util::randFloat(-.1, .1);
+    setVelocity(util::randFloat(-.5, .5), util::randFloat(-.5, .5), .75);
+
+    color = old->color;
+
+    hit = false;
+    split = true;
 }
 
 /*
@@ -81,28 +115,26 @@ bool Asteroid::checkSide(Side s)
     return false;
 }
 
-/*
- * FUNCTION: checkLocBound
- * DESCRIPTION: checks to see if an asteroid is going to spawn too close
- *  to a pointer with a given radius
+/* void checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
+ *                              int radius)
+ * Checks to see if an asteroid is going to spawn too close
+ * to a pointer with a given radius
  *
- * PARAMETERS:
- *  quadrant - string stating which quadrant can be checked, uses a graph
- *             with loc as the origin.
- *             pp covers points (x, y)
- *             nn covers points (-x, -y)
- *             pn covers points (x, -y)
- *             np covers points (-x, y)
- *  loc - the location of the object
- *  point - the point to avoid
- *  radius - defines the space around the point to avoid
+ * quadrant - string stating which quadrant can be checked, uses a graph
+ *            with loc as the origin.
+ *            pp covers points (x, y)
+ *            nn covers points (-x, -y)
+ *            pn covers points (x, -y)
+ *            np covers points (-x, y)
+ * loc - the location of the object
+ * point - the point to avoid
+ * radius - defines the space around the point to avoid
  *
- * RETURN:
- *  if ++ and within radius of point return true
- *  if -- and within radius of point return true
- *  if +- and within radius of point return true
- *  if -+ and within radius of point return true
- *  else return false
+ * if ++ and within radius of point return true
+ * if -- and within radius of point return true
+ * if +- and within radius of point return true
+ * if -+ and within radius of point return true
+ * else return false
  */
 bool Asteroid::checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
                              int radius)
@@ -151,7 +183,7 @@ bool Asteroid::checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
                 return false;
             break;
     }
-    //no return here necessary
+    return false; //this line should never run, something is wrong if it does
 }
 
 /*
@@ -166,6 +198,8 @@ bool Asteroid::checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
  */
 void Asteroid::draw(sf::RenderWindow& win)
 {
+    boundFix();
+
     Vect2d loc = getLocation();
     sf::CircleShape stroid(getRadius(), sides);
 
@@ -173,7 +207,7 @@ void Asteroid::draw(sf::RenderWindow& win)
     stroid.setOrigin(getRadius(), getRadius());
     stroid.setFillColor(sf::Color(0, 0, 0));
     stroid.setOutlineThickness(5);
-    stroid.setOutlineColor(sf::Color(255, 255, 255));
+    stroid.setOutlineColor(color);
 
     //update values
     stroid.setRotation(getAngle());
@@ -242,4 +276,3 @@ void Asteroid::draw(sf::RenderWindow& win)
         }
     }
 }
-

@@ -39,11 +39,14 @@ class Asteroid : public SpaceObject
         bool checkLocBound(Quadrant quad, Vect2d loc,
                            Vect2d point = WIN_MID,
                            int radius = 200);
+        sf::Color color;
 
     public:
-        bool hit;
         Asteroid();
+        Asteroid(Asteroid* old);
         void draw(sf::RenderWindow& win);
+        bool hit;
+        bool split;
 };
 
 #endif

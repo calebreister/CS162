@@ -16,8 +16,8 @@
 Pulse::Pulse()
 {
     timeToLive = 250;
-    setRadius(0);
-    setLocation(0, 0);
+    radius = 0;
+    location = {0, 0};
     setVelocity(0, 0, 0);
     setAngle(0);
 }
@@ -32,16 +32,16 @@ Pulse::Pulse()
 Pulse::Pulse(Vect2d loc, float ang)
 {
     Vect2d vel = util::deg2slope(ang);
-    timeToLive = 50;
-    setRadius(1);
-    setLocation(loc);
+    timeToLive = PULSE_LIFE;
+    radius = 1;
+    location = loc;
     setAngle(ang);
 
     vel *= 100;
-    setVelocity(vel, SHIP_SPEED + 4);
+    setVelocity(vel, SHIP_SPEED + 2);
     pulse.setRotation(getAngle());
     pulse.setPosition(loc.x, loc.y);
-    pulse.setSize(sf::Vector2f(15, 3));
+    pulse.setSize(sf::Vector2f(30, 3));
 }
 
 /* void checkScreenEdge()
