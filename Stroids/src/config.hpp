@@ -21,6 +21,5 @@ const int MAX_STROIDS = 100;
 const int START_STROIDS = 5;
 
 const int MAX_PULSE = 100;
-const int GUN_COOL_TIME = 50;
 
 #endif

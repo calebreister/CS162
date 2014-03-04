@@ -1,5 +1,5 @@
 /*
- * Gun.cpp    Feb 27, 2014
+ * Pulse.cpp    Feb 27, 2014
  * AUTHOR: Caleb Reister
  * DEV ENV: Eclipse 4 CDT Linux AMD64
  * DESCRIPTION: Defines the "bullets" fired
@@ -8,9 +8,9 @@
 
 //#define NDEBUG
 #include <cassert>
-#include "Gun.hpp"
+#include "Pulse.hpp"
 
-Gun::Gun()
+Pulse::Pulse()
 {
     timeToLive = 250;
     setRadius(0);
@@ -19,7 +19,7 @@ Gun::Gun()
     setAngle(0);
 }
 
-Gun::Gun(Vect2d loc, float ang)
+Pulse::Pulse(Vect2d loc, float ang)
 {
     Vect2d vel = util::deg2slope(ang);
     timeToLive = 50;
@@ -34,13 +34,13 @@ Gun::Gun(Vect2d loc, float ang)
     pulse.setSize(sf::Vector2f(15, 3));
 }
 
-void Gun::hit()
+void Pulse::hit()
 {
     timeToLive = 0;
 }
 
 
-bool Gun::pulseDead()
+bool Pulse::isDead()
 {
     assert(timeToLive >= 0);
     if (timeToLive == 0)
@@ -49,7 +49,7 @@ bool Gun::pulseDead()
         return false;
 }
 
-void Gun::draw(sf::RenderWindow& win)
+void Pulse::draw(sf::RenderWindow& win)
 {
     Vect2d loc = getLocation();
     static const int STEPS = timeToLive;

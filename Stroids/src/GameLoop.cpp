@@ -27,6 +27,8 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+                game.fireGun(event);
         }
 
         game.keyInput();

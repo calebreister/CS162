@@ -16,22 +16,21 @@
 #include "config.hpp"
 #include "Ship.hpp"
 #include "Asteroid.hpp"
-#include "Gun.hpp"
+#include "Pulse.hpp"
 
 class GameLogic
 {
     private:
         //rendering order
         Asteroid* stroid[MAX_STROIDS];
-        Gun* laser[MAX_PULSE];
+        Pulse* laserGun[MAX_PULSE];
         Ship ship;
-        int gunCool;
-        void fireGun();
 
     public:
         GameLogic();
         ~GameLogic();
         void keyInput();
+        void fireGun(sf::Event& event);
         void drawStroids(sf::RenderWindow& win);
         void drawPulses(sf::RenderWindow& win);
         void drawShip(sf::RenderWindow& win);

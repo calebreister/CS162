@@ -17,9 +17,7 @@ GameLogic::GameLogic()
         stroid[i] = NULL;
 
     for (int i = 0; i < MAX_PULSE; i++)
-        laser[i] = NULL;
-
-    gunCool = GUN_COOL_TIME;
+        laserGun[i] = NULL;
 }
 
 GameLogic::~GameLogic()
@@ -28,15 +26,21 @@ GameLogic::~GameLogic()
         if (stroid[i] != NULL)
             delete stroid[i];
     for (int i = 0; i < MAX_PULSE; i++)
-        delete laser[i];
+        delete laserGun[i];
 }
 
-void GameLogic::fireGun()
+void GameLogic::fireGun(sf::Event& event)
 {
-    int i;
-    for (i = 0; laser[i] != NULL; i++)
-        ;
-    laser[i] = new Gun(ship.getLocation(), ship.getAngle());
+    if (ship.getState() != GONE && ship.getState() != EXPLODE)
+    {
+        if (event.type == sf::Event::KeyReleased
+            && event.key.code == sf::Keyboard::Space)
+        {
+            int i;
+            for (i = 0; laserGun[i] != NULL; i++);
+            laserGun[i] = new Pulse(ship.getLocation(), ship.getAngle());
+        }
+    }
 }
 
 void GameLogic::keyInput()
@@ -54,21 +58,6 @@ void GameLogic::keyInput()
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             ship.applyThrust(-.05);
-    }
-
-    if (ship.getState() != ShipState::EXPLODE && ship.getState()
-            != ShipState::GONE)
-    {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-        {
-            if (gunCool == 0)
-            {
-                fireGun();
-                gunCool = GUN_COOL_TIME;
-            }
-            else
-                gunCool--;
-        }
     }
 }
 
@@ -93,16 +82,16 @@ void GameLogic::drawPulses(sf::RenderWindow& win)
 {
     for (int i = 0; i < MAX_PULSE; i++)
     {
-        if (laser[i] != NULL)
+        if (laserGun[i] != NULL)
         {
-            if (laser[i]->pulseDead())
+            if (laserGun[i]->isDead())
             {
-                delete laser[i];
-                laser[i] = NULL; //prevents program from cashing
+                delete laserGun[i];
+                laserGun[i] = NULL; //prevents program from cashing
                                  //not sure why
             }
             else
-                laser[i]->draw(win);
+                laserGun[i]->draw(win);
         }
     }
 }
@@ -126,11 +115,11 @@ void GameLogic::checkCollisions()
 
             for (int iPulse = 0; iPulse < MAX_PULSE; iPulse++)
             {
-                if (laser[iPulse] != NULL)
+                if (laserGun[iPulse] != NULL)
                 {
-                    if (objectsIntersect(laser[iPulse], stroid[iStroid]))
+                    if (objectsIntersect(laserGun[iPulse], stroid[iStroid]))
                     {
-                        laser[iPulse]->hit();
+                        laserGun[iPulse]->hit();
                         stroid[iStroid]->hit = true;
                     }
                 }

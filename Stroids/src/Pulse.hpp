@@ -12,17 +12,18 @@
 #include "config.hpp"
 #include "SpaceObject.hpp"
 
-class Gun : public SpaceObject
+class Pulse : public SpaceObject
 {
     private:
         sf::RectangleShape pulse;
         unsigned int timeToLive; //lifetime of pulse
+
     public:
-        Gun();
-        Gun(Vect2d loc, float ang);
+        Pulse();
+        Pulse(Vect2d loc, float ang);
         //projectile
         void hit();
-        bool pulseDead();
+        bool isDead();
         void draw(sf::RenderWindow& win);
 };
 
