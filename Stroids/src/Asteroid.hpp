@@ -15,6 +15,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "util.hpp"
+#include "config.hpp"
 #include "SpaceObject.hpp"
 
 enum Side

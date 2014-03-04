@@ -18,7 +18,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
                             "'Stroids - Gamma Quadrant",
                             sf::Style::Titlebar | sf::Style::Close);
-    window.setFramerateLimit(REF_HZ);
+    window.setFramerateLimit(cfg["REF_HZ"].as_int());
 
     while (window.isOpen())
     {

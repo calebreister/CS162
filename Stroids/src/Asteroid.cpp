@@ -4,15 +4,16 @@
  * DESCRIPTION: implementation of ASTEROID_H
  */
 
-#define NDEBUG
+//#define NDEBUG
 #include <cassert>
 #include "Asteroid.hpp"
 
 Asteroid::Asteroid()
 {
     //initialize variables
-    radius = util::randInt(10, 30);
-    sides = util::randInt(6, 11);
+    radius = util::randInt(cfg["STROID"]["MIN_SIZE"].as_int(),
+                           cfg["STROID"]["MAX_SIZE"].as_int());
+    sides = util::randInt(6, 12);
     Vect2d loc = {util::randFloat(0, WIN_SIZE.x),
                   util::randFloat(0, WIN_SIZE.y)};
 
@@ -33,16 +34,20 @@ Asteroid::Asteroid()
     }
 
     //set values
-    location =
-    {   loc.x, loc.y};
+    location = {loc.x, loc.y};
     //setLocation(400, 400);
     rotationVel = util::randFloat(-.1, .1);
-    setVelocity(util::randFloat(-.5, .5), util::randFloat(-.5, .5), .75);
+    setVelocity(util::randFloat(cfg["STROID"]["MIN_SPEED"].as_float(),
+                                cfg["STROID"]["MAX_SPEED"].as_float()),
+                util::randFloat(cfg["STROID"]["MIN_SPEED"].as_float(),
+                                cfg["STROID"]["MAX_SPEED"].as_float()),
+                cfg["STROID"]["MAX_SPEED"].as_float());
     //setVelocity(1, 1, 1);
 
     color = sf::Color(util::randInt(util::randInt(0, 100), 255),
                       util::randInt(util::randInt(0, 100), 255),
                       util::randInt(util::randInt(0, 100), 255));
+    //color = sf::Color(255, 255, 255);
 
     hit = false;
     split = false;

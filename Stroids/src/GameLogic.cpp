@@ -11,9 +11,10 @@
 
 GameLogic::GameLogic()
 {
-    for (int i = 0; i < START_STROIDS; i++)
+    for (int i = 0; i < cfg["STROID"]["START_NUM"].as_int(); i++)
         stroid[i] = new Asteroid;
-    for (int i = START_STROIDS; i < MAX_STROIDS; i++)
+    for (int i = cfg["STROID"]["START_NUM"].as_int();
+            i < MAX_STROIDS; i++)
         stroid[i] = NULL;
 
     for (int i = 0; i < MAX_PULSE; i++)
@@ -41,7 +42,7 @@ int GameLogic::findFreeStroid()
         }
         i++;
     }
-    std::cout << "Error: asteroid memory full." << std::endl;
+    std::cerr << "Error: asteroid memory full. New asteroid not created." << std::endl;
     return -1; //Error: no memory
 }
 
@@ -53,10 +54,10 @@ void GameLogic::keyInput()
     if (ship.getState() == GOOD)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            ship.chgAngle(-TURN_RATE);
+            ship.chgAngle(-(cfg["SHIP"]["TURN_RATE"].as_float()));
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            ship.chgAngle(TURN_RATE);
+            ship.chgAngle(cfg["SHIP"]["TURN_RATE"].as_float());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
             ship.applyThrust(.05);
@@ -125,7 +126,7 @@ void GameLogic::stroidLogic(sf::RenderWindow& win)
     }
 
     count++;
-    if (count == REF_HZ * STROID_SPAWN_RATE)
+    if (count == cfg["REF_HZ"].as_int() * cfg["STROID"]["SPAWN_RATE"].as_int())
     {
         count = 0;
         stroid[findFreeStroid()] = new Asteroid();

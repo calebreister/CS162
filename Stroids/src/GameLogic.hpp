@@ -12,8 +12,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "util.hpp"
 #include "config.hpp"
+#include "util.hpp"
 #include "Ship.hpp"
 #include "Asteroid.hpp"
 #include "Pulse.hpp"
