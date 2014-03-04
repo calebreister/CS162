@@ -68,7 +68,6 @@ void SpaceObject::chgLocation(float deltaX, float deltaY)
 {
     location.x += deltaX;
     location.y += deltaY;
-    boundFix();
 }
 
 /*
@@ -82,7 +81,6 @@ void SpaceObject::updateLocation()
 {
     location.x += velocity.x;
     location.y += velocity.y;
-    boundFix();
 }
 
 /*

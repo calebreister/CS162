@@ -17,11 +17,11 @@ class Pulse : public SpaceObject
     private:
         sf::RectangleShape pulse;
         unsigned int timeToLive; //lifetime of pulse
+        void checkScreenEdge();
 
     public:
         Pulse();
         Pulse(Vect2d loc, float ang);
-        //projectile
         void hit();
         bool isDead();
         void draw(sf::RenderWindow& win);

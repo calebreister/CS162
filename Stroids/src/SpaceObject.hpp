@@ -24,9 +24,11 @@ class SpaceObject
         int radius;
         Vect2d velocity;
 
+    protected:
+        void boundFix();
+
     public:
         SpaceObject();
-        void boundFix();
         void setRadius(int rad);
 
         void setLocation(float x, float y);

@@ -1,5 +1,5 @@
 /*
- * Graphics.cpp    Feb 28, 2014
+ * GameLogic.cpp    Feb 28, 2014
  * AUTHOR: Caleb Reister
  * DEV ENV: Eclipse 4 CDT Linux AMD64
  * DESCRIPTION:
@@ -17,7 +17,7 @@ GameLogic::GameLogic()
         stroid[i] = NULL;
 
     for (int i = 0; i < MAX_PULSE; i++)
-        laserGun[i] = NULL;
+        laser[i] = NULL;
 }
 
 GameLogic::~GameLogic()
@@ -26,9 +26,14 @@ GameLogic::~GameLogic()
         if (stroid[i] != NULL)
             delete stroid[i];
     for (int i = 0; i < MAX_PULSE; i++)
-        delete laserGun[i];
+        delete laser[i];
 }
 
+/* void fireGun(sf::Event& event)
+ * Fires pulses from the ship. Gets event-based input for gunfire.
+ *
+ * sf::Event& event - the SFML event from which to capture the fire button
+ */
 void GameLogic::fireGun(sf::Event& event)
 {
     if (ship.getState() != GONE && ship.getState() != EXPLODE)
@@ -37,12 +42,15 @@ void GameLogic::fireGun(sf::Event& event)
             && event.key.code == sf::Keyboard::Space)
         {
             int i;
-            for (i = 0; laserGun[i] != NULL; i++);
-            laserGun[i] = new Pulse(ship.getLocation(), ship.getAngle());
+            for (i = 0; laser[i] != NULL; i++);
+            laser[i] = new Pulse(ship.getLocation(), ship.getAngle());
         }
     }
 }
 
+/* void keyInput()
+ * Gets non-event based user input from the keyboard. Used to control the ship.
+ */
 void GameLogic::keyInput()
 {
     if (ship.getState() == GOOD)
@@ -61,7 +69,12 @@ void GameLogic::keyInput()
     }
 }
 
-void GameLogic::drawStroids(sf::RenderWindow& win)
+/* void stroidLogic(sf::RenderWindow& win);
+ * Allocates and deallocates all asteroids. Draws asteroids.
+ *
+ * sf::RenderWindow& win - the window in which to render asteroids
+ */
+void GameLogic::stroidLogic(sf::RenderWindow& win)
 {
     for (int i = 0; i < MAX_STROIDS; i++)
     {
@@ -78,24 +91,34 @@ void GameLogic::drawStroids(sf::RenderWindow& win)
     }
 }
 
-void GameLogic::drawPulses(sf::RenderWindow& win)
+/* void pulseLogic(sf::RenderWindow& win);
+ * Allocates and deallocates all laser pulses. Draws appropriate pulses.
+ *
+ * sf::RenderWindow& win - window in which to render pulses
+ */
+void GameLogic::pulseLogic(sf::RenderWindow& win)
 {
     for (int i = 0; i < MAX_PULSE; i++)
     {
-        if (laserGun[i] != NULL)
+        if (laser[i] != NULL)
         {
-            if (laserGun[i]->isDead())
+            if (laser[i]->isDead())
             {
-                delete laserGun[i];
-                laserGun[i] = NULL; //prevents program from cashing
+                delete laser[i];
+                laser[i] = NULL; //prevents program from cashing
                                  //not sure why
             }
             else
-                laserGun[i]->draw(win);
+                laser[i]->draw(win);
         }
     }
 }
 
+/* void drawShip(sf::RenderWindow& win)
+ * Draws the ship, the Ship class manages destruction internally.
+ *
+ * sf::RenderWindow& win - window in which to draw the ship
+ */
 void GameLogic::drawShip(sf::RenderWindow& win)
 {
     ship.render(win);
@@ -103,6 +126,10 @@ void GameLogic::drawShip(sf::RenderWindow& win)
     ship.render(win);
 }
 
+/* void GameLogic::checkCollisions()
+ * Checks all SpaceObjects for collision, performs
+ * necessary actions upon collision.
+ */
 void GameLogic::checkCollisions()
 {
     Ship* pShip = &ship;
@@ -115,11 +142,11 @@ void GameLogic::checkCollisions()
 
             for (int iPulse = 0; iPulse < MAX_PULSE; iPulse++)
             {
-                if (laserGun[iPulse] != NULL)
+                if (laser[iPulse] != NULL)
                 {
-                    if (objectsIntersect(laserGun[iPulse], stroid[iStroid]))
+                    if (objectsIntersect(laser[iPulse], stroid[iStroid]))
                     {
-                        laserGun[iPulse]->hit();
+                        laser[iPulse]->hit();
                         stroid[iStroid]->hit = true;
                     }
                 }

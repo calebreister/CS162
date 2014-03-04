@@ -1,5 +1,5 @@
 /*
- * Graphics.hpp    Feb 28, 2014
+ * GameLogic.hpp    Feb 28, 2014
  * AUTHOR: Caleb Reister
  * DEV ENV: Eclipse 4 CDT Linux AMD64
  * DESCRIPTION: Graphics of asteroids game
@@ -23,7 +23,7 @@ class GameLogic
     private:
         //rendering order
         Asteroid* stroid[MAX_STROIDS];
-        Pulse* laserGun[MAX_PULSE];
+        Pulse* laser[MAX_PULSE];
         Ship ship;
 
     public:
@@ -31,8 +31,8 @@ class GameLogic
         ~GameLogic();
         void keyInput();
         void fireGun(sf::Event& event);
-        void drawStroids(sf::RenderWindow& win);
-        void drawPulses(sf::RenderWindow& win);
+        void stroidLogic(sf::RenderWindow& win);
+        void pulseLogic(sf::RenderWindow& win);
         void drawShip(sf::RenderWindow& win);
         void checkCollisions();
 };

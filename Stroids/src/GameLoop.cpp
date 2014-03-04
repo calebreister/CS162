@@ -34,8 +34,8 @@ int main()
         game.keyInput();
 
         window.clear();
-        game.drawStroids(window);
-        game.drawPulses(window);
+        game.stroidLogic(window);
+        game.pulseLogic(window);
         game.drawShip(window);
         game.checkCollisions();
 
