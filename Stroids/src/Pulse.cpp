@@ -32,7 +32,7 @@ Pulse::Pulse()
 Pulse::Pulse(Vect2d loc, float ang)
 {
     Vect2d vel = util::deg2slope(ang);
-    timeToLive = cfg["LASER"]["PULSE_LIFE"][0].as_int();
+    timeToLive = cfg["LASER"]["PULSE_LIFE"].as_int();
     radius = 1;
     location = loc;
     setAngle(ang);

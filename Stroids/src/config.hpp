@@ -21,6 +21,6 @@ const int MAX_PULSE = 200;
 
 JSON::Value configInit();
 void configValidate();
-JSON::Value cfg = configInit();
+const JSON::Value cfg = configInit();
 
 #endif
