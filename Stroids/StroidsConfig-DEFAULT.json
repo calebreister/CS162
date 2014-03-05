@@ -6,7 +6,9 @@
 
     "SHIP" :
     {
-        "MAX_SPEED" : 5.0,
+        "SPEED" : 5.0,
+        "FWD_THRUST" : 0.05,
+        "REV_THRUST" : -0.05,
         "CMT" : "Degrees to turn per refresh.",
         "TURN_RATE" : 2.0,
         "COLOR" : [255, 0, 0],
@@ -26,7 +28,6 @@
         "CMT" : "Number seconds between asteroid spawnings",
         "SPAWN_RATE" : 10,
         "MAX_SPEED" : 0.5,
-        "MIN_SPEED" : -0.5,
         "MAX_SIZE" : 30,
         "MIN_SIZE" : 10,
         "CMT" : "Whether or not to use a random color.",

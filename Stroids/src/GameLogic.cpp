@@ -60,10 +60,10 @@ void GameLogic::keyInput()
             ship.chgAngle(cfg["SHIP"]["TURN_RATE"].as_float());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            ship.applyThrust(.05);
+            ship.applyThrust(cfg["SHIP"]["FWD_THRUST"].as_float());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            ship.applyThrust(-.05);
+            ship.applyThrust(cfg["SHIP"]["REV_THRUST"].as_float());
     }
 }
 

@@ -53,3 +53,10 @@ JSON::Value configInit()
 
     return parse_file(path.c_str());
 }
+
+/*void configValidate()
+{
+    if (!cfg["REF_HZ"])
+
+}
+*/

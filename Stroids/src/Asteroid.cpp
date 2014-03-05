@@ -37,11 +37,11 @@ Asteroid::Asteroid()
     location = {loc.x, loc.y};
     //setLocation(400, 400);
     rotationVel = util::randFloat(-.1, .1);
-    setVelocity(util::randFloat(cfg["STROID"]["MIN_SPEED"].as_float(),
+    setVelocity(util::randFloat(-cfg["STROID"]["MAX_SPEED"].as_float(),
                                 cfg["STROID"]["MAX_SPEED"].as_float()),
-                util::randFloat(cfg["STROID"]["MIN_SPEED"].as_float(),
+                util::randFloat(-cfg["STROID"]["MAX_SPEED"].as_float(),
                                 cfg["STROID"]["MAX_SPEED"].as_float()),
-                cfg["STROID"]["MAX_SPEED"].as_float());
+                cfg["STROID"]["MAX_SPEED"].as_float() + .5);
     //setVelocity(1, 1, 1);
 
     color = sf::Color(util::randInt(util::randInt(0, 100), 255),

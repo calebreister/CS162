@@ -32,13 +32,13 @@ Pulse::Pulse()
 Pulse::Pulse(Vect2d loc, float ang)
 {
     Vect2d vel = util::deg2slope(ang);
-    timeToLive = cfg["LASER"]["PULSE_LIFE"].as_int();
+    timeToLive = cfg["LASER"]["PULSE_LIFE"][0].as_int();
     radius = 1;
     location = loc;
     setAngle(ang);
 
     vel *= 100;
-    setVelocity(vel, cfg["SHIP"]["MAX_SPEED"].as_float() + 2);
+    setVelocity(vel, cfg["SHIP"]["SPEED"].as_float() + 2);
     pulse.setRotation(getAngle());
     pulse.setPosition(loc.x, loc.y);
     pulse.setSize(sf::Vector2f(30, 3));

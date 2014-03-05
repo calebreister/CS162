@@ -20,6 +20,7 @@ const int MAX_STROIDS = 1000;
 const int MAX_PULSE = 200;
 
 JSON::Value configInit();
-const JSON::Value cfg = configInit();
+void configValidate();
+JSON::Value cfg = configInit();
 
 #endif

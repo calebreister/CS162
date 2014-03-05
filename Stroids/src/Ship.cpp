@@ -107,7 +107,7 @@ void Ship::applyThrust(float thrust)
 {
     float rad = util::deg2rad(getAngle());
     chgVelocity(thrust * cos(rad), thrust * sin(rad),
-                cfg["SHIP"]["MAX_SPEED"].as_float());
+                cfg["SHIP"]["SPEED"].as_float());
 }
 
 /*
