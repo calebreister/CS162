@@ -16,11 +16,9 @@ int main(int argc, char** argv)
     // Load JSON file
 
     Value v = parse_file("comp.json");
-    cerr << v << endl;
-    cerr << "---" << endl;
 
     // Build object programmatically
-    Object obj;
+    Object obj = v;
 
     obj["foo"] = true;
     obj["bar"] = 3LL;

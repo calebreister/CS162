@@ -1,15 +1,20 @@
-#include <fstream>
-#include <iostream>
-#include <string>
+//Localized includes to prevent
+//other parts of the program from accessing
+//the data made available
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <fstream>
+
+//#define NDEBUG
 #include <cassert>
-#include "json.hh"
+#include "StroidCfg.hpp"
 using namespace std;
 using namespace JSON;
 
-JSON::Value configInit()
+const int MAX_STROIDS = 1000;
+
+Config::Config()
 {
     //get home directory
     int myuid;
@@ -18,96 +23,191 @@ JSON::Value configInit()
     homedir = getpwuid(myuid);
     string path = homedir->pw_dir;
     path += "/StroidConfig.json";
-
     ofstream cfgFile;
 
     //create file if it does not exist
     if (!ifstream(path.c_str()))
     {
         cfgFile.open(path.c_str());
-        cerr << "StroidConfig.json file does not exist... creating." << endl;
+        cerr << "StroidConfig.json file does not exist. Creating..." << endl;
+        cfgFile << "{\"SHIP\":{\"COLOR\":[null,null,null]},"
+                << "\"LASER\":{\"COLOR\":[null,null,null]},"
+                << "\"STROID\":{\"COLOR\":[null, null, null]}}";
         cfgFile.close();
     }
 
-    //if the file does exist, check its values
-    Value in = parse_file(path.c_str());
-    Object out = in;
+    read = parse_file(path.c_str());
+    write = read;
 
-    //all if statements make sure that the property exists
-    //and that the type is correct
-    if (!in["REF_HZ"] || in["REF_HZ"].type() == NIL
-        || in["REF_HZ"].type() == BOOL)
-        out["REF_HZ"] = 120;
+    validateValues();
 
-    if (in["SHIP"].type() == OBJECT)
-    {
-        if (!in["SHIP"]["SPEED"] || in["SHIP"]["SPEED"].type() != INT
-            || in["SHIP"]["SPEED"].type() != FLOAT)
-            out["SHIP"]["SPEED"] = 5.01;
-
-        if (!in["SHIP"]["FWD_THRUST"] || in["SHIP"]["FWD_THRUST"].type() != INT
-            || in["SHIP"]["FWD_THRUST"].type() != FLOAT)
-            out["SHIP"]["FWD_THRUST"] = 0.05;
-
-        if (!in["SHIP"]["EF_THRUST"] || in["SHIP"]["REV_THRUST"].type() != INT
-            || in["SHIP"]["REV_THRUST"].type() != FLOAT)
-            out["SHIP"]["REV_THRUST"] = -0.05;
-
-        if (!in["SHIP"]["TURN_RATE"] || in["SHIP"]["TURN_RATE"].type() != INT
-            || in["SHIP"]["TURN_RATE"].type() != FLOAT)
-            out["SHIP"]["TURN_RATE"] = 2.01;
-
-        ////////////////////////////////////////////
-        if (in["SHIP"]["COLOR"].type() == ARRAY)
-        {
-            if (in["SHIP"]["COLOR"][0].as_int() > 255
-                || in["SHIP"]["COLOR"][0].as_int() < 0)
-                out["SHIP"]["COLOR"][0] = 255;
-            if (in["SHIP"]["COLOR"][1].as_int() > 255
-                || in["SHIP"]["COLOR"][1].as_int() < 0)
-                out["SHIP"]["COLOR"][1] = 0;
-            if (in["SHIP"]["COLOR"][2].as_int() > 255
-                || in["SHIP"]["COLOR"][2].as_int() < 0)
-                out["SHIP"]["COLOR"][2] = 0;
-        }
-        else
-        {
-            Array color;
-            color.push_back(255);
-            color.push_back(0);
-            color.push_back(0);
-            out["SHIP"]["COLOR"] = color;
-        }
-/////////////////////////////////////////////////////
-        if (!in["SHIP"]["OUTLINE_PX"] || in["SHIP"]["OUTLINE_PX"].type() != INT)
-            out["SHIP"]["OUTLINE_PX"] = 1;
-    }
-    else
-    {
-        Object ship;
-        ship["SPEED"] = 5.01;
-        ship["FWD_THRUST"] = 0.05;
-        ship["REV_THRUST"] = -0.05;
-        ship["TURN_RATE"] = 2.01;
-        Array color;
-        color.push_back(255);
-        color.push_back(0);
-        color.push_back(0);
-        ship["COLOR"] = color;
-        ship["OUTLINE_PX"] = 1;
-        out["SHIP"] = ship;
-    }
-
-    //write the changes
+    //write the changes to HD
     cfgFile.open(path.c_str());
-    cfgFile << out;
+    cfgFile << write;
     cfgFile.close();
 
-    return parse_file(path.c_str());
+    read = parse_file(path.c_str());
+}
+
+Array Config::validateColor(string obj, int defR, int defG, int defB)
+{
+    Array tempColor;
+
+    int def[3];
+    def[0] = defR;
+    def[1] = defG;
+    def[2] = defB;
+
+    tempColor = read[obj]["COLOR"];
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (read[obj]["COLOR"][i].type() != INT
+            || read[obj]["COLOR"][i].as_int() > 255
+            || read[obj]["COLOR"][i].as_int() < 0)
+        {
+            cerr << "Property [" << obj
+                 << ":COLOR["
+                 << i << "] is invalid. Regenerating..." << endl;
+            tempColor[i] = def[i];
+        }
+    }
+
+    return tempColor;
+}
+
+void Config::validateValues()
+{
+    //all if statements make sure that the property exists
+    //and that the type is correct
+    //NOTE: all properties that contain sub-properties
+    //(objects and arrays) have to exist beforehand
+
+    string obj;
+    string item;
+
+    //CHECK LASER
+    obj = "LASER";
+
+    item = "PULSE_LIFE";
+    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 1;
+    }
+
+    write[obj]["COLOR"] = validateColor(obj, 255, 255, 255);
+
+    /////////////////////////////////////////////////////////////////////////////////
+    //CHECK SHIP
+    obj = "SHIP";
+
+    item = "SPEED";
+    if ((read[obj][item].type() != INT && read[obj][item].type() != FLOAT)
+        || read[obj][item].as_float() < 0)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 5.01;
+    }
+
+    item = "THRUST_FWD";
+    if (read[obj][item].type() != INT && read[obj][item].type() != FLOAT)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 0.05;
+    }
+
+    item = "THRUST_REV";
+    if (read[obj][item].type() != INT && read[obj][item].type() != FLOAT)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = -0.05;
+    }
+
+    item = "TURN_RATE";
+    if (read[obj][item].type() != INT && read[obj][item].type() != FLOAT)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 2.01;
+    }
+
+    item = "OUTLINE_PX";
+    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 1;
+    }
+
+    write["SHIP"]["COLOR"] = validateColor("SHIP", 255, 0, 0);
+
+    //////////////////////////////////////////////////////////////////////////
+    //CHECK ASTEROID
+    obj = "STROID";
+
+    item = "START_NUM";
+    if (read[obj][item].type() != INT
+        || read[obj][item].as_int() > MAX_STROIDS
+        || read[obj][item].as_int() < 1)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 10;
+    }
+
+    item = "SPAWN_RATE";
+    if (read[obj][item].type() != INT
+        || read[obj][item].as_int() < 1)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 10;
+    }
+
+    item = "MAX_SPEED";
+    if ((read[obj][item].type() != INT && read[obj][item].type() != FLOAT)
+        || read[obj][item].as_float() < 0)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = .5;
+    }
+
+    item = "MAX_SIZE";
+    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0
+        || read[obj][item].as_int() < read[obj]["MIN_SIZE"].as_int())
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 30;
+    }
+
+    item = "MIN_SIZE";
+    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0
+        || read[obj][item].as_int() > read[obj]["MAX_SIZE"].as_int())
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 10;
+    }
+
+    item = "COLOR_RAND";
+    if (read[obj][item].type() != BOOL)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = true;
+    }
+
+    write[obj]["COLOR"] = validateColor(obj, 255, 255, 255);
 }
 
 int main()
 {
-
-    cout << configInit();
+    cout << cfg.read;
 }

@@ -1,39 +1,35 @@
 {
-    "CMT" : "From here on out, CMT is a comment.",
-    
-    "CMT" : "Refresh rate of the game (FPS)",
-    "REF_HZ" : 120,
-
-    "SHIP" :
-    {
-        "SPEED" : 5.0,
-        "CMT" : "THRUST defines acceleration.",
-        "FWD_THRUST" : 0.05,
-        "REV_THRUST" : -0.05,
-        "CMT" : "Degrees to turn per refresh.",
-        "TURN_RATE" : 2.0,
-        "COLOR" : [255, 0, 0],
-        "OUTLINE_PX" : 1
+    "LASER": {
+        "COLOR": [
+            255,
+            255,
+            255
+        ],
+        "PULSE_LIFE": 1
     },
-    
-    "LASER" :
-    {
-        "CMT" : "Lifetime of a single laser shot (pulse), relative to REF_HZ",
-        "PULSE_LIFE" : 80,
-        "PULSE_COLOR" : [255, 255, 255]
+    "SHIP": {
+        "COLOR": [
+            255,
+            0,
+            0
+        ],
+        "OUTLINE_PX": 1,
+        "SPEED": 5.01,
+        "THRUST_FWD": 0.05,
+        "THRUST_REV": -0.05,
+        "TURN_RATE": 2.01
     },
-    
-    "STROID" :
-    {
-        "START_NUM" : 10,
-        "CMT" : "Number seconds between asteroid spawnings",
-        "SPAWN_RATE" : 10,
-        "MAX_SPEED" : 0.5,
-        "MAX_SIZE" : 30,
-        "MIN_SIZE" : 10,
-        "CMT" : "Whether or not to use a random color.",
-        "RAND_COLOR" : true,
-        "CMT" : "The color to use if it is not random",
-        "COLOR" : [255, 255, 255]
+    "STROID": {
+        "COLOR": [
+            255,
+            255,
+            255
+        ],
+        "COLOR_RAND": true,
+        "MAX_SIZE": 30,
+        "MAX_SPEED": 0.5,
+        "MIN_SIZE": 10,
+        "SPAWN_RATE": 10,
+        "START_NUM": 10
     }
 }

@@ -8,7 +8,7 @@
 #ifndef CONFIG_HPP_
 #define CONFIG_HPP_
 
-#include <fstream>
+#include <iostream>
 #include "json.hh"
 #include "util.hpp"
 
@@ -19,8 +19,15 @@ const Vect2d ZERO = {0, 0};
 const int MAX_STROIDS = 1000;
 const int MAX_PULSE = 200;
 
-JSON::Value configInit();
-void configValidate();
-const JSON::Value cfg = configInit();
+class Config
+{
+    private:
+        JSON::Object write;
+        JSON::Array validateColor(std::string obj, int defR, int defG, int defB);
+        void validateValues();
+    public:
+        Config();
+        JSON::Value read;
+} cfg;
 
 #endif
