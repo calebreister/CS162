@@ -26,6 +26,7 @@ Ship::Ship()
  */
 void Ship::draw()
 {
+    JSON::Array color = cfg::getInst()->read["SHIP"]["COLOR"];
     boundFix();
 
     //explosion variables
@@ -44,7 +45,9 @@ void Ship::draw()
     if (state == GOOD)
     {
         ship.setFillColor(sf::Color(0, 0, 0));
-        ship.setOutlineColor(sf::Color(255, 0, 0));
+        ship.setOutlineColor(sf::Color(color[0].as_int(),
+                                       color[1].as_int(),
+                                       color[2].as_int()));
     }
     else if (state == EXPLODE)
     {
@@ -57,7 +60,10 @@ void Ship::draw()
         {
             ship.setScale(size, size);
             ship.setFillColor(sf::Color(0, 0, 0, alpha));
-            ship.setOutlineColor(sf::Color(255, 0, 0, alpha));
+            ship.setOutlineColor(sf::Color(color[0].as_int(),
+                                           color[1].as_int(),
+                                           color[2].as_int(),
+                                           alpha));
         }
         else
             state = GONE;
@@ -69,7 +75,7 @@ void Ship::draw()
         count = 0;
     }
 
-    ship.setOutlineThickness(1);
+    ship.setOutlineThickness(cfg::getInst()->read["SHIP"]["OUTLINE_PX"].as_int());
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -107,7 +107,7 @@ void cfg::validateValues()
     {
         cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
              << endl;
-        write[obj][item] = 1;
+        write[obj][item] = 100;
     }
 
     write[obj]["COLOR"] = validateColor(obj, 255, 255, 255);

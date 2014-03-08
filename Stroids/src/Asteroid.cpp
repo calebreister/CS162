@@ -46,9 +46,17 @@ Asteroid::Asteroid()
                 cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float() + .5);
     //setVelocity(1, 1, 1);
 
-    color = sf::Color(util::randInt(util::randInt(0, 100), 255),
-                      util::randInt(util::randInt(0, 100), 255),
-                      util::randInt(util::randInt(0, 100), 255));
+    if (cfg::getInst()->read["STROID"]["COLOR_RAND"].as_bool() == true)
+        color = sf::Color(util::randInt(util::randInt(0, 100), 255),
+                          util::randInt(util::randInt(0, 100), 255),
+                          util::randInt(util::randInt(0, 100), 255));
+    else
+    {
+        JSON::Array userColor = cfg::getInst()->read["STROID"]["COLOR"];
+        color = sf::Color(userColor[0].as_int(),
+                          userColor[1].as_int(),
+                          userColor[2].as_int());
+    }
     //color = sf::Color(255, 255, 255);
 
     hit = false;
