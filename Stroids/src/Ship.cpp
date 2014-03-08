@@ -5,7 +5,6 @@
  */
 
 #include "Ship.hpp"
-extern Config cfg;
 using namespace std;
 
 Ship::Ship()
@@ -108,7 +107,7 @@ void Ship::applyThrust(float thrust)
 {
     float rad = util::deg2rad(getAngle());
     chgVelocity(thrust * cos(rad), thrust * sin(rad),
-                cfg.read["SHIP"]["SPEED"].as_float());
+                cfg::getInst()->read["SHIP"]["SPEED"].as_float());
 }
 
 /*

@@ -9,7 +9,6 @@
 //#define NDEBUG
 #include <cassert>
 #include "Pulse.hpp"
-extern Config cfg;
 
 /* Pulse()
  * Initializes pulse data for testing purposes.
@@ -34,13 +33,13 @@ Pulse::Pulse()
 Pulse::Pulse(Vect2d loc, float ang)
 {
     Vect2d vel = util::deg2slope(ang);
-    timeToLive = cfg.read["LASER"]["PULSE_LIFE"].as_int();
+    timeToLive = cfg::getInst()->read["LASER"]["PULSE_LIFE"].as_int();
     radius = 1;
     location = loc;
     setAngle(ang);
 
     vel *= 100;
-    setVelocity(vel, cfg.read["SHIP"]["SPEED"].as_float() + 2);
+    setVelocity(vel, cfg::getInst()->read["SHIP"]["SPEED"].as_float() + 2);
     pulse.setRotation(getAngle());
     pulse.setPosition(loc.x, loc.y);
     pulse.setSize(sf::Vector2f(30, 3));

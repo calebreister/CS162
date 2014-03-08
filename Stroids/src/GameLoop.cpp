@@ -19,7 +19,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
                             "'Stroids - Gamma Quadrant",
                             sf::Style::Titlebar | sf::Style::Close);
-    window.setFramerateLimit(cfg.read["FRAME_RATE"].as_int());
+    window.setFramerateLimit(cfg::getInst()->read["FRAME_RATE"].as_int());
 
     while (window.isOpen())
     {
@@ -29,7 +29,7 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
 
-                game.fireGun(event);
+            game.fireGun(event);
         }
 
         game.keyInput();

@@ -41,16 +41,20 @@ const Vect2d ZERO = {0, 0};
 const int MAX_STROIDS = 1000;
 const int MAX_PULSE = 200;
 
-class Config
+//Singleton, defined in config.cpp
+class cfg
 {
     private:
+        cfg();
+        static cfg* pInst;
+
         JSON::Object write;
         JSON::Array validateColor(std::string obj, int defR, int defG, int defB);
         void validateValues();
 
     public:
-        Config();
         JSON::Value read;
+        static cfg* getInst();
 };
 
 namespace util

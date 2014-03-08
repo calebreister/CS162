@@ -7,15 +7,14 @@
 //#define NDEBUG
 #include <cassert>
 #include "Asteroid.hpp"
-extern Config cfg;
 
 Asteroid::Asteroid()
 {
     //cfg = &stroidConfig;
 
     //initialize variables
-    radius = util::randInt(cfg.read["STROID"]["MIN_SIZE"].as_int(),
-                           cfg.read["STROID"]["MAX_SIZE"].as_int());
+    radius = util::randInt(cfg::getInst()->read["STROID"]["MIN_SIZE"].as_int(),
+                           cfg::getInst()->read["STROID"]["MAX_SIZE"].as_int());
     sides = util::randInt(6, 12);
     Vect2d loc = {util::randFloat(0, WIN_SIZE.x),
                   util::randFloat(0, WIN_SIZE.y)};
@@ -40,11 +39,11 @@ Asteroid::Asteroid()
     location = {loc.x, loc.y};
     //setLocation(400, 400);
     rotationVel = util::randFloat(-.1, .1);
-    setVelocity(util::randFloat(-cfg.read["STROID"]["MAX_SPEED"].as_float(),
-                                cfg.read["STROID"]["MAX_SPEED"].as_float()),
-                util::randFloat(-cfg.read["STROID"]["MAX_SPEED"].as_float(),
-                                cfg.read["STROID"]["MAX_SPEED"].as_float()),
-                cfg.read["STROID"]["MAX_SPEED"].as_float() + .5);
+    setVelocity(util::randFloat(-cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float(),
+                                cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float()),
+                util::randFloat(-cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float(),
+                                cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float()),
+                cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float() + .5);
     //setVelocity(1, 1, 1);
 
     color = sf::Color(util::randInt(util::randInt(0, 100), 255),
