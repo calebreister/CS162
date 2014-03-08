@@ -12,7 +12,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "config.hpp"
 #include "util.hpp"
 #include "Ship.hpp"
 #include "Asteroid.hpp"
@@ -26,6 +25,7 @@ class GameLogic
         Pulse* laser[MAX_PULSE];
         Ship ship;
         int findFreeStroid();
+        //Config* cfg;
 
     public:
         GameLogic();

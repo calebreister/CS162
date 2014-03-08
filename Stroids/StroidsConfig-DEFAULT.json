@@ -1,11 +1,13 @@
 {
+    "FRAME_RATE": 120,
     "LASER": {
         "COLOR": [
             255,
             255,
             255
         ],
-        "PULSE_LIFE": 1
+        "PULSE_LIFE": 1,
+        "EDGE_DEATH": true
     },
     "SHIP": {
         "COLOR": [

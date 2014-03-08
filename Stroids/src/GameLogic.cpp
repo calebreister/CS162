@@ -8,12 +8,14 @@
 //#define NDEBUG
 #include <cassert>
 #include "GameLogic.hpp"
+extern Config cfg;
 
 GameLogic::GameLogic()
 {
-    for (int i = 0; i < cfg["STROID"]["START_NUM"].as_int(); i++)
+    //cfg = &stroidConfig;
+    for (int i = 0; i < cfg.read["STROID"]["START_NUM"].as_int(); i++)
         stroid[i] = new Asteroid;
-    for (int i = cfg["STROID"]["START_NUM"].as_int();
+    for (int i = cfg.read["STROID"]["START_NUM"].as_int();
             i < MAX_STROIDS; i++)
         stroid[i] = NULL;
 
@@ -28,6 +30,7 @@ GameLogic::~GameLogic()
             delete stroid[i];
     for (int i = 0; i < MAX_PULSE; i++)
         delete laser[i];
+    //delete cfg;
 }
 
 int GameLogic::findFreeStroid()
@@ -54,16 +57,16 @@ void GameLogic::keyInput()
     if (ship.getState() == GOOD)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            ship.chgAngle(-(cfg["SHIP"]["TURN_RATE"].as_float()));
+            ship.chgAngle(-(cfg.read["SHIP"]["TURN_RATE"].as_float()));
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            ship.chgAngle(cfg["SHIP"]["TURN_RATE"].as_float());
+            ship.chgAngle(cfg.read["SHIP"]["TURN_RATE"].as_float());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            ship.applyThrust(cfg["SHIP"]["FWD_THRUST"].as_float());
+            ship.applyThrust(cfg.read["SHIP"]["FWD_THRUST"].as_float());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            ship.applyThrust(cfg["SHIP"]["REV_THRUST"].as_float());
+            ship.applyThrust(cfg.read["SHIP"]["REV_THRUST"].as_float());
     }
 }
 
@@ -126,7 +129,7 @@ void GameLogic::stroidLogic(sf::RenderWindow& win)
     }
 
     count++;
-    if (count == cfg["REF_HZ"].as_int() * cfg["STROID"]["SPAWN_RATE"].as_int())
+    if (count == cfg.read["REF_HZ"].as_int() * cfg.read["STROID"]["SPAWN_RATE"].as_int())
     {
         count = 0;
         stroid[findFreeStroid()] = new Asteroid();

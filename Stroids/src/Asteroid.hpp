@@ -15,7 +15,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "util.hpp"
-#include "config.hpp"
 #include "SpaceObject.hpp"
 
 enum Side
@@ -41,10 +40,12 @@ class Asteroid : public SpaceObject
                            Vect2d point = WIN_MID,
                            int radius = 200);
         sf::Color color;
+        //Config* cfg;
 
     public:
         Asteroid();
         Asteroid(Asteroid* old);
+        ~Asteroid();
         void draw(sf::RenderWindow& win);
         bool hit;
         bool split;

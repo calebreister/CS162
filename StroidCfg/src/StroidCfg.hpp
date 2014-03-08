@@ -14,6 +14,6 @@ class Config
     public:
         Config();
         JSON::Value read;
-} cfg;
+} cfig;
 
 #endif

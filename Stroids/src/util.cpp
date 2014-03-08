@@ -5,6 +5,8 @@
  */
 
 #include "util.hpp"
+using namespace std;
+using namespace JSON;
 
 //////////////////////////////////////////////////////////////////
 //Operator overloads for Vect2d

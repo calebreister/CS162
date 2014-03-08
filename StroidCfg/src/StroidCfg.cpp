@@ -86,6 +86,10 @@ void Config::validateValues()
     string obj;
     string item;
 
+    item = "FRAME_RATE";
+    if (read[item].type() != INT || read[item].as_int() < 1)
+        write[item] = 120;
+
     //CHECK LASER
     obj = "LASER";
 
@@ -98,6 +102,14 @@ void Config::validateValues()
     }
 
     write[obj]["COLOR"] = validateColor(obj, 255, 255, 255);
+
+    item = "EDGE_DEATH";
+    if (read[obj][item].type() != BOOL)
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = true;
+    }
 
     /////////////////////////////////////////////////////////////////////////////////
     //CHECK SHIP
@@ -209,5 +221,5 @@ void Config::validateValues()
 
 int main()
 {
-    cout << cfg.read;
+    cout << cfig.read;
 }

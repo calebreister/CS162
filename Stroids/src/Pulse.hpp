@@ -9,7 +9,6 @@
 #define MUNITION_HPP_
 
 #include "util.hpp"
-#include "config.hpp"
 #include "SpaceObject.hpp"
 
 class Pulse : public SpaceObject
@@ -18,6 +17,7 @@ class Pulse : public SpaceObject
         sf::RectangleShape pulse;
         unsigned int timeToLive; //lifetime of pulse
         void checkScreenEdge();
+        //Config* cfg;
 
     protected:
         Pulse();

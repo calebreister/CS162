@@ -13,12 +13,13 @@
 int main()
 {
     GameLogic game;
+    //Config* cfg = &stroidConfig;
 
     //initialize SFML window
     sf::RenderWindow window(sf::VideoMode(WIN_SIZE.x, WIN_SIZE.y),
                             "'Stroids - Gamma Quadrant",
                             sf::Style::Titlebar | sf::Style::Close);
-    window.setFramerateLimit(cfg["REF_HZ"].as_int());
+    window.setFramerateLimit(cfg.read["FRAME_RATE"].as_int());
 
     while (window.isOpen())
     {
@@ -41,5 +42,6 @@ int main()
 
         window.display();
     }
+    //delete cfg;
     return 0;
 }
