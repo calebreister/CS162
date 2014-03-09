@@ -17,7 +17,7 @@ class Pulse : public SpaceObject
         sf::RectangleShape pulse;
         unsigned int timeToLive; //lifetime of pulse
         void checkScreenEdge();
-        //Config* cfg;
+        sf::Color color;
 
     protected:
         Pulse();

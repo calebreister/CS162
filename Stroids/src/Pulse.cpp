@@ -21,6 +21,7 @@ Pulse::Pulse()
     location = ZERO;
     setVelocity(0, 0, 0);
     setAngle(0);
+    color = sf::Color(255, 255, 255);
 }
 
 /* Pulse(Vect2d loc, float ang)
@@ -43,12 +44,12 @@ Pulse::Pulse(Vect2d loc, float ang)
     pulse.setRotation(getAngle());
     pulse.setPosition(loc.x, loc.y);
     pulse.setSize(sf::Vector2f(30, 3));
-}
 
-/* void checkScreenEdge()
- * Checks to see if the pulse has reached the edge of the screen.
- * Prevents it from going to the other side.
- */
+    JSON::Array userColor = cfg::getInst()->read["LASER"]["COLOR"];
+    color = sf::Color(userColor[0].as_int(),
+                      userColor[1].as_int(),
+                      userColor[2].as_int());
+}
 
 /* void hit()
  * Sets timeToLive to 0, invoking the draw function will
@@ -81,9 +82,12 @@ void Pulse::draw(sf::RenderWindow& win)
     Vect2d loc = getLocation();
 
     pulse.setPosition(loc.x, loc.y);
-    pulse.setFillColor(sf::Color(255, 255, 255));
+    pulse.setFillColor(sf::Color(color));
 
     win.draw(pulse);
     timeToLive--;
     updateLocation();
+
+    if (!cfg::getInst()->read["LASER"]["EDGE_DEATH"].as_bool())
+        boundFix();
 }

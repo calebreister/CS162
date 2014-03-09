@@ -62,10 +62,10 @@ void GameLogic::keyInput()
             ship.chgAngle(cfg::getInst()->read["SHIP"]["TURN_RATE"].as_float());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            ship.applyThrust(cfg::getInst()->read["SHIP"]["FWD_THRUST"].as_float());
+            ship.applyThrust(cfg::getInst()->read["SHIP"]["THRUST_FWD"].as_float());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            ship.applyThrust(cfg::getInst()->read["SHIP"]["REV_THRUST"].as_float());
+            ship.applyThrust(cfg::getInst()->read["SHIP"]["THRUST_REV"].as_float());
     }
 }
 
@@ -82,8 +82,7 @@ void GameLogic::fireGun(sf::Event& event)
             && event.key.code == sf::Keyboard::Space)
         {
             int i;
-            for (i = 0; laser[i] != NULL; i++)
-                ;
+            for (i = 0; laser[i] != NULL; i++);
             laser[i] = new Pulse(ship.getLocation(), ship.getAngle());
         }
     }
@@ -107,12 +106,13 @@ void GameLogic::stroidLogic(sf::RenderWindow& win)
             {
                 if (stroid[i]->split)
                 {
+                    //destroy the asteroid
                     delete stroid[i];
                     stroid[i] = NULL;
                 }
                 else
                 {
-                    //create 2 new ones in its place
+                    //create 2 new asteroids
                     if (findFreeStroid() != -1)
                     {
                         stroid[findFreeStroid()] = new Asteroid(stroid[i]);
@@ -128,7 +128,7 @@ void GameLogic::stroidLogic(sf::RenderWindow& win)
     }
 
     count++;
-    if (count == cfg::getInst()->read["REF_HZ"].as_int() * cfg::getInst()->read["STROID"]["SPAWN_RATE"].as_int())
+    if (count == cfg::getInst()->read["STROID"]["SPAWN_RATE"].as_int())
     {
         count = 0;
         stroid[findFreeStroid()] = new Asteroid();

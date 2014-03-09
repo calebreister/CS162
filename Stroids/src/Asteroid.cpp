@@ -13,8 +13,8 @@ Asteroid::Asteroid()
     //cfg = &stroidConfig;
 
     //initialize variables
-    radius = util::randInt(cfg::getInst()->read["STROID"]["MIN_SIZE"].as_int(),
-                           cfg::getInst()->read["STROID"]["MAX_SIZE"].as_int());
+    radius = util::randInt(cfg::getInst()->read["STROID"]["SIZE_MIN"].as_int(),
+                           cfg::getInst()->read["STROID"]["SIZE_MAX"].as_int());
     sides = util::randInt(6, 12);
     Vect2d loc = {util::randFloat(0, WIN_SIZE.x),
                   util::randFloat(0, WIN_SIZE.y)};
@@ -85,11 +85,6 @@ Asteroid::Asteroid(Asteroid* old)
 
     hit = false;
     split = true;
-}
-
-Asteroid::~Asteroid()
-{
-    //delete cfg;
 }
 
 /*

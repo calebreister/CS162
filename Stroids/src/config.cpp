@@ -187,7 +187,7 @@ void cfg::validateValues()
     {
         cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
              << endl;
-        write[obj][item] = 10;
+        write[obj][item] = 100;
     }
 
     item = "MAX_SPEED";
@@ -199,22 +199,22 @@ void cfg::validateValues()
         write[obj][item] = .5;
     }
 
-    item = "MAX_SIZE";
+    item = "SIZE_MAX";
     if (read[obj][item].type() != INT || read[obj][item].as_int() < 0
-        || read[obj][item].as_int() < read[obj]["MIN_SIZE"].as_int())
-    {
-        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
-             << endl;
-        write[obj][item] = 30;
-    }
-
-    item = "MIN_SIZE";
-    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0
-        || read[obj][item].as_int() > read[obj]["MAX_SIZE"].as_int())
+        || read[obj][item].as_int() > read[obj][item].as_int())
     {
         cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
              << endl;
         write[obj][item] = 10;
+    }
+
+    item = "SIZE_MIN";
+    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0
+        || read[obj][item].as_int() < read[obj][item].as_int())
+    {
+        cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
+             << endl;
+        write[obj][item] = 30;
     }
 
     item = "COLOR_RAND";

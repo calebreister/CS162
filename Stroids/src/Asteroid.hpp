@@ -40,12 +40,10 @@ class Asteroid : public SpaceObject
                            Vect2d point = WIN_MID,
                            int radius = 200);
         sf::Color color;
-        //Config* cfg;
 
     public:
         Asteroid();
         Asteroid(Asteroid* old);
-        ~Asteroid();
         void draw(sf::RenderWindow& win);
         bool hit;
         bool split;
