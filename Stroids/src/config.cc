@@ -8,7 +8,7 @@
 
 //#define NDEBUG
 #include <cassert>
-#include "util.hpp"
+#include "util.hh"
 using namespace std;
 using namespace JSON;
 

@@ -12,8 +12,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "util.hpp"
-#include "SpaceObject.hpp"
+#include "util.hh"
+#include "SpaceObject.hh"
 
 enum ShipState
 {

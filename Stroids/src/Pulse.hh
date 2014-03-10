@@ -1,5 +1,5 @@
 /*
- * Munition.hpp    Feb 27, 2014
+ * Munition.hh    Feb 27, 2014
  * AUTHOR: Caleb Reister
  * DEV ENV: Eclipse 4 CDT Linux AMD64
  * DESCRIPTION: Defines the "bullets" fired
@@ -8,8 +8,8 @@
 #ifndef MUNITION_HPP_
 #define MUNITION_HPP_
 
-#include "util.hpp"
-#include "SpaceObject.hpp"
+#include "util.hh"
+#include "SpaceObject.hh"
 
 class Pulse : public SpaceObject
 {

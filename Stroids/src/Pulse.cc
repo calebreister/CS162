@@ -8,7 +8,7 @@
 
 //#define NDEBUG
 #include <cassert>
-#include "Pulse.hpp"
+#include "Pulse.hh"
 
 /* Pulse()
  * Initializes pulse data for testing purposes.

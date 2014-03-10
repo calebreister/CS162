@@ -1,10 +1,10 @@
 /*
  * PROGRAM: util
  * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation file for util.hpp
+ * DESCRIPTION: implementation file for util.hh
  */
 
-#include "util.hpp"
+#include "util.hh"
 using namespace std;
 using namespace JSON;
 

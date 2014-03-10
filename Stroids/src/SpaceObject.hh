@@ -13,7 +13,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "util.hpp"
+#include "util.hh"
 
 class SpaceObject
 {

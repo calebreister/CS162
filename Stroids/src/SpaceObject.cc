@@ -7,7 +7,7 @@
 
 #define NDEBUG
 #include <cassert>
-#include "SpaceObject.hpp"
+#include "SpaceObject.hh"
 
 SpaceObject::SpaceObject()
 {

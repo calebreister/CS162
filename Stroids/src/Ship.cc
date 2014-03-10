@@ -1,10 +1,10 @@
 /*
  * PROGRAM: Ship
  * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation of Ship.hpp
+ * DESCRIPTION: implementation of Ship.hh
  */
 
-#include "Ship.hpp"
+#include "Ship.hh"
 using namespace std;
 
 Ship::Ship()

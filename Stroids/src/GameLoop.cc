@@ -8,7 +8,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "GameLogic.hpp"
+#include "GameLogic.hh"
 
 int main()
 {

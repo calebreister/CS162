@@ -7,7 +7,7 @@
 
 //#define NDEBUG
 #include <cassert>
-#include "GameLogic.hpp"
+#include "GameLogic.hh"
 
 GameLogic::GameLogic()
 {

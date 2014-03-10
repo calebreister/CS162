@@ -6,7 +6,7 @@
 
 //#define NDEBUG
 #include <cassert>
-#include "Asteroid.hpp"
+#include "Asteroid.hh"
 
 Asteroid::Asteroid()
 {
