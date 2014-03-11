@@ -1,0 +1,7 @@
+<map id="src/GameLogic.hh" name="src/GameLogic.hh">
+<area shape="rect" id="node11" href="$util_8hh.html" title="util.hh" alt="" coords="817,237,873,267"/>
+<area shape="rect" id="node22" href="$_ship_8hh.html" title="defines a class for controlling a space ship from above. " alt="" coords="257,83,323,112"/>
+<area shape="rect" id="node37" href="$_asteroid_8hh.html" title="Contains a class declaration for a single asteroid. " alt="" coords="461,83,549,112"/>
+<area shape="rect" id="node48" href="$_pulse_8hh.html" title="Defines the &quot;bullets&quot; fired by the ship in the asteroids game implementation. " alt="" coords="573,83,645,112"/>
+<area shape="rect" id="node29" href="$_space_object_8hh_source.html" title="SpaceObject.hh" alt="" coords="479,160,594,189"/>
+</map>

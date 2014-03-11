@@ -1,0 +1,3 @@
+<map id="Asteroid::draw" name="Asteroid::draw">
+<area shape="rect" id="node3" href="$class_game_logic.html#a27f072b23647caed0de7ecfe26fa3ef2" title="Allocates and deallocates all asteroids. Draws asteroids. " alt="" coords="161,5,319,35"/>
+</map>

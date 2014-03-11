@@ -1,0 +1,5 @@
+<map id="SpaceObject" name="SpaceObject">
+<area shape="rect" id="node3" href="$class_asteroid.html" title="A SpaceObject that draws an asteroid in the given window. " alt="" coords="5,83,75,112"/>
+<area shape="rect" id="node5" href="$class_pulse.html" title="SpaceObject that simulates laser pulses. " alt="" coords="99,83,152,112"/>
+<area shape="rect" id="node7" href="$class_ship.html" title="A class derived from SpaceObject designed for drawing and controlling a user&#45;run ship. " alt="" coords="176,83,224,112"/>
+</map>

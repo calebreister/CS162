@@ -1,0 +1,15 @@
+<map id="src/util.hh" name="src/util.hh">
+<area shape="rect" id="node3" href="$_asteroid_8hh.html" title="Contains a class declaration for a single asteroid. " alt="" coords="31,160,140,189"/>
+<area shape="rect" id="node7" href="$_game_logic_8hh.html" title="Graphics and operation of the asteroids game. " alt="" coords="139,237,267,267"/>
+<area shape="rect" id="node13" href="$_space_object_8hh_source.html" title="src/SpaceObject.hh" alt="" coords="280,83,416,112"/>
+<area shape="rect" id="node16" href="$_ship_8hh.html" title="defines a class for controlling a space ship from above. " alt="" coords="215,160,303,189"/>
+<area shape="rect" id="node21" href="$_pulse_8hh.html" title="Defines the &quot;bullets&quot; fired by the ship in the asteroids game implementation. " alt="" coords="487,160,580,189"/>
+<area shape="rect" id="node28" href="$config_8cc_source.html" title="src/config.cc" alt="" coords="491,83,587,112"/>
+<area shape="rect" id="node33" href="$util_8cc_source.html" title="src/util.cc" alt="" coords="611,83,688,112"/>
+<area shape="rect" id="node5" href="$_asteroid_8cc_source.html" title="src/Asteroid.cc" alt="" coords="5,237,115,267"/>
+<area shape="rect" id="node9" href="$_game_logic_8cc.html" title="Graphics and operation of the asteroids game. " alt="" coords="63,315,191,344"/>
+<area shape="rect" id="node11" href="$_game_loop_8cc_source.html" title="src/GameLoop.cc" alt="" coords="215,315,340,344"/>
+<area shape="rect" id="node26" href="$_space_object_8cc.html" title="Declares a base class for any object that floats around on the screen. " alt="" coords="327,160,463,189"/>
+<area shape="rect" id="node19" href="$_ship_8cc_source.html" title="src/Ship.cc" alt="" coords="291,237,379,267"/>
+<area shape="rect" id="node24" href="$_pulse_8cc.html" title="Implementation of Pulse class. " alt="" coords="487,237,580,267"/>
+</map>

@@ -17,12 +17,9 @@ Ship::Ship()
 }
 
 ////////////////////////////////////////////////////////////////////////////
-/*
- * draw()
- * contains drawing instructions for the ship based on its current state
- *
- * PARAMETERS:
- * explodeAlpha - Alpha reduction during ship explosion
+/**@fn void Ship::draw()
+ * @brief Contains drawing instructions for the ship based on its current state
+ * @param explodeAlpha Opacity reduction during ship explosion
  */
 void Ship::draw()
 {
@@ -79,12 +76,12 @@ void Ship::draw()
 }
 
 ////////////////////////////////////////////////////////////////////////
-/* void render(sf::RenderWindow& win
- * Renders the ship in the given window
- * and gets position information from the class.
+/**@fn void Ship::render(sf::RenderWindow& win)
+ *
+ * Renders the ship in the given window and gets position information from the class.
  * Does NOT get input for positioning
  *
- * sf::RenderWindow& win - the window in which to draw the ship
+ * @param[out] win The window in which to draw the ship
  */
 void Ship::render(sf::RenderWindow& win)
 {
@@ -101,13 +98,13 @@ void Ship::render(sf::RenderWindow& win)
 }
 
 //////////////////////////////////////////////////////////////
-
-/*
- * FUNCTION: applyThrust
- * DESCRIPTION:
+/**@fn void Ship::applyThrust(float thrust)
+ *
  * Simulates firing the engine. Changes the current velocity based on the
  * angle the ship is facing (it may be facing a different direction than it’s
  * traveling).
+ *
+ * @param thrust The amount of thrust to apply
  */
 void Ship::applyThrust(float thrust)
 {
@@ -116,9 +113,8 @@ void Ship::applyThrust(float thrust)
                 cfg::getInst()->read["SHIP"]["SPEED"].as_float());
 }
 
-/*
- * explode()
- * Change the state of the ship to explode, set velocity to 0.
+/**@fn void Ship::explode()
+ * @brief Change the state of the ship to explode, set velocity to 0.
  */
 void Ship::explode()
 {
@@ -127,6 +123,9 @@ void Ship::explode()
     setVelocity(0, 0, 0);
 }
 
+/**
+ * @return The state of the ship: GOOD, EXPLODING, or GONE.
+ */
 ShipState Ship::getState()
 {
     return state;

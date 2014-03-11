@@ -1,0 +1,6 @@
+<map id="GameLogic::stroidLogic" name="GameLogic::stroidLogic">
+<area shape="rect" id="node3" href="$class_asteroid.html#a38c30efd77e6c0b9d85e164f388c7b58" title="Asteroid::draw" alt="" coords="213,59,320,88"/>
+<area shape="rect" id="node5" href="$class_space_object.html#a2a837b94c7ac3f505eb710811612a5be" title="Makes sure the object does not go outside the screen. " alt="" coords="387,5,544,35"/>
+<area shape="rect" id="node7" href="$class_space_object.html#a393f621897b8f40ee439a3117001d82c" title="Changes the angle of the object. " alt="" coords="387,59,544,88"/>
+<area shape="rect" id="node9" href="$class_space_object.html#aa567c199a46cf92aac12dddf4141a880" title="SpaceObject::updateLocation" alt="" coords="369,112,561,141"/>
+</map>

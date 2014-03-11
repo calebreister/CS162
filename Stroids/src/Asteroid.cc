@@ -36,7 +36,8 @@ Asteroid::Asteroid()
     }
 
     //set values
-    location = {loc.x, loc.y};
+    location =
+    {   loc.x, loc.y};
     //setLocation(400, 400);
     rotationVel = util::randFloat(-.1, .1);
     setVelocity(util::randFloat(-cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float(),
@@ -63,12 +64,13 @@ Asteroid::Asteroid()
     split = false;
 }
 
-/* Asteroid(Vect2d loc)
+/**@fn Asteroid::Asteroid(Asteroid* old)
+ *
  * Asteroid constructor with a definite starting location, used for asteroids
  * that have been hit once and split. Due to the split status, it has several other
  * non-random properties.
  *
- * Asteroid* old - the asteroid from which to base the new one
+ * @param old The asteroid from which to base the new one
  */
 Asteroid::Asteroid(Asteroid* old)
 {
@@ -87,13 +89,11 @@ Asteroid::Asteroid(Asteroid* old)
     split = true;
 }
 
-/*
- * FUNCTION: checkSide
- * DESCRIPTION: check a side of the screen to see if an
- *  asteroid's radius crosses an edge of the screen
- * PARAMETERS:
- *  s - the side to check
- * RETURN: whether or not the asteroid's radius crosses the given side
+/**@fn bool Asteroid::checkSide(Side s)
+ * @brief Checks a side of the screen to see if an asteroid's radius
+ *  crosses an edge of the screen
+ * @param s The side to check
+ * @return whether or not the asteroid's radius crosses the given side
  */
 bool Asteroid::checkSide(Side s)
 {
@@ -128,8 +128,8 @@ bool Asteroid::checkSide(Side s)
     return false;
 }
 
-/* void checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
- *                              int radius)
+/**@fn void checkLocBound(Quadrant quad, Vect2d loc, Vect2d point, int radius)
+ *
  * Checks to see if an asteroid is going to spawn too close
  * to a pointer with a given radius
  *
@@ -139,17 +139,15 @@ bool Asteroid::checkSide(Side s)
  *            nn covers points (-x, -y)
  *            pn covers points (x, -y)
  *            np covers points (-x, y)
- * loc - the location of the object
- * point - the point to avoid
- * radius - defines the space around the point to avoid
  *
- * if ++ and within radius of point return true
- * if -- and within radius of point return true
- * if +- and within radius of point return true
- * if -+ and within radius of point return true
- * else return false
+ * @param loc The location of the object
+ * @param point The point to avoid
+ * @param radius Defines the space around the point to avoid
+ * @return true if the location is within the radius surrounding the point
  */
-bool Asteroid::checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
+bool Asteroid::checkLocBound(Quadrant quad,
+                             const Vect2d& loc,
+                             const Vect2d& point,
                              int radius)
 {
     assert(quad == pp
@@ -199,15 +197,15 @@ bool Asteroid::checkLocBound(Quadrant quad, Vect2d loc, Vect2d point,
     return false; //this line should never run, something is wrong if it does
 }
 
-/*
- * FUNCTION: draw
- * DESCRIPTION: draw an asteroid
+/**@fn void Asteroid::draw(sf::RenderWindow& win)
+ *
+ * Draws an asteroid
  *  - Change the angle by the rotational velocity amount.
  *  - Then draw the asteroid as a regular polygon of the given number of sides.
  *  - If it’s near an edge (within one radius), you should draw it again off the
  *     opposite edge so the part that is there shows up.
- * PARAMETERS:
- *  win - the window in which to draw the asteroid
+ *
+ * @param[out] win The window in which to draw the asteroid
  */
 void Asteroid::draw(sf::RenderWindow& win)
 {

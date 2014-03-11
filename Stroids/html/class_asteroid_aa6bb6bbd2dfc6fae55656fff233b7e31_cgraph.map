@@ -1,0 +1,5 @@
+<map id="Asteroid::Asteroid" name="Asteroid::Asteroid">
+<area shape="rect" id="node3" href="$namespaceutil.html#a00c9036a302cc373724bd28a7c0ae6e6" title="Same as randInt but returns a float. " alt="" coords="216,5,317,35"/>
+<area shape="rect" id="node7" href="$class_space_object.html#adc165d6313cc805913d1974cf5096f2d" title="Set the velocity of the SpaceObject. " alt="" coords="181,59,352,88"/>
+<area shape="rect" id="node5" href="$namespaceutil.html#a7b48a35abdf88914ca9334cd12e072a6" title="Returns a pseudo&#45;random integer between given low and high values, inclusive. " alt="" coords="401,5,487,35"/>
+</map>

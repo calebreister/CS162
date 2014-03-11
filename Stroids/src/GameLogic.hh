@@ -1,12 +1,10 @@
-/*
- * GameLogic.hh    Feb 28, 2014
- * AUTHOR: Caleb Reister
- * DEV ENV: Eclipse 4 CDT Linux AMD64
- * DESCRIPTION: Graphics of asteroids game
+/**@file GameLogic.hh
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief Graphics and operation of the asteroids game
  */
 
-#ifndef GAME_LOGIC_HPP_
-#define GAME_LOGIC_HPP_
+#ifndef GAME_LOGIC_HH
+#define GAME_LOGIC_HH
 
 #include <cmath>
 #include <SFML/System.hpp>
@@ -17,6 +15,9 @@
 #include "Asteroid.hh"
 #include "Pulse.hh"
 
+/**@class GameLogic
+ * @brief A class used to control an asteroids game.
+ */
 class GameLogic
 {
     private:
@@ -25,7 +26,6 @@ class GameLogic
         Pulse* laser[MAX_PULSE];
         Ship ship;
         int findFreeStroid();
-        //Config* cfg;
 
     public:
         GameLogic();

@@ -1,0 +1,5 @@
+<map id="Asteroid::draw" name="Asteroid::draw">
+<area shape="rect" id="node3" href="$class_space_object.html#a2a837b94c7ac3f505eb710811612a5be" title="Makes sure the object does not go outside the screen. " alt="" coords="179,5,336,35"/>
+<area shape="rect" id="node5" href="$class_space_object.html#a393f621897b8f40ee439a3117001d82c" title="Changes the angle of the object. " alt="" coords="179,59,336,88"/>
+<area shape="rect" id="node7" href="$class_space_object.html#aa567c199a46cf92aac12dddf4141a880" title="SpaceObject::updateLocation" alt="" coords="161,112,353,141"/>
+</map>

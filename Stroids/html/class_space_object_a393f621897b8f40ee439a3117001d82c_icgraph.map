@@ -1,0 +1,5 @@
+<map id="SpaceObject::chgAngle" name="SpaceObject::chgAngle">
+<area shape="rect" id="node3" href="$class_asteroid.html#a38c30efd77e6c0b9d85e164f388c7b58" title="Asteroid::draw" alt="" coords="233,5,340,35"/>
+<area shape="rect" id="node7" href="$class_game_logic.html#ac0e1b07c88a33788628ec93d52b0177c" title="GameLogic::keyInput" alt="" coords="213,59,360,88"/>
+<area shape="rect" id="node5" href="$class_game_logic.html#a27f072b23647caed0de7ecfe26fa3ef2" title="Allocates and deallocates all asteroids. Draws asteroids. " alt="" coords="409,5,567,35"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Ship::getState" name="Ship::getState">
+<area shape="rect" id="node3" href="$class_game_logic.html#ac0e1b07c88a33788628ec93d52b0177c" title="GameLogic::keyInput" alt="" coords="160,5,307,35"/>
+<area shape="rect" id="node5" href="$class_game_logic.html#a57a85e86134445788530cdafed3e2af0" title="Fires pulses from the ship. Gets event&#45;based input for gunfire. " alt="" coords="164,59,303,88"/>
+</map>

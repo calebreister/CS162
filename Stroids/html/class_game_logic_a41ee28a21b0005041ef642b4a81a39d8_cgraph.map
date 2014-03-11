@@ -1,0 +1,5 @@
+<map id="GameLogic::pulseLogic" name="GameLogic::pulseLogic">
+<area shape="rect" id="node3" href="$class_pulse.html#a53902c7b1c56d0d701f6324d66a907e6" title="Draws the pulse on the screen where and when appropriate. " alt="" coords="213,32,304,61"/>
+<area shape="rect" id="node5" href="$class_space_object.html#aa567c199a46cf92aac12dddf4141a880" title="SpaceObject::updateLocation" alt="" coords="353,5,545,35"/>
+<area shape="rect" id="node7" href="$class_space_object.html#a2a837b94c7ac3f505eb710811612a5be" title="Makes sure the object does not go outside the screen. " alt="" coords="371,59,528,88"/>
+</map>

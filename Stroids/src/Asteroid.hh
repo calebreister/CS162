@@ -1,12 +1,10 @@
-/*
- * HEADER: ASTEROIRD_HPP
- * AUTHOR: Caleb Reister
- * DESCRIPTION: contains class declaration for a single
- *  asteroid for use in my Asteroids clone
+/**@file Asteroid.hh
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief Contains a class declaration for a single asteroid.
  */
 
-#ifndef ASTEROID_HPP
-#define ASTEROID_HPP
+#ifndef ASTEROID_HH
+#define ASTEROID_HH
 
 #include <iostream>
 #include <cmath>
@@ -30,14 +28,17 @@ enum Quadrant
     np //-+
 };
 
+/**@class Asteroid
+ * @brief A SpaceObject that draws an asteroid in the given window.
+ */
 class Asteroid : public SpaceObject
 {
     private:
         unsigned int sides;
         float rotationVel; //short for rotational velocity
         bool checkSide(Side s);
-        bool checkLocBound(Quadrant quad, Vect2d loc,
-                           Vect2d point = WIN_MID,
+        bool checkLocBound(Quadrant quad, const Vect2d& loc,
+                           const Vect2d& point = WIN_MID,
                            int radius = 200);
         sf::Color color;
 

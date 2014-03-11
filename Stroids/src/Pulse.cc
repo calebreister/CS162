@@ -1,18 +1,11 @@
-/*
- * Pulse.cpp    Feb 27, 2014
- * AUTHOR: Caleb Reister
- * DEV ENV: Eclipse 4 CDT Linux AMD64
- * DESCRIPTION: Defines the "bullets" fired
- *  by the ship in the asteroids game implementation.
+/**@file Pulse.cc
+ * @brief Implementation of Pulse class.
  */
 
 //#define NDEBUG
 #include <cassert>
 #include "Pulse.hh"
 
-/* Pulse()
- * Initializes pulse data for testing purposes.
- */
 Pulse::Pulse()
 {
     //cfg = &stroidConfig;
@@ -24,12 +17,13 @@ Pulse::Pulse()
     color = sf::Color(255, 255, 255);
 }
 
-/* Pulse(Vect2d loc, float ang)
- * Constructor that passes location and angle data, used to fire a pulse from the ship.
- * Sets a constant velocity.
+/**@fn Pulse(Vect2d loc, float ang)
  *
- * Vect2d loc - the starting location of the pulse
- * float ang - the starting angle of the pulse
+ * This is a constructor that passes location and angle data, used to fire a pulse
+ * from the ship. It also sets a constant velocity.
+ *
+ * @param loc The starting location of the pulse
+ * @param ang The starting angle of the pulse
  */
 Pulse::Pulse(Vect2d loc, float ang)
 {
@@ -51,7 +45,8 @@ Pulse::Pulse(Vect2d loc, float ang)
                       userColor[2].as_int());
 }
 
-/* void hit()
+/**@fn void Pulse::hit()
+ *
  * Sets timeToLive to 0, invoking the draw function will
  * cause the pulse to disappear.
  */
@@ -60,8 +55,9 @@ void Pulse::hit()
     timeToLive = 0;
 }
 
-/* void isDead()
- * Checks to see if the pulse has hit anything.
+/**@fn bool Pulse::isDead()
+ * @brief Checks to see if the pulse has hit anything.
+ * @return Whether or not timeToLive == 0
  */
 bool Pulse::isDead()
 {
@@ -72,10 +68,9 @@ bool Pulse::isDead()
         return false;
 }
 
-/* draw(sf::RenderWindow& win)
- * Draws the pulse on the screen where and when appropriate.
- *
- * sf::RenderWindow& win - the window in which to draw the pulse.
+/**@fn void Pulse::draw(sf::RenderWindow& win)
+ * @brief Draws the pulse on the screen where and when appropriate.
+ * @param[out] win - the window in which to draw the pulse.
  */
 void Pulse::draw(sf::RenderWindow& win)
 {

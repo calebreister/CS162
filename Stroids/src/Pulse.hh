@@ -1,16 +1,15 @@
-/*
- * Munition.hh    Feb 27, 2014
- * AUTHOR: Caleb Reister
- * DEV ENV: Eclipse 4 CDT Linux AMD64
- * DESCRIPTION: Defines the "bullets" fired
- *  by the ship in the asteroids game implementation.
+/**@file Pulse.hh
+ * @brief Defines the "bullets" fired by the ship in the asteroids game implementation.
  */
-#ifndef MUNITION_HPP_
-#define MUNITION_HPP_
+#ifndef MUNITION_HH_
+#define MUNITION_HH_
 
 #include "util.hh"
 #include "SpaceObject.hh"
 
+/**@class Pulse
+ * @brief SpaceObject that simulates laser pulses.
+ */
 class Pulse : public SpaceObject
 {
     private:

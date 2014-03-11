@@ -1,8 +1,6 @@
-/*
- * GameLogic.cpp    Feb 28, 2014
- * AUTHOR: Caleb Reister
- * DEV ENV: Eclipse 4 CDT Linux AMD64
- * DESCRIPTION:
+/**@file GameLogic.cc
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief Graphics and operation of the asteroids game
  */
 
 //#define NDEBUG
@@ -32,6 +30,10 @@ GameLogic::~GameLogic()
     //delete cfg;
 }
 
+/**
+ * @brief Finds a free asteroid within the pointer array of asteroids
+ * @return The index of a free (NULL) space in the asteroid array.
+ */
 int GameLogic::findFreeStroid()
 {
     int i = 0;
@@ -48,7 +50,7 @@ int GameLogic::findFreeStroid()
     return -1; //Error: no memory
 }
 
-/* void keyInput()
+/**
  * Gets non-event based user input from the keyboard. Used to control the ship.
  */
 void GameLogic::keyInput()
@@ -69,10 +71,9 @@ void GameLogic::keyInput()
     }
 }
 
-/* void fireGun(sf::Event& event)
- * Fires pulses from the ship. Gets event-based input for gunfire.
- *
- * sf::Event& event - the SFML event from which to capture the fire button
+/**@fn void GameLogic::fireGun(sf::Event& event)
+ * @brief Fires pulses from the ship. Gets event-based input for gunfire.
+ * @param[in] event The SFML event from which to capture the fire button
  */
 void GameLogic::fireGun(sf::Event& event)
 {
@@ -88,10 +89,9 @@ void GameLogic::fireGun(sf::Event& event)
     }
 }
 
-/* void stroidLogic(sf::RenderWindow& win);
- * Allocates and deallocates all asteroids. Draws asteroids.
- *
- * sf::RenderWindow& win - the window in which to render asteroids
+/**@fn void GameLogic::stroidLogic(sf::RenderWindow& win);
+ * @brief Allocates and deallocates all asteroids. Draws asteroids.
+ * @param[out] win The window in which to render the asteroids
  */
 void GameLogic::stroidLogic(sf::RenderWindow& win)
 {
@@ -135,10 +135,9 @@ void GameLogic::stroidLogic(sf::RenderWindow& win)
     }
 }
 
-/* void pulseLogic(sf::RenderWindow& win);
- * Allocates and deallocates all laser pulses. Draws appropriate pulses.
- *
- * sf::RenderWindow& win - window in which to render pulses
+/**@fn void GameLogic::pulseLogic(sf::RenderWindow& win);
+ * @brief Allocates and deallocates all laser pulses. Draws appropriate pulses.
+ * @param[out] win - window in which to render pulses
  */
 void GameLogic::pulseLogic(sf::RenderWindow& win)
 {
@@ -158,19 +157,17 @@ void GameLogic::pulseLogic(sf::RenderWindow& win)
     }
 }
 
-/* void drawShip(sf::RenderWindow& win)
- * Draws the ship, the Ship class manages destruction internally.
- *
- * sf::RenderWindow& win - window in which to draw the ship
+/**@fn void GameLogic::drawShip(sf::RenderWindow& win)
+ * @brief Draws the ship, the Ship class manages destruction internally.
+ * @param win Window in which to draw the ship
  */
 void GameLogic::drawShip(sf::RenderWindow& win)
 {
     ship.render(win);
 }
 
-/* void GameLogic::checkCollisions()
- * Checks all SpaceObjects for collision, performs
- * necessary actions upon collision.
+/**@fn void GameLogic::checkCollisions()
+ * @brief Checks all SpaceObjects for collision, performs necessary actions upon collision.
  */
 void GameLogic::checkCollisions()
 {

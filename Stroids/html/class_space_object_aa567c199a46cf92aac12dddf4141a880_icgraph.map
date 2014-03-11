@@ -1,0 +1,6 @@
+<map id="SpaceObject::updateLocation" name="SpaceObject::updateLocation">
+<area shape="rect" id="node3" href="$class_asteroid.html#a38c30efd77e6c0b9d85e164f388c7b58" title="Asteroid::draw" alt="" coords="248,5,355,35"/>
+<area shape="rect" id="node7" href="$class_pulse.html#a53902c7b1c56d0d701f6324d66a907e6" title="Draws the pulse on the screen where and when appropriate. " alt="" coords="256,59,347,88"/>
+<area shape="rect" id="node5" href="$class_game_logic.html#a27f072b23647caed0de7ecfe26fa3ef2" title="Allocates and deallocates all asteroids. Draws asteroids. " alt="" coords="404,5,561,35"/>
+<area shape="rect" id="node9" href="$class_game_logic.html#a41ee28a21b0005041ef642b4a81a39d8" title="Allocates and deallocates all laser pulses. Draws appropriate pulses. " alt="" coords="404,59,561,88"/>
+</map>

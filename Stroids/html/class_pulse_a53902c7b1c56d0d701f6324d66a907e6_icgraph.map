@@ -1,0 +1,3 @@
+<map id="Pulse::draw" name="Pulse::draw">
+<area shape="rect" id="node3" href="$class_game_logic.html#a41ee28a21b0005041ef642b4a81a39d8" title="Allocates and deallocates all laser pulses. Draws appropriate pulses. " alt="" coords="145,5,303,35"/>
+</map>

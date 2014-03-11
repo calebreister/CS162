@@ -1,0 +1,6 @@
+<map id="GameLogic::keyInput" name="GameLogic::keyInput">
+<area shape="rect" id="node3" href="$class_ship.html#a16e20e55850453c37a5bb6a707c7e64f" title="Ship::getState" alt="" coords="228,5,332,35"/>
+<area shape="rect" id="node5" href="$class_space_object.html#a393f621897b8f40ee439a3117001d82c" title="Changes the angle of the object. " alt="" coords="201,59,359,88"/>
+<area shape="rect" id="node7" href="$class_ship.html#a6a25661cfc1569221e24ae8f3e5f593f" title="Ship::applyThrust" alt="" coords="219,112,341,141"/>
+<area shape="rect" id="node9" href="$namespaceutil.html#a8caf5c2d0bc9737a8138ee33149b1db7" title="Converts degress to radians. " alt="" coords="408,112,501,141"/>
+</map>

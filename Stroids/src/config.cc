@@ -1,3 +1,30 @@
+/**
+ * @see cfg
+ * @brief A class designed to work it a JSON configuration file for the asteroids game.
+ *
+ * @section Configuration File
+ * FRAME_RATE: The rate at which to refresh the window. Can be used to control the speed of the game.
+ *
+ * LASER/COLOR: The color of laser pulses in RGB values from 0 to 255.
+ * LASER/EDGE_DEATH: Whether or not the pulse warps to the other side of the screen when it hits and edge.
+ * LASER/PULSE_LIFE: The amount of time (relative to FRAME_RATE) a pulse will exist.
+ *
+ * SHIP/COLOR: The color of the ship.
+ * SHIP/OUTLINE_PX: The thickness of the ship's sides.
+ * SHIP/SPEED: The speed of the ship.
+ * SHIP/THRUST_FWD: The thrust applied when you press the UP key.
+ * SHIP/THRUST_REV: The thrust applied when you press the DOWN key.
+ * SHIP/TURN_RATE: The speed at which the ship turns when you press LEFT or RIGHT.
+ *
+ * STROID/COLOR: The color of all the asteroids assuming COLOR_RAND is false.
+ * STROID/COLOR_RAND: Whether or not to use a random color for each asteroid.
+ * STROID/MAX_SPEED: The max speed of the asteroid.
+ * STROID/SIZE_MAX: The max size of the asteroid.
+ * STROID/SIZE_MIN: The minimum size of the asteroid.
+ * STROID/SPAWN_RATE: The amount of time (relative to FRAME_RATE) between new asteroid creations.
+ * STROID/START_NUM: The number of asteroids spawned automatically at the beginning of the game.
+ */
+
 //Localized includes to prevent
 //other parts of the program from accessing
 //the data made available
@@ -23,6 +50,9 @@ cfg* cfg::getInst()
     return pInst;
 }
 
+/**
+ * Initializes the configuration file in the home directory if it does not exist.
+ */
 cfg::cfg()
 {
     //get home directory
@@ -58,6 +88,15 @@ cfg::cfg()
     read = parse_file(path.c_str());
 }
 
+/**@fn JSON::Array cfg::validateColor(string obj, int defR, int defG, int defB)
+ * @brief Checks a color to make sure it is within range and applies
+ * default values if it isn't.
+ * @param obj The JSON object with an Array called COLOR on which to apply the validation.
+ * @param defR The default red value.
+ * @param defG The default green value.
+ * @param defB The default blue value.
+ * @return The validated JSON array.
+ */
 Array cfg::validateColor(string obj, int defR, int defG, int defB)
 {
     Array tempColor;
@@ -85,6 +124,10 @@ Array cfg::validateColor(string obj, int defR, int defG, int defB)
     return tempColor;
 }
 
+/**@fn void cfg::validateValues()
+ * @brief Check all of the values in the configuration file
+ *  (and create them if they don't exist).
+ */
 void cfg::validateValues()
 {
     //all if statements make sure that the property exists

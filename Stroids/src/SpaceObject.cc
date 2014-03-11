@@ -1,8 +1,6 @@
-/*
- * SpaceObject.cpp
- *
- *  Created on: Feb 5, 2014
- *      Author: caleb
+/**@file SpaceObject.cc
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief Declares a base class for any object that floats around on the screen.
  */
 
 #define NDEBUG
@@ -17,9 +15,8 @@ SpaceObject::SpaceObject()
     radius = 0;
 }
 
-/*
- * FUNCTION: boundFix
- * DESCRIPTION: makes sure the object does not go outside the screen
+/**@fn void SpaceObject::boundFix()
+ * @brief Makes sure the object does not go outside the screen
  */
 void SpaceObject::boundFix()
 {
@@ -34,11 +31,10 @@ void SpaceObject::boundFix()
         location.y = WIN_SIZE.y;
 }
 
-/*
- * FUNCTION: chgLocation
- * DESCRIPTION: changes the ships location (in relation to the current position)
- * PARAMETERS:
- *  delta - the change vector
+/**@fn void SpaceObject::chgLocation(float deltaX, float deltaY)
+ * @brief Changes the ships location (in relation to the current position)
+ * @param deltaX The X component to change.
+ * @param deltaY The Y component to change.
  */
 void SpaceObject::chgLocation(float deltaX, float deltaY)
 {
@@ -46,9 +42,8 @@ void SpaceObject::chgLocation(float deltaX, float deltaY)
     location.y += deltaY;
 }
 
-/*
- * FUNCTION: updateLocation
- * DESCRIPTION:
+/**@fn void SpaceObject::updateLocation()
+ *
  *  - Updates the location based on the current velocity.
  *      (adds the velocity vector to the location vector)
  *  - Ensures that the SpaceObject is always inside the window
@@ -59,13 +54,11 @@ void SpaceObject::updateLocation()
     location.y += velocity.y;
 }
 
-/*
- * FUNCTION: setVelocity
- * DESCRIPTION: set the the velocity of the SpaceObject
- * PARAMETERS:
- *  velX: the x-velocity factor
- *  velY: the y-velocity factor'
- *  max: the maximum angular velocity to allow
+/**@fn void SpaceObject::setVelocity(float velX, float velY, float max)
+ * @brief Set the velocity of the SpaceObject.
+ * @param velX The x-velocity component
+ * @param velY The y-velocity component
+ * @param max The maximum angular velocity to allow
  */
 void SpaceObject::setVelocity(float velX, float velY, float max)
 {
@@ -74,8 +67,7 @@ void SpaceObject::setVelocity(float velX, float velY, float max)
 
     //SPEED LIMITING
     float angMaxRatio = getAngVel() / max; // angular velocity / max velocity
-    if (angMaxRatio > 1)
-    {
+    if (angMaxRatio > 1)    {
         velocity.x /= angMaxRatio;
         velocity.y /= angMaxRatio;
     }
@@ -85,7 +77,12 @@ void SpaceObject::setVelocity(float velX, float velY, float max)
     assert(velocity.y <= max);
     assert(velocity.y >= -max);
 }
-void SpaceObject::setVelocity(Vect2d vel, float max)
+/**@fn void SpaceObject::setVelocity(const Vect2d& vel, float max)
+ * @brief Sets the velocity of the SpaceObject
+ * @param vel The velocity vector
+ * @param max The maximum angular velocity to allow
+ */
+void SpaceObject::setVelocity(const Vect2d& vel, float max)
 {
     velocity = vel;
 
@@ -98,15 +95,11 @@ void SpaceObject::setVelocity(Vect2d vel, float max)
     }
 }
 
-/*
- * FUNCTION: chgVelocity
- * DESCRIPTION changes the velocity vector and multiplies it
- * PARAMETERS 1:
- *  deltaX - the change in X
- *  deltaY - the change in Y
- *  ang - the angle at which to move the ship
- *  mag - the magnitude
- *  max - the max allowable velocity
+/**@fn void SpaceObject::chgVelocity(float deltaX, float deltaY, float max)
+ * @brief Changes the velocity vector
+ * @param deltaX The change in X
+ * @param deltaY The change in Y
+ * @param max The max allowable velocity
  */
 void SpaceObject::chgVelocity(float deltaX, float deltaY, float max)
 {
@@ -117,24 +110,21 @@ void SpaceObject::chgVelocity(float deltaX, float deltaY, float max)
     assert(velocity.y >= -max);
 }
 
-/*
- * FUNCTION: setAngle
- * DESCRIPTION: set the angle of the object
- * PARAMETERS:
- *  deg - the angle in degrees to set
- * NOTE: does not set the angle to be within 360 degrees, this is done in getAngle()
+/**@fn void SpaceObject::setAngle(float deg)
+ * @brief Set the angle of the object
+ * @param deg The angle to set in degrees
+ *
+ * This function allows you to set the angle of the object in degrees. You do
+ * not need to validate the input, that is done in getAngle().
  */
 void SpaceObject::setAngle(float deg)
 {
     angleDeg = deg;
 }
 
-/*
- * FUNCTION: chgAngle
- * DESCRIPTION: changes the angle of the object
- * PARAMETERS:
- *  deltaDeg - number of degrees to add to the current angle
- * NOTE: does not set the angle to be within 360 degrees, this is done in getAngle()
+/**@fn void SpaceObject::chgAngle(float deltaDeg)
+ * @brief Changes the angle of the object
+ * @param deltaDeg The number of degrees to add to the current angle
  */
 void SpaceObject::chgAngle(float deltaDeg)
 {
@@ -143,8 +133,7 @@ void SpaceObject::chgAngle(float deltaDeg)
 
 ///////////////////////////////////////////////////////////////////////////////
 /*
- * FUNCTION: getRadius
- * DESCRIPTION: returns the radius of the SpaceObject
+ * @return The radius of the SpaceObject
  */
 float SpaceObject::getRadius()
 {
@@ -152,8 +141,7 @@ float SpaceObject::getRadius()
 }
 
 /*
- * FUNCTION: getLocation
- * RETURN: location of the SpaceObject
+ * @return The location of the SpaceObject as a vector
  */
 Vect2d SpaceObject::getLocation()
 {
@@ -161,8 +149,7 @@ Vect2d SpaceObject::getLocation()
 }
 
 /*
- * FUNCTION: getVelocity
- * RETURN: current velocity of the SpaceObject
+ * @return The current velocity of the SpaceObject
  */
 Vect2d SpaceObject::getVelocity()
 {
@@ -170,9 +157,8 @@ Vect2d SpaceObject::getVelocity()
 }
 
 /*
- * FUNCTION: getAngVel
- * DESCRIPTION: gets the angular velocity of the object
- * RETURN: object's angular velocity as a float
+ * @brief Gets the angular velocity of the object
+ * @return object's angular velocity as a float
  */
 float SpaceObject::getAngVel()
 {
@@ -181,11 +167,9 @@ float SpaceObject::getAngVel()
 }
 
 /*
- * FUNCTION: getAngle
- * DESCRIPTION: gets the current angle (in degrees) of the object,
+ * @brief Gets the current angle (in degrees) of the object,
  *  ensures the angle value is within 0 and 359
- * RETURN:
- *  angle in degrees (between 0 and 359)
+ * @return The angle of the SpaceObject in degrees (between 0 and 359)
  */
 float SpaceObject::getAngle()
 {
@@ -194,20 +178,17 @@ float SpaceObject::getAngle()
 }
 
 ///////////////////////////////////////////////////////////////////////
-/*
- * objectsIntersect(SpaceObject obj1, SpaceObject obj2)
- * Checks to see whether the radius of one SpaceObject intersects another
+/**@fn bool objectsIntersect(SpaceObject obj1, SpaceObject obj2)
+ * @brief Checks to see whether the radius of one SpaceObject intersects another
+ * @param obj1 The 1st object to check
+ * @param obj2 The 2nd object to check
  *
- * obj1: the first object to check
- * obj2: the second object to check
- *
- * RETURN: bool whether or not objects intersect
+ * @return bool of whether or not objects intersect
  */
-bool objectsIntersect(SpaceObject* obj1, SpaceObject* obj2)
+bool objectsIntersect(const SpaceObject* obj1, const SpaceObject* obj2)
 {
     double distBetween =
-                         sqrt(
-                              pow(obj2->location.x - obj1->location.x, 2) +
+                         sqrt(pow(obj2->location.x - obj1->location.x, 2) +
                               pow(obj2->location.y - obj1->location.y, 2));
 
     if (distBetween < obj1->radius + obj2->radius)

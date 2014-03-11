@@ -1,0 +1,5 @@
+<map id="util::deg2rad" name="util::deg2rad">
+<area shape="rect" id="node3" href="$class_ship.html#a6a25661cfc1569221e24ae8f3e5f593f" title="Ship::applyThrust" alt="" coords="148,5,271,35"/>
+<area shape="rect" id="node7" href="$namespaceutil.html#a42ae66419a20b877590216db9345c3f1" title="Converts an angle to a slope for use on a Cartesian plane, ranged. " alt="" coords="156,59,263,88"/>
+<area shape="rect" id="node5" href="$class_game_logic.html#ac0e1b07c88a33788628ec93d52b0177c" title="GameLogic::keyInput" alt="" coords="320,5,467,35"/>
+</map>

@@ -1,12 +1,10 @@
-/*
- * HEADER: SHIP_HPP
- * AUTHOR: Caleb Reister
- * DESCRIPTION: class for controlling a "ship" from above
- *      going to be used in my implementation of asteroids
+/**@file Ship.hh
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief defines a class for controlling a space ship from above.
  */
 
-#ifndef SHIP_HPP
-#define SHIP_HPP
+#ifndef SHIP_HH
+#define SHIP_HH
 
 #include <cmath>
 #include <SFML/System.hpp>
@@ -20,6 +18,10 @@ enum ShipState
     GOOD, EXPLODE, GONE
 };
 
+/**@class Ship
+ * @brief A class derived from SpaceObject designed for
+ *  drawing and controlling a user-run ship.
+ */
 class Ship : public SpaceObject
 {
     private:

@@ -1,8 +1,9 @@
-/*
- * PROGRAM: ShipMain
- * AUTHOR: Caleb Reister
- * DESCRIPTION:
- *  SFML implementation of Ship class, making it move around the screen
+/**@file ShipMain.cc
+ * @author Caleb Reister <calebreister@gmail.com
+ * @mainpage Stroids is an SFML implementation of asteroids. It has several extensions.
+ *  - Color
+ *  - A human-readable configuration file
+ *  - Object-oriented
  */
 
 #include <SFML/System.hpp>

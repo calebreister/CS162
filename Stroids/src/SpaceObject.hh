@@ -1,12 +1,10 @@
-/*
- * CLASS: SPACE_OBJECT_HPP
- * AUTHOR: Caleb Reister
- * DESCRIPTION:
- *  Controls 2D physics for any object that floats in space
+/**@file SpaceObject.cc
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief  Controls 2D physics for any object that floats in space.
  */
 
-#ifndef SPACE_OBJECT_HPP
-#define SPACE_OBJECT_HPP
+#ifndef SPACE_OBJECT_HH
+#define SPACE_OBJECT_HH
 
 #include <iostream>
 #include <cmath>
@@ -15,6 +13,10 @@
 #include <SFML/Graphics.hpp>
 #include "util.hh"
 
+/**@class SpaceObject
+ * @brief A base class that defines any object that moves from above in a 2d world.
+ *  I am using it for an Asteroids clone.
+ */
 class SpaceObject
 {
     private:
@@ -25,8 +27,8 @@ class SpaceObject
         int radius;
         Vect2d location;
         void boundFix();
-        void setVelocity(float velX, float velY, float maxAngVel);
-        void setVelocity(Vect2d vel, float max);
+        void setVelocity(float velX, float velY, float max);
+        void setVelocity(const Vect2d& vel, float max);
         void setAngle(float deg);
         void updateLocation();
 
@@ -43,7 +45,7 @@ class SpaceObject
         float getAngVel();
         float getAngle();
         //////////////////////////////
-        friend bool objectsIntersect(SpaceObject* obj1, SpaceObject* obj2);
+        friend bool objectsIntersect(const SpaceObject* obj1, const SpaceObject* obj2);
 };
 
 #endif

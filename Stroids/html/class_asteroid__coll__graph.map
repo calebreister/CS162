@@ -1,0 +1,4 @@
+<map id="Asteroid" name="Asteroid">
+<area shape="rect" id="node2" href="$class_space_object.html" title="A base class that defines any object that moves from above in a 2d world. I am using it for an Astero..." alt="" coords="5,101,101,131"/>
+<area shape="rect" id="node4" href="$struct_vect2d.html" title="Vect2d" alt="" coords="23,5,84,35"/>
+</map>

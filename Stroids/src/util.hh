@@ -1,14 +1,9 @@
-/*
- * HEADER: UTIL_HPP
- * AUTHOR: Caleb Reister
- * DESCRIPTION: defines a utilities namespace
- *  - functions for angle conversion (radians, degrees, slope)
- *  - 2d vector struct
- *  - random number generators
+/**@file util.hh
+ * @author Caleb Reister <calebreister@gmail.com>
  */
 
-#ifndef UTIL_HPP
-#define UTIL_HPP
+#ifndef UTIL_HH
+#define UTIL_HH
 
 #include <iostream>
 #include <cmath>
@@ -18,6 +13,11 @@
 
 const float PI = M_PI;
 
+/*
+ * @struct Vect2d
+ * @brief A struct that defines a simple 2d vector with a n X and Y component.
+ *  It has been extended to also include common operator overloads for aggregate operations.
+ */
 struct Vect2d
 {
         float x;
@@ -41,7 +41,9 @@ const Vect2d ZERO = {0, 0};
 const int MAX_STROIDS = 1000;
 const int MAX_PULSE = 200;
 
-//Singleton, defined in config.cpp
+/**@class cfg
+ * @brief Defines functions for working with a JSON configuration file.
+ */
 class cfg
 {
     private:
@@ -57,6 +59,10 @@ class cfg
         static cfg* getInst();
 };
 
+/**@namespace util
+ * @brief Defines various utilities such as a random number generators and
+ *  various conversion functions.
+ */
 namespace util
 {
     //Random number generator

@@ -1,7 +1,10 @@
-/*
- * PROGRAM: util
- * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation file for util.hh
+/**@file util
+ * @author Caleb Reister <calebreister@gmail.com>
+ *
+ * This file contains various useful definitions...
+ * - Vect2d is a simple vector struct with multiple operator overloads
+ * - @see cfg A singleton class that works with a JSON configuration file.
+ * - @see util
  */
 
 #include "util.hh"
@@ -64,14 +67,11 @@ void operator/=(Vect2d& out, float op)
     out.y /= op;
 }
 ////////////////////////////////////////////////////////////////////////
-/*
- * FUNCTION randInt
- * DESCRIPTION: Returns a pseudo-random integer between given
- *  low and high values, inclusive
- * PARAMETERS:
- *  low - the lowest number to be generated
- *  high - the highest number to be generated
- * RETURN: A pseudo-random number between low and high (inclusive)
+/**@fn int util::randInt(int low, int high)
+ * @brief Returns a pseudo-random integer between given low and high values, inclusive
+ * @param low The lowest number to be generated
+ * @param high The highest number to be generated
+ * @return A pseudo-random number between low and high (inclusive)
  */
 int util::randInt(int low, int high)
 {
@@ -90,13 +90,11 @@ int util::randInt(int low, int high)
     return randNum;
 }
 
-/*
- * FUNCTION: randFloat
- * DESCRIPTION: returns a pseudo-random flaot between low and high, inclusive
- * PARAMETERS:
- *  low - lowest number to be generated
- *  high - highest number to be generated
- * RETURN: a pseudo-random float type number
+/**@fn float util::randFloat(float low, float high)
+ * @brief Same as randInt but returns a float.
+ * @param low The lowest number to be generated
+ * @param high The highest number to be generated
+ * @return A pseudo-random number between low and high (inclusive)
  */
 float util::randFloat(float low, float high)
 {
@@ -118,54 +116,49 @@ float util::randFloat(float low, float high)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/*
- * FUNCTION: rad2deg
- * DESCRIPTION: converts radians to degrees
- * PARAMETERS:
- *  rad = the radians to convert, as a float
- * RETURN: the angle (float) in degrees
+/**@fn float util::rad2deg(float rad)
+ * @brief Converts radians to degrees.
+ * @param rad The radians to convert, as a float
+ * @return The angle (float) in degrees.
  */
 float util::rad2deg(float rad)
 {
     return (180 * rad) / PI;
 }
 
-/*
- * FUNCTION: deg2rad
- * DESCRIPTION: converts ang to radians
- * PARAMTERS:
- *  deg = the ang to convert
- * RETURN:
- *  radians as a float
+/**@fn float util::deg2rad(float deg)
+ * @brief Converts degress to radians.
+ * @param deg The ang to convert.
+ * @return Radians as a float.
  */
 float util::deg2rad(float deg)
 {
     return (PI * deg) / 180;
 }
 
-/*
- * FUNCTION: slope2deg
- * DESCRIPTION: gets a slope (either as a vector or a float),
- *  converts it to ang, and stores it
- * PARAMETERS:
- *  slope (vector) - the rise (y) and run (x) values of the slope
- *  slope (float) - the rise and run, pre-divided
+/**@fn float util::slope2deg(Vect2d slope)
+ * @brief Gets a slope and converts it to degrees.
+ * @param slope The rise (y) and run (x) values of the slope
+ * @return The angle of the slope in degress.
  */
 float util::slope2deg(Vect2d slope)
 {
     return rad2deg(atan(slope.y / slope.x));
 }
-
+/**@fn float util::slope2deg(Vect2d slope)
+ * @brief Gets a slope and converts it to degrees.
+ * @param slope The rise / run, pre-divided.
+ * @return The angle of the slope in degress.
+*/
 float util::slope2deg(float slope)
 {
     return rad2deg(atan(slope));
 }
 
-/*
- * FUNCTION: deg2slope
- * DESCRIPTION: converts ang to a slope for use on
- *  a Cartesian plane, ranged
- * RETURN: slope of angle expressed as a vector
+/**@fn Vect2d util::deg2slope(float deg)
+ * @brief Converts an angle to a slope for use on a Cartesian plane, ranged.
+ * @param deg The slope as a vector.
+ * @return Slope of angle expressed as a vector
  */
 Vect2d util::deg2slope(float deg)
 {
