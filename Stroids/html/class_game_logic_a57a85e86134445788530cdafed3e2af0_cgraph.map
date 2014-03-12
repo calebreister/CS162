@@ -1,3 +1,5 @@
 <map id="GameLogic::fireGun" name="GameLogic::fireGun">
-<area shape="rect" id="node3" href="$class_ship.html#a16e20e55850453c37a5bb6a707c7e64f" title="Ship::getState" alt="" coords="193,5,297,35"/>
+<area shape="rect" id="node3" href="$class_ship.html#a16e20e55850453c37a5bb6a707c7e64f" title="Ship::getState" alt="" coords="227,5,331,35"/>
+<area shape="rect" id="node5" href="$class_space_object.html#a09c077da9a23abc00b718e6dc506bdfd" title="SpaceObject::getLocation" alt="" coords="193,59,364,88"/>
+<area shape="rect" id="node7" href="$class_space_object.html#aad52be99a1fe5d3eba85944b62ec4f4e" title="Gets the current angle (in degrees) of the object, ensures the angle value is within 0 and 359..." alt="" coords="201,112,356,141"/>
 </map>

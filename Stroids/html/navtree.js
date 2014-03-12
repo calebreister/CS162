@@ -26,7 +26,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_asteroid_8cc_source.html"
+"_asteroid_8cc.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

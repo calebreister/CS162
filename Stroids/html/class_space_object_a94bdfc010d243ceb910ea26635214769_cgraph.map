@@ -1,0 +1,4 @@
+<map id="SpaceObject::setVelocity" name="SpaceObject::setVelocity">
+<area shape="rect" id="node3" href="$class_space_object.html#a6918140a0fdd752ada6b4cbe8779aa56" title="Gets the angular velocity of the object. " alt="" coords="224,5,389,35"/>
+<area shape="rect" id="node5" href="$class_space_object.html#abdf828400bcb4d3ee2e6191f00c39e5b" title="SpaceObject::getVelocity" alt="" coords="437,5,608,35"/>
+</map>

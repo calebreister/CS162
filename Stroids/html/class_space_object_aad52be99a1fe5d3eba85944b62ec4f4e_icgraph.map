@@ -1,0 +1,5 @@
+<map id="SpaceObject::getAngle" name="SpaceObject::getAngle">
+<area shape="rect" id="node3" href="$class_asteroid.html#a38c30efd77e6c0b9d85e164f388c7b58" title="Asteroid::draw" alt="" coords="227,5,333,35"/>
+<area shape="rect" id="node7" href="$class_game_logic.html#a57a85e86134445788530cdafed3e2af0" title="Fires pulses from the ship. Gets event&#45;based input for gunfire. " alt="" coords="211,59,349,88"/>
+<area shape="rect" id="node5" href="$class_game_logic.html#a27f072b23647caed0de7ecfe26fa3ef2" title="Allocates and deallocates all asteroids. Draws asteroids. " alt="" coords="399,5,556,35"/>
+</map>

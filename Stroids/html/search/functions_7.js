@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hit',['hit',['../class_pulse.html#ad270467607fa4447d29259b9c23766c1',1,'Pulse']]]
+  ['isdead',['isDead',['../class_pulse.html#a3e2dd021a94c114ad98b7dd3ba7e9316',1,'Pulse']]]
 ];

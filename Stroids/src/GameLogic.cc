@@ -30,7 +30,7 @@ GameLogic::~GameLogic()
     //delete cfg;
 }
 
-/**
+/**@fn int findFreeStroid()
  * @brief Finds a free asteroid within the pointer array of asteroids
  * @return The index of a free (NULL) space in the asteroid array.
  */

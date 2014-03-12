@@ -1,0 +1,4 @@
+<map id="SpaceObject::getRadius" name="SpaceObject::getRadius">
+<area shape="rect" id="node3" href="$class_asteroid.html#a38c30efd77e6c0b9d85e164f388c7b58" title="Asteroid::draw" alt="" coords="219,5,325,35"/>
+<area shape="rect" id="node5" href="$class_game_logic.html#a27f072b23647caed0de7ecfe26fa3ef2" title="Allocates and deallocates all asteroids. Draws asteroids. " alt="" coords="375,5,532,35"/>
+</map>

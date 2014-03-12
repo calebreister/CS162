@@ -1,7 +1,6 @@
-/*
- * PROGRAM: Ship
- * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation of Ship.hh
+/**@file Ship
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief Implementation of @see Ship
  */
 
 #include "Ship.hh"
@@ -123,7 +122,7 @@ void Ship::explode()
     setVelocity(0, 0, 0);
 }
 
-/**
+/**@fn ShipState getState()
  * @return The state of the ship: GOOD, EXPLODING, or GONE.
  */
 ShipState Ship::getState()

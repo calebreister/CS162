@@ -11,7 +11,7 @@ var indexSectionsWithContent =
   1: "acgpsv",
   2: "u",
   3: "agpsu",
-  4: "abcdefghikprsu",
+  4: "abcdefhikprsu",
   5: "s"
 };
 

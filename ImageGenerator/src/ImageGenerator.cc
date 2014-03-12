@@ -1,3 +1,12 @@
+/*
+Caleb Reister
+2014-03-11
+
+This is a simple image generator created to test 2d arrays.
+It outputs a PPM file with several gradients and a sold square(ish) shape in the
+middle.
+*/
+
 #include "ImageGenerator.hh"
 using namespace std;
 

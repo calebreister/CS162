@@ -13,7 +13,7 @@
 
 const float PI = M_PI;
 
-/*
+/**
  * @struct Vect2d
  * @brief A struct that defines a simple 2d vector with a n X and Y component.
  *  It has been extended to also include common operator overloads for aggregate operations.

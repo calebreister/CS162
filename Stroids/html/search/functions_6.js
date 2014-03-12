@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getstate',['getState',['../class_ship.html#a16e20e55850453c37a5bb6a707c7e64f',1,'Ship']]]
+  ['hit',['hit',['../class_pulse.html#ad270467607fa4447d29259b9c23766c1',1,'Pulse']]]
 ];

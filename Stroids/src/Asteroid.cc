@@ -1,7 +1,6 @@
-/*
- * PROGRAM: Asteroid
- * AUTHOR: Caleb Reister
- * DESCRIPTION: implementation of ASTEROID_H
+/**@file Asteroid.cc
+ * @author Caleb Reister <calebreister@gmail.com>
+ * @brief Implementation of @see Asteroid class
  */
 
 //#define NDEBUG

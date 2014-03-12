@@ -1,0 +1,6 @@
+<map id="SpaceObject::getVelocity" name="SpaceObject::getVelocity">
+<area shape="rect" id="node3" href="$class_space_object.html#a6918140a0fdd752ada6b4cbe8779aa56" title="Gets the angular velocity of the object. " alt="" coords="224,32,389,61"/>
+<area shape="rect" id="node5" href="$class_space_object.html#adc165d6313cc805913d1974cf5096f2d" title="Set the velocity of the SpaceObject. " alt="" coords="437,32,608,61"/>
+<area shape="rect" id="node7" href="$class_asteroid.html#aa6bb6bbd2dfc6fae55656fff233b7e31" title="Asteroid::Asteroid" alt="" coords="680,5,805,35"/>
+<area shape="rect" id="node9" href="$class_space_object.html#afc02817207084e12a3093229f5759760" title="Changes the velocity vector. " alt="" coords="656,59,829,88"/>
+</map>

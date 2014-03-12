@@ -132,7 +132,7 @@ void SpaceObject::chgAngle(float deltaDeg)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/*
+/**@fn float getRadius
  * @return The radius of the SpaceObject
  */
 float SpaceObject::getRadius()
@@ -140,7 +140,7 @@ float SpaceObject::getRadius()
     return radius;
 }
 
-/*
+/**@fn Vect2d getLocation()
  * @return The location of the SpaceObject as a vector
  */
 Vect2d SpaceObject::getLocation()
@@ -148,7 +148,7 @@ Vect2d SpaceObject::getLocation()
     return location;
 }
 
-/*
+/**@fn Vect2d getVelocity()
  * @return The current velocity of the SpaceObject
  */
 Vect2d SpaceObject::getVelocity()
@@ -156,7 +156,7 @@ Vect2d SpaceObject::getVelocity()
     return velocity;
 }
 
-/*
+/**@fn float getAngVel()
  * @brief Gets the angular velocity of the object
  * @return object's angular velocity as a float
  */
@@ -166,7 +166,7 @@ float SpaceObject::getAngVel()
     return sqrt(pow(vel.x, 2) + pow(vel.y, 2));
 }
 
-/*
+/**@fn getAngle()
  * @brief Gets the current angle (in degrees) of the object,
  *  ensures the angle value is within 0 and 359
  * @return The angle of the SpaceObject in degrees (between 0 and 359)

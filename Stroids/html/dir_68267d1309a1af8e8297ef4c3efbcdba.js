@@ -1,6 +1,6 @@
 var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
-    [ "Asteroid.cc", "_asteroid_8cc_source.html", null ],
+    [ "Asteroid.cc", "_asteroid_8cc.html", null ],
     [ "Asteroid.hh", "_asteroid_8hh.html", "_asteroid_8hh" ],
     [ "config.cc", "config_8cc_source.html", null ],
     [ "GameLogic.cc", "_game_logic_8cc.html", null ],

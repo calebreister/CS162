@@ -1,5 +1,6 @@
 var NAVTREEINDEX0 =
 {
+"_asteroid_8cc.html":[3,0,0,0],
 "_asteroid_8cc_source.html":[3,0,0,0],
 "_asteroid_8hh.html":[3,0,0,1],
 "_asteroid_8hh.html#a8c0137d7160ad71b6ed265c53c99ed00":[3,0,0,1,2],
