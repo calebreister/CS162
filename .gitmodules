@@ -3,4 +3,4 @@
 	url = ./libjson
 [submodule "SFML"]
 	path = SFML
-	url = ./SFML
+	url = https://github.com/LaurentGomila/SFML.git
