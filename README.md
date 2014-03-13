@@ -20,7 +20,5 @@ On Linux, if you install the extra libraries necessary for SFML, make sure you r
 To install the dependencies on a Debian-based system, see https://gist.github.com/calebreister/9531018. These names may be useful on other systems as well.
 
 **NOTE: I may have used some C++11 features. If you want to build SFML with C++11, add 
-
 set(CMAKE_CXX_FLAGS "-std=c++11")
-
 to line 26 of the CMakeLists file.**
