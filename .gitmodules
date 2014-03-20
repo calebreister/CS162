@@ -8,3 +8,6 @@
 [submodule "libSFML-Py"]
 	path = libSFML-Py
 	url = git://github.com/Sonkun/python-sfml.git
+[submodule "libSFMLPy"]
+	path = libSFMLPy
+	url = git://github.com/Sonkun/python-sfml.git
