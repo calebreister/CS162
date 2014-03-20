@@ -7,7 +7,6 @@
 #Testing program
 ScratchPad
 
-*.pydevproject
 .metadata
 .gradle
 bin/
@@ -20,17 +19,11 @@ local.properties
 .settings/
 .loadpath
 
-#JSON library
-libjson/
-
 # External tool builders
 .externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
 *.launch
-
-# CDT-specific
-.cproject
 
 # PDT-specific
 .buildpath
