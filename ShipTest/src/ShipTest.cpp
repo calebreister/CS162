@@ -1,8 +1,7 @@
 #include <iostream>
 #include "ship.h"
 
-void
-output(Ship ship);
+void output(Ship ship);
 using namespace std;
 
 int
