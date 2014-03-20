@@ -27,7 +27,7 @@
 								<option id="gnu.cpp.compiler.option.other.verbose.1026431283" name="Verbose (-v)" superClass="gnu.cpp.compiler.option.other.verbose" value="false" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1610363694" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libjson}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SFML/bin/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libSFML/bin/include}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.files.181295032" name="Include files (-include)" superClass="gnu.cpp.compiler.option.include.files"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.332393078" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -47,7 +47,7 @@
 								</option>
 								<option id="gnu.cpp.link.option.paths.2127501534" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libjson/bin}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SFML/bin/lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libSFML/bin/lib}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.937325797" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

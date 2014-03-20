@@ -1,6 +1,6 @@
-[submodule "libjson"]
+[submodule "libJSON++"]
 	path = libjson
 	url = ./libjson
-[submodule "SFML"]
-	path = SFML
+[submodule "libSFML"]
+	path = libSFML
 	url = https://github.com/LaurentGomila/SFML.git
