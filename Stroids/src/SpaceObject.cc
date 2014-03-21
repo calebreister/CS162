@@ -22,12 +22,12 @@ void SpaceObject::boundFix()
 {
     if (location.x > WIN_SIZE.x)
         location.x = 0;
-    if (location.x < ZERO.x)
+    else if (location.x < ZERO.x)
         location.x = WIN_SIZE.x;
 
     if (location.y > WIN_SIZE.y)
         location.y = 0;
-    if (location.y < ZERO.y)
+    else if (location.y < ZERO.y)
         location.y = WIN_SIZE.y;
 }
 
