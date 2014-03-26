@@ -3,6 +3,7 @@
 *.zip
 *.~lock.*
 *.lock
+*__pycache__*
 
 #Testing program
 ScratchPad

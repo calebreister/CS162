@@ -1,5 +1,14 @@
 #!/usr/bin/env python3.3
 
+"""
+PyDev configuration for pysfml
+- Find the path to the pysfml library (in my case /usr/lib/pysfml).
+- Add that path to predefined completions in the interpreter preferences
+- Add sfml to Forced Builtins in the interpreter preferences
+
+It makes no since to use the library locally in this case.
+"""
+
 import sfml as sf
 
 def drawShip():

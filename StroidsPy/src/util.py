@@ -1,7 +1,8 @@
 import math
+
+
 #many of the utilities included in util in the C++ version
 #already exists in the Python standard library
-
 #CONSTANTS
 def WIN_SIZE(): return [800, 800]
 def WIN_MID(): return [400, 400]
@@ -24,7 +25,7 @@ def deg2slope(deg):
     #devoted function set. They also can be returned.
     #Individual items can be inserted, removed, or appended
     #meaning that Python lists are dynamically allocated.
-    return [math.cos(math.radians(deg)), 
+    return [math.cos(math.radians(deg)),
             math.sin(math.radians(deg))]
     
 ##@fn angleRange

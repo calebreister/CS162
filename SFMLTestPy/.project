@@ -3,7 +3,6 @@
 	<name>SFMLTestPy</name>
 	<comment></comment>
 	<projects>
-		<project>libSFMLPy</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
