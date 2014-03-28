@@ -8,13 +8,13 @@ import util
 #@var _loc The location
 #@var __vel The velocity
 #@var __angleDeg The angle of the object in degrees. Should not be directly changed
-#@var _radius The _radius of the object, should not be changed after __init__
+#@var radius The radius of the object, should not be changed after __init__
 class SpaceObject:
-    #@var _radius
+    #@var radius
     #radius is fine to change, but in most situations it should be left constant
-    #note that _radius will NOT change the actual size of the object, it will only
+    #note that radius will NOT change the actual size of the object, it will only
     #change the likliness of collision 
-    _radius = 5
+    radius = 5
     ##@var __vel
     #vel and angleDeg both require value validations. These are done
     #with the set, chg, and get functions.
@@ -31,12 +31,12 @@ class SpaceObject:
     
     ##################################################
     def __init__(self, radius):
-        self._radius = radius
+        self.radius = radius
     
     ##################################################
     ##@fn boundFix()
     #@brief Makes sure the object does not go outside the screen
-    def __boundFix(self):
+    def _boundFix(self):
         if self._loc[0] > util.WIN_SIZE[0]:
             self._loc[0] = 0
         elif self._loc[0] < 0:
@@ -111,14 +111,14 @@ class SpaceObject:
         
 ################################################################
 ##@fn objectsIntersect(obj1, obj2)
-#@brief Checks to see whether the _radius of one SpaceObject intersects another
+#@brief Checks to see whether the radius of one SpaceObject intersects another
 #@param obj1 The 1st object to check
 #@param obj2 The 2nd object to check
 #@return bool of whether or not objects intersect       
 def objectsIntersect(obj1, obj2):
     distBetween = math.sqrt((obj2._loc[0] - obj1._loc[0]) ** 2 + 
                             (obj2._loc[1] - obj1._loc[1]) ** 2)
-    if distBetween < obj1._radius + obj2._radius:
+    if distBetween < obj1.radius + obj2.radius:
         return True
     else:
         return False

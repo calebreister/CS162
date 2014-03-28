@@ -1,12 +1,10 @@
 import math
 
-
 #many of the utilities included in util in the C++ version
 #already exists in the Python standard library
 #CONSTANTS
-def WIN_SIZE(): return [800, 800]
-def WIN_MID(): return [400, 400]
-def ZERO(): return [0, 0]
+WIN_SIZE = [800, 800]
+WIN_MID = [400, 400]
 
 ##@fn float util::slope2deg(Vect2d slope)
 #@brief Gets a slope and converts it to degrees.

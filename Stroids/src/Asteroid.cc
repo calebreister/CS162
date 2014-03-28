@@ -35,8 +35,7 @@ Asteroid::Asteroid()
     }
 
     //set values
-    location =
-    {   loc.x, loc.y};
+    location = {loc.x, loc.y};
     //setLocation(400, 400);
     rotationVel = util::randFloat(-.1, .1);
     setVelocity(util::randFloat(-cfg::getInst()->read["STROID"]["MAX_SPEED"].as_float(),
@@ -149,45 +148,45 @@ bool Asteroid::checkLocBound(Quadrant quad,
                              const Vect2d& point,
                              int radius)
 {
-    assert(quad == pp
-           || quad == nn
-           || quad == pn
-           || quad == np);
+    assert(quad == pp ||
+           quad == nn ||
+           quad == pn ||
+           quad == np);
 
     switch (quad)
     {
         case pp:
-            if (loc.x > point.x
-                && loc.y > point.y
-                && loc.x < point.x + radius
-                && loc.y < point.y + radius)
+            if (loc.x > point.x &&
+                loc.y > point.y &&
+                loc.x < point.x + radius &&
+                loc.y < point.y + radius)
                 return true;
             else
                 return false;
             break;
         case nn:
-            if (loc.x < point.x
-                && loc.y < point.y
-                && loc.x > point.x - radius
-                && loc.y > point.y - radius)
+            if (loc.x < point.x &&
+                loc.y < point.y &&
+                loc.x > point.x - radius &&
+                loc.y > point.y - radius)
                 return true;
             else
                 return false;
             break;
         case pn:
-            if (loc.x > point.x
-                && loc.y < point.y
-                && loc.x < point.x + radius
-                && loc.y > point.y - radius)
+            if (loc.x > point.x &&
+                loc.y < point.y &&
+                loc.x < point.x + radius &&
+                loc.y > point.y - radius)
                 return true;
             else
                 return false;
             break;
         case np:
-            if (loc.x < point.x
-                && loc.y > point.y
-                && loc.x > point.x - radius
-                && loc.y < point.y + radius)
+            if (loc.x < point.x &&
+                loc.y > point.y &&
+                loc.x > point.x - radius &&
+                loc.y < point.y + radius)
                 return true;
             else
                 return false;

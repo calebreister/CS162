@@ -15,14 +15,14 @@ class Ship(SpaceObject.SpaceObject):
     #Any other values will raise a ValueError
     #This variable should only be read by the user.
     _state = 'GOOD'
-    _radius = 5
+    radius = 5
     
     #################################################
     ##@fn draw()
     #@brief Contains drawing instructions for the ship based on its current state
     #@param explodeAlpha Opacity reduction during ship explosion
     def __draw(self):
-        self.boundFix()
+        self._boundFix()
         #explosion variables
         STEPS = 100
         count = 1

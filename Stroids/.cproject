@@ -46,7 +46,7 @@
 									<listOptionValue builtIn="false" value="sfml-graphics"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.2127501534" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libjson/bin}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libjson/build}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libSFML/bin/lib}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.937325797" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -144,4 +144,5 @@
 			<resource resourceType="PROJECT" workspacePath="/Stroids"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
