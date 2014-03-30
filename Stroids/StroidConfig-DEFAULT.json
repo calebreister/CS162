@@ -1,0 +1,37 @@
+{
+    "FRAME_RATE": 120,
+    "LASER": {
+        "COLOR": [
+            255,
+            255,
+            255
+        ],
+        "EDGE_DEATH": true,
+        "PULSE_LIFE": 100
+    },
+    "SHIP": {
+        "COLOR": [
+            255,
+            0,
+            0
+        ],
+        "OUTLINE_PX": 1,
+        "SPEED": 5.01,
+        "THRUST_FWD": 0.05,
+        "THRUST_REV": -0.05,
+        "TURN_RATE": 2.01
+    },
+    "STROID": {
+        "COLOR": [
+            255,
+            255,
+            255
+        ],
+        "COLOR_RAND": true,
+        "MAX_SPEED": 0.5,
+        "SIZE_MAX": 30,
+        "SIZE_MIN": 10,
+        "SPAWN_RATE": 100,
+        "START_NUM": 10
+    }
+}

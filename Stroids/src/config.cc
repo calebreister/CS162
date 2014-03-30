@@ -243,12 +243,11 @@ void cfg::validateValues()
     }
 
     item = "SIZE_MAX";
-    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0
-        || read[obj][item].as_int() > read[obj][item].as_int())
+    if (read[obj][item].type() != INT || read[obj][item].as_int() < 0)
     {
         cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
              << endl;
-        write[obj][item] = 10;
+        write[obj][item] = 30;
     }
 
     item = "SIZE_MIN";
@@ -257,7 +256,7 @@ void cfg::validateValues()
     {
         cerr << "Property " << obj << ":" << item << " is invalid. Regenerating..."
              << endl;
-        write[obj][item] = 30;
+        write[obj][item] = 10;
     }
 
     item = "COLOR_RAND";
